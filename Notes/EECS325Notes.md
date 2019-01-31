@@ -176,7 +176,7 @@ Has institutional mail, web servers; high transmission rate
 ---
 
 # Jan 17, Thursday
-
+## Idle Layer <!-- omit in toc -->
 ### Wireless LANs
 
 - Cover smaller area. Has three different protocols that support different transmission rate
@@ -407,7 +407,7 @@ Hide behind your system/application.
 ---
 
 # Jan 24, Thursday
-
+## Idle Layer <!-- omit in toc -->
 ### Denial of Service (DoS)
 
 ### Packet "Sniffing"
