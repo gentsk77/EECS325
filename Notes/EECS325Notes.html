@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>EECS325 Computer Networks</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body>
+        <h1 id="eecs325-computer-networks">EECS325 Computer Networks</h1>
+<p>Yue Shu</p>
+<p>Spring 2019</p>
+<ul>
+<li><a href="#eecs325-computer-networks">EECS325 Computer Networks</a></li>
+<li><a href="#jan-15-tuesday">Jan 15, Tuesday</a></li>
+<li><a href="#chapter-one-introduction">Chapter One: Introduction</a>
+<ul>
+<li><a href="#internet-as-an-example-of-network-systems">Internet as an example of network systems</a></li>
+<li><a href="#protocol">Protocol</a></li>
+<li><a href="#network-structure">Network Structure</a></li>
+<li><a href="#access-network-type">Access Network Type</a>
+<ul>
+<li><a href="#digital-subscriber-line-dsl">Digital subscriber line (DSL)</a></li>
+<li><a href="#cable-network">Cable network</a></li>
+<li><a href="#difference">Difference:</a>
+<ul>
+<li><a href="#frequency-division-multiplexing-fdm">Frequency Division Multiplexing (FDM)</a></li>
+<li><a href="#hyrid-fiber-coax-hfc">Hyrid Fiber Coax (HFC)</a></li>
+</ul>
+</li>
+<li><a href="#your-home-network">Your home network</a></li>
+<li><a href="#enterprise-network">Enterprise network</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#jan-17-thursday">Jan 17, Thursday</a>
+<ul>
+<li><a href="#wireless-lans">Wireless LANs</a></li>
+<li><a href="#wide-area-wireless-access">Wide-area Wireless Access</a></li>
+<li><a href="#process-of-sending-data-packets">Process of Sending Data Packets</a></li>
+<li><a href="#physical-media">Physical Media</a>
+<ul>
+<li><a href="#coaxial-cable">Coaxial Cable</a></li>
+<li><a href="#fiber-optic-cable">Fiber optic cable</a></li>
+<li><a href="#radio">Radio</a></li>
+</ul>
+</li>
+<li><a href="#the-network-core">The Network Core</a>
+<ul>
+<li><a href="#packet-switching-store-and-forward">Packet switching: store and forward</a>
+<ul>
+<li><a href="#routing">Routing</a></li>
+<li><a href="#forwarding">Forwarding</a></li>
+</ul>
+</li>
+<li><a href="#circuit-switching">Circuit switching</a>
+<ul>
+<li><a href="#fdm-frequency-devision-multiplexing">FDM (Frequency Devision Multiplexing)</a></li>
+<li><a href="#tdm-time-devision-multiplexing">TDM (Time Devision Multiplexing)</a></li>
+</ul>
+</li>
+<li><a href="#packet-switching-vs-circuit-switching">Packet Switching VS Circuit Switching</a>
+<ul>
+<li><a href="#circuit-switching">Circuit Switching</a></li>
+<li><a href="#packet-switching">Packet Switching</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#internet-structure-network-of-networks">Internet Structure: network of networks</a></li>
+<li><a href="#four-sources-of-delay">Four Sources of Delay</a>
+<ul>
+<li><a href="#process-delay">Process Delay</a></li>
+<li><a href="#transmission-delay">Transmission Delay</a></li>
+<li><a href="#queueing-delay">Queueing Delay</a></li>
+<li><a href="#propogation-delay">Propogation Delay</a></li>
+<li><a href="#packet-loss">Packet Loss</a></li>
+</ul>
+</li>
+<li><a href="#throughput">Throughput</a>
+<ul>
+<li><a href="#bottleneck-link">Bottleneck link</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#january-22-tuesday">January 22, Tuesday</a>
+<ul>
+<li><a href="#protocol-layers">Protocol Layers</a>
+<ul>
+<li><a href="#internet-protocol-stack-end-to-end-protocol">Internet Protocol Stack: End to End Protocol</a>
+<ul>
+<li><a href="#application">Application</a></li>
+<li><a href="#transport">Transport</a></li>
+<li><a href="#network">Network</a></li>
+<li><a href="#link">Link</a></li>
+<li><a href="#physical">Physical</a></li>
+</ul>
+</li>
+<li><a href="#isoosi-reference-model">ISO/OSI reference model</a>
+<ul>
+<li><a href="#presentation">Presentation</a></li>
+<li><a href="#session">Session</a></li>
+</ul>
+</li>
+<li><a href="#process-of-data-transfer-between-end-users">Process of data transfer between end users</a></li>
+</ul>
+</li>
+<li><a href="#network-security">Network Security</a>
+<ul>
+<li><a href="#malware">Malware</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#jan-24-thursday">Jan 24, Thursday</a>
+<ul>
+<li><a href="#denial-of-service-dos">Denial of Service (DoS)</a></li>
+<li><a href="#packet-%22sniffing%22">Packet &quot;Sniffing&quot;</a></li>
+</ul>
+</li>
+<li><a href="#chapter-two-application-layer">Chapter Two: Application Layer</a>
+<ul>
+<li><a href="#application-architecture">Application Architecture</a>
+<ul>
+<li><a href="#client-server-architecture">Client-Server Architecture</a>
+<ul>
+<li><a href="#server">Server</a></li>
+<li><a href="#client">Client</a></li>
+<li><a href="#communication-process">Communication process</a></li>
+</ul>
+</li>
+<li><a href="#p2p-architecture">P2P architecture</a>
+<ul>
+<li><a href="#process-of-communication">Process of communication</a></li>
+</ul>
+</li>
+<li><a href="#sockets">Sockets</a></li>
+<li><a href="#addressing-processes">Addressing processes</a></li>
+<li><a href="#app-layer-protocol-defines">App-layer protocol defines</a></li>
+<li><a href="#what-transport-services-the-app-required">What transport services the app required</a></li>
+<li><a href="#internet-transport-protocols-services">Internet transport protocols services</a></li>
+</ul>
+</li>
+<li><a href="#web-and-http">Web and HTTP</a>
+<ul>
+<li><a href="#http-connections">HTTP connections</a>
+<ul>
+<li><a href="#non-persistant-http-connections">Non persistant HTTP connections</a></li>
+<li><a href="#persistant-http-connections">Persistant HTTP connections</a></li>
+</ul>
+</li>
+<li><a href="#http-request-message">HTTP request message</a>
+<ul>
+<li><a href="#general-format">General format</a></li>
+</ul>
+</li>
+<li><a href="#http-response-message">HTTP response message</a>
+<ul>
+<li><a href="#response-status-codes">Response status codes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#jan-29-tuesday">Jan 29, Tuesday</a>
+<ul>
+<li><a href="#user-server-state-cookies">User-server state: cookies</a>
+<ul>
+<li><a href="#cookies-can-be-used-for">Cookies can be used for</a></li>
+</ul>
+</li>
+<li><a href="#web-caches-proxy-server">Web Caches (proxy server)</a>
+<ul>
+<li><a href="#forward-proxy-we-are-talking-about-this-one">Forward Proxy (we are talking about this one)</a></li>
+<li><a href="#reverse-proxy">Reverse Proxy</a></li>
+<li><a href="#caching-example">Caching Example</a>
+<ul>
+<li><a href="#without-web-cache-mechanism">Without web cache mechanism</a></li>
+<li><a href="#increase-access-link-capacity-without-web-cache">Increase access link capacity without web cache</a></li>
+<li><a href="#install-local-web-cache-server">Install local web cache server</a></li>
+</ul>
+</li>
+<li><a href="#conditional-get">Conditional GET</a></li>
+</ul>
+</li>
+<li><a href="#electronic-mail">Electronic Mail</a>
+<ul>
+<li><a href="#smtp-protocol">SMTP protocol</a></li>
+<li><a href="#mail-message-format">Mail message format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="jan-15-tuesday">Jan 15, Tuesday</h1>
+<p>Refer to the syllbus available on canvas.</p>
+<h1 id="chapter-one-introduction">Chapter One: Introduction</h1>
+<h2 id="internet-as-an-example-of-network-systems">Internet as an example of network systems</h2>
+<ul>
+<li>
+<p><code>Routers</code> and <code>switches</code> are pretty much the same now days.</p>
+</li>
+<li>
+<p>Devices not automatically connected. Need the <code>ISPs</code>.</p>
+</li>
+<li>
+<p>Need <code>protocol</code> (the standards) to have a formatted signals.</p>
+</li>
+<li>
+<p>Also need internet standards to define the entity</p>
+</li>
+</ul>
+<h2 id="protocol">Protocol</h2>
+<ul>
+<li><code>Protocal</code>: define the interactions between two end systems or entities (message to be sent and received etc.)</li>
+<li><code>Internet protocol</code>: defines the standard of internetworks communication</li>
+<li>Set up connection with internet protocol request (eg: TCP) between your pc and the server. Once the connection is setup, you are allowed to get to the file corresponded to the link</li>
+<li><code>TCP request</code> checks if you are authorized to receive the file.</li>
+</ul>
+<h2 id="network-structure">Network Structure</h2>
+<ul>
+<li>
+<p>Different network system on the edge, connected by different ISPs.</p>
+</li>
+<li>
+<p><code>Routers</code>: routers within different ISPs relay/forward traffic from your pc/desktop. Routers transmit data, provide scalability, security, etc.</p>
+</li>
+<li>
+<p><code>Network edge</code>: the end of the communication</p>
+</li>
+<li>
+<p><code>Bandwidth</code>: determines the performance(speed) of your access network</p>
+</li>
+</ul>
+<h2 id="access-network-type">Access Network Type</h2>
+<h3 id="digital-subscriber-line-dsl">Digital subscriber line (DSL)</h3>
+<p>DSL modem -- DSLAM(receive all different signals with different frequencies)</p>
+<p>telephone network -- DSLAM(receive all different signals with different frequencies)</p>
+<h3 id="cable-network">Cable network</h3>
+<p>your cable modem -- cable headend</p>
+<h3 id="difference">Difference:</h3>
+<ul>
+<li>
+<p><code>DSL</code>: dedicated link, transmission rate slow</p>
+</li>
+<li>
+<p><code>Cable</code>: link shared by multiple users; transmission rate faster</p>
+</li>
+<li>
+<p>Both DSL and Cable network carry data generated by different signals, thus need <code>frequency division multiplexing</code> to differentiate channels</p>
+</li>
+</ul>
+<h4 id="frequency-division-multiplexing-fdm">Frequency Division Multiplexing (FDM)</h4>
+<p>Since all signals(video, data, control messages) are mixed together, need to differentiate them with FDM.</p>
+<h4 id="hyrid-fiber-coax-hfc">Hyrid Fiber Coax (HFC)</h4>
+<p>Provide asymmetric up/downstream services</p>
+<h3 id="your-home-network">Your home network</h3>
+<p>[Wired devices with ethernet interface (eg: laptop, desktop)] -- [router(transmit data, provide scalability, security, etc.)] -- [cable/DSL modem]  -- ....</p>
+<p>[Wireless devices] -- [wireless access] -- [router] -- [cable/DSL modem]  -ethernet switch- [institutional modem (-- institutional mail, web servers, etc.)] -institutional link to ISP- ...</p>
+<h3 id="enterprise-network">Enterprise network</h3>
+<p>Has institutional mail, web servers; high transmission rate</p>
+<hr>
+<h1 id="jan-17-thursday">Jan 17, Thursday</h1>
+<h3 id="wireless-lans">Wireless LANs</h3>
+<ul>
+<li>
+<p>Cover smaller area. Has three different protocols that support different transmission rate</p>
+</li>
+<li>
+<p><code>Bandwidth</code>: limited by actual channel (wireless/wired, wired &gt; wireless), different frequencies for wireless channels, cable network determined by the material of the cable</p>
+</li>
+</ul>
+<h3 id="wide-area-wireless-access">Wide-area Wireless Access</h3>
+<p>eg: your cellular data. smaller capacity, cover larger area. provided by different carriers</p>
+<h3 id="process-of-sending-data-packets">Process of Sending Data Packets</h3>
+<p>[App message] -break into smaller packets of L bits, with transmission rate R- [router]</p>
+<h2 id="physical-media">Physical Media</h2>
+<h3 id="coaxial-cable">Coaxial Cable</h3>
+<ul>
+<li>
+<p>Bidirectional: support bidirectional data transmission</p>
+</li>
+<li>
+<p>Broadband: support multiple channels on cable; HFC</p>
+</li>
+</ul>
+<h3 id="fiber-optic-cable">Fiber optic cable</h3>
+<ul>
+<li>Higher speed, lower error rate</li>
+</ul>
+<h3 id="radio">Radio</h3>
+<ul>
+<li>Bidirectional</li>
+<li>Propogation environment effects: easily affected by the environment. Reflection, interference, obstruction by objects</li>
+<li><code>Terrestrial microwave</code></li>
+<li><code>LAN</code></li>
+<li><code>Wide area</code></li>
+<li><code>Satellite</code></li>
+</ul>
+<h2 id="the-network-core">The Network Core</h2>
+<h3 id="packet-switching-store-and-forward">Packet switching: store and forward</h3>
+<ul>
+<li><code>Packets</code>: consist of bits (basic units)</li>
+<li>Packets transmitted in the link as 0/1 signals bit by bit.</li>
+<li>Some bits arrive at the routers faster than the rest, it will wait until all the bits arrive in the router before the next transmission</li>
+<li>Transmission time: length of packet L/ transmission rate R</li>
+<li>Routers are connected to multiple end users. Packets of the end users have to be queued, which can be dropped(lost) if the memory(buffer) fills up.</li>
+</ul>
+<h4 id="routing">Routing</h4>
+<ul>
+<li><code>Routing</code>: determines where the packets should be heading to (making decision) by the <code>routing algorithm</code> according to a <code>local forwarding table</code></li>
+<li><code>local forwarding table</code> a mapped table contains the following
+<ul>
+<li><code>header value</code>: the address of the destination, does not change, is shared by the whole system</li>
+<li><code>output link</code>: the link the packet should be transmitted to, local to each router</li>
+</ul>
+</li>
+<li><code>Routing algorithm</code>: distributed algorithm that only knows the condition of neighbouring routers.</li>
+<li>Routers need to exchange information to determine the destination.</li>
+<li>Routers do not know the buffer condition of each other.</li>
+<li>The routing process is completed by software of routers.</li>
+</ul>
+<h4 id="forwarding">Forwarding</h4>
+<ul>
+<li>The action the router performs according to local forwarding table</li>
+<li>The forwarding process is completed by the hardware of routers.</li>
+</ul>
+<h3 id="circuit-switching">Circuit switching</h3>
+<ul>
+<li>Dedicated resource shared by users.</li>
+<li>Resources remain idle if not in use.</li>
+<li>Circuit switching is no longer in use right now. Mostly replaced by packet switching.</li>
+</ul>
+<h4 id="fdm-frequency-devision-multiplexing">FDM (Frequency Devision Multiplexing)</h4>
+<ul>
+<li>Equally devide the bandwidth for the users so that all the users can use the channels all the time</li>
+</ul>
+<h4 id="tdm-time-devision-multiplexing">TDM (Time Devision Multiplexing)</h4>
+<ul>
+<li>Each user use the entire bandwidth exclusively for a very small amount of time periodically, so the users cannot realize that they are sharing the bandwidth with other users</li>
+<li>Widely applied in the Operating System, eg: Linux (reserve different time intervals for multiple users)</li>
+</ul>
+<h3 id="packet-switching-vs-circuit-switching">Packet Switching VS Circuit Switching</h3>
+<p>refer to the slides for an example</p>
+<h4 id="circuit-switching-1">Circuit Switching</h4>
+<p>Only allow limited amount of users. Reserve resources for limited users.</p>
+<h4 id="packet-switching">Packet Switching</h4>
+<ul>
+<li>
+<p>Allow resource to be shared. Thus could accomodate more users.</p>
+</li>
+<li>
+<p>Could have <code>congestions</code>: <code>packet lost/delay</code>, need good protocol for reliable data transfer, <code>congestion control</code>.</p>
+</li>
+</ul>
+<h2 id="internet-structure-network-of-networks">Internet Structure: network of networks</h2>
+<p>We need to connect different access networks with each other. But how?</p>
+<p>With a global ISP? NO, need the same agreement</p>
+<p>With <strong>different core ISPs interconnected to each other</strong>? YES!</p>
+<ul>
+<li>
+<p>Different <code>core ISPs</code> connected by <code>peering links</code> and <code>IXP hubs</code> (internet exchanging point)</p>
+</li>
+<li>
+<p>Core ISPs connected to <code>regional ISPs</code></p>
+</li>
+<li>
+<p><code>Content providers</code> (eg: Google) with multiple <code>data centers</code> connected to IXP and connected directly to the regional ISPs</p>
+</li>
+<li>
+<p><code>POP</code>: point of presence. Frequently used by content providers to get closer to their end users</p>
+</li>
+</ul>
+<h2 id="four-sources-of-delay">Four Sources of Delay</h2>
+<p>The sequence is: arrive at router - <code>process</code> - <code>queueing</code> - <code>transmission</code> - leave router - <code>propogation</code> - arrive at next router</p>
+<h3 id="process-delay">Process Delay</h3>
+<p>The time the router takes to process the entire packet upon arrival</p>
+<h3 id="transmission-delay">Transmission Delay</h3>
+<p>The time the router takes to process and direct the packet bits by bits in the router (The time the toll station takes to serve the entire caravan car by car)</p>
+<h3 id="queueing-delay">Queueing Delay</h3>
+<ul>
+<li>Time interval between arrival and being sent again while waiting in the router. (The time one caravan waits while the former caravan is being serviced)</li>
+<li>Calculate length of queueing delay by determining the value of average queueing delay</li>
+<li>Can lead to data loss.</li>
+</ul>
+<h3 id="propogation-delay">Propogation Delay</h3>
+<ul>
+<li>The time it takes the packets to travel in the link from one router to the next. (The time the caravan takes to travel to the next toll station)</li>
+<li>Usually very fast</li>
+</ul>
+<h3 id="packet-loss">Packet Loss</h3>
+<ul>
+<li><code>Packet loss</code>: packets can be dropped due to insufficient <code>buffer size</code></li>
+<li><code>Buffer size</code>: the storage size of packets that could be stored in the router</li>
+</ul>
+<h2 id="throughput">Throughput</h2>
+<p>Rate (bits/time unit) at which bits transferred between sender/receiver</p>
+<h3 id="bottleneck-link">Bottleneck link</h3>
+<p>Link on end to end path that has smaller transmission rate</p>
+<hr>
+<h1 id="january-22-tuesday">January 22, Tuesday</h1>
+<p>Revisiting slides on last Thursday</p>
+<h2 id="protocol-layers">Protocol Layers</h2>
+<ul>
+<li>Used to organize all the pieces of <code>network structure</code>: host, routers, etc.</li>
+<li><code>Moduralization</code> ensures that <code>individual layers</code> would not affect the functions of other layers</li>
+<li>The layers can work completely independently by themselves, but also able to communicate information</li>
+<li>But we may not always divide all the functions into independant layers.</li>
+</ul>
+<h3 id="internet-protocol-stack-end-to-end-protocol">Internet Protocol Stack: End to End Protocol</h3>
+<h4 id="application">Application</h4>
+<ul>
+<li>Supporting the network applications.</li>
+<li>eg: FTP, HTTP, SMTP</li>
+<li>HTTP is developed based on TCP</li>
+</ul>
+<h4 id="transport">Transport</h4>
+<ul>
+<li>Interprocess data transfer</li>
+<li>Only happens between two end systems to let two processes communicate with each other</li>
+<li>eg: TCP (guarantee reliability of data transfer, contains congestion control), UDP</li>
+<li>TCP is slower than UDP. Most game/game streaming applications use UDP rather than TCP. But TCP contains reliability, whereas UDP does not guarantee</li>
+<li>Not necessary for the routers/switches to support the transport layer protocols, although most devices now days can also support such layer.</li>
+</ul>
+<h4 id="network">Network</h4>
+<ul>
+<li>Both routing and forwarding are in this layer.</li>
+<li>Routing of datagrams from source to destination.</li>
+<li>Only IP protocol</li>
+<li>IP protocol: consists of different routing protocols</li>
+</ul>
+<h4 id="link">Link</h4>
+<ul>
+<li>Only used to transfer data within two neighbouring network elements (router to router, switches to switches, etc.)</li>
+<li>Do not connect two end users</li>
+<li>eg: Ethernet (wired connection), 802.11 (WiFi, wireless connection), PPP</li>
+</ul>
+<h4 id="physical">Physical</h4>
+<ul>
+<li>Basically are just bits on the wire</li>
+</ul>
+<h3 id="isoosi-reference-model">ISO/OSI reference model</h3>
+<ul>
+<li>Includes two extra layers</li>
+<li>Just below the application layer</li>
+<li>Not necessary for all applications, thus can be combined with application layer</li>
+</ul>
+<h4 id="presentation">Presentation</h4>
+<ul>
+<li>Allows application to describe/interpret the meaning of data: encryption, compression etc.</li>
+</ul>
+<h4 id="session">Session</h4>
+<ul>
+<li>Synchronization, checkpointing, recovery of data exchange</li>
+</ul>
+<h3 id="process-of-data-transfer-between-end-users">Process of data transfer between end users</h3>
+<ul>
+<li>Data are transferred with encapsulation</li>
+<li>Each layer generates a specific type of header and attach it to the message being tranferred. The header contains layer specific information (eg: ip address by the network layer), and only corresponding layers can decrypt it.</li>
+<li>While the headers are being transferred between different layers, some of the headers might be changed, such as the data link layer, and the network layer for specific applications</li>
+<li>Tranport layer information (header) will never be changed</li>
+<li>The process: [application layer] - message -&gt; [transport layer] - segment -&gt; [network layer] - datagram -&gt; [link layer] - frame -&gt; [physical layer]</li>
+<li>Each layer can only see the correct corresponded header</li>
+<li>The layers try to interpret/decapsulate the packets even though they might not understand??</li>
+<li>[source] - encapsulated packets -&gt; [router]</li>
+<li>Router drop the network header and check how to head the packet to the next link</li>
+<li>[router] - encapsulated packets -&gt; [destination]</li>
+<li>The destination end user decrpt the packet encapsulated with layers of headers</li>
+</ul>
+<h2 id="network-security">Network Security</h2>
+<h3 id="malware">Malware</h3>
+<p>Hide behind your system/application.</p>
+<ul>
+<li>Virus: need to be exectued to infect your devices</li>
+<li>Worm: if your pc is infected, your mobile device can also get infected</li>
+<li>Spywre: record yoru keystrokes</li>
+<li>Once infected, the host can be enrolled in botnet, used by the hacker to attack servers illegally.</li>
+<li>By hacking other machines, the hackers utilize others' devices and hide their identities.</li>
+</ul>
+<hr>
+<h1 id="jan-24-thursday">Jan 24, Thursday</h1>
+<h3 id="denial-of-service-dos">Denial of Service (DoS)</h3>
+<h3 id="packet-%22sniffing%22">Packet &quot;Sniffing&quot;</h3>
+<h1 id="chapter-two-application-layer">Chapter Two: Application Layer</h1>
+<h2 id="application-architecture">Application Architecture</h2>
+<h3 id="client-server-architecture">Client-Server Architecture</h3>
+<h4 id="server">Server</h4>
+<ul>
+<li>Always-on host</li>
+<li>Have a permanent public IP address in most cases</li>
+<li>Have more servers to cater more requests: have data centers</li>
+<li>Data center: a building stores only servers, routers, switches etc.  An approach for server providers to scale up?</li>
+</ul>
+<h4 id="client">Client</h4>
+<ul>
+<li>Dynamic IP adress depanding on server</li>
+<li>Does not communicate directly with each other.</li>
+<li>[Client] - message -&gt; [Server] - message -&gt; [Client]</li>
+</ul>
+<h4 id="communication-process">Communication process</h4>
+<ul>
+<li>Clients initiate connections</li>
+<li>Server waits to be contracted by clients</li>
+</ul>
+<h3 id="p2p-architecture">P2P architecture</h3>
+<ul>
+<li>No need to always deploy the servers for the client to share contents</li>
+<li>End systems can directly communicate with each other</li>
+<li>Peers request and provide serivce to each other, which pertains self scalability: both new capacity and demands are brought to the architecture when new peers show up</li>
+</ul>
+<h4 id="process-of-communication">Process of communication</h4>
+<ul>
+<li>Start inter-process communication defiend by OS</li>
+<li>Process: program running within a host</li>
+<li>Processes in different host communicate by exchanging messages</li>
+</ul>
+<h3 id="sockets">Sockets</h3>
+<h3 id="addressing-processes">Addressing processes</h3>
+<ul>
+<li>Processes need identifier to receive messages</li>
+<li>Identifier: containing IP address and prot number associated with the process on host</li>
+<li>Port number eg: HTTP (80)</li>
+</ul>
+<h3 id="app-layer-protocol-defines">App-layer protocol defines</h3>
+<ul>
+<li>REFER TO THE SLIDES DUDE</li>
+</ul>
+<h3 id="what-transport-services-the-app-required">What transport services the app required</h3>
+<ul>
+<li>Interlayer requirements that should be done by layer collaboration</li>
+<li>Also see the slides</li>
+</ul>
+<h3 id="internet-transport-protocols-services">Internet transport protocols services</h3>
+<ul>
+<li>Reliable transport: between sending and receiving sides</li>
+<li>Flow control: by receiving side(?) to make sure receivers do not get overwhelmed by sender messages</li>
+<li>Congestion control: by sending side to make sure internet resources are also shared by other end systems</li>
+</ul>
+<h2 id="web-and-http">Web and HTTP</h2>
+<ul>
+<li>Internet objects are addressable by URL which consists of a host name + a path name</li>
+</ul>
+<h3 id="http-connections">HTTP connections</h3>
+<ul>
+<li>HTTP is using TCP protocal</li>
+<li>Client initiates TCP connection to server using port 80</li>
+<li>Server accpets the TCP connection from client</li>
+<li>HTTP messages (application layer protocol messages) exchanged between browser (HTTP client) and Web server</li>
+<li>The server closes the TCP connection (sometimes the client can also close the connetion by accident, in which case the server might not konw, and the server will close the connection after a certain amount of time -- connection timeout)</li>
+<li>HTTP is stateless, servers do not need to maintain a certain state of past client requests</li>
+<li>SSL: provides secured library for TCP. TCP does not use SSL by default</li>
+<li>HTTPs is TCP using SSL?</li>
+</ul>
+<h4 id="non-persistant-http-connections">Non persistant HTTP connections</h4>
+<ul>
+<li>At most one object can be sent over TCP connection, which will be closed by the server after one request message and resoponse</li>
+<li>To download multiple objects, the HTTP client should build up multiple connections</li>
+<li>After downloading the first object receiving from the server, in order to download a second object, the HTTP client should establish the TCP connection with the server again, and repeat sending out requests etc.</li>
+<li>RTT (Run Trip Time): the time it takes the small packet to tranvel from the client to the server and then back from the server to the packet. Cannot avoid this time no matter what.</li>
+<li>Initiate TCP connection: 1 RTT (must happen before sending HTTP request)</li>
+<li>Send HTTP request and receive file back from server: 1 RTT + some time to transmit the file</li>
+<li>Cost 2 RTT to request and receive in total</li>
+</ul>
+<h4 id="persistant-http-connections">Persistant HTTP connections</h4>
+<ul>
+<li>Only need to set up the TCP connection once, all later on request and response can be communicated within the connection established</li>
+<li>Cost only 1 RTT roughly</li>
+</ul>
+<h3 id="http-request-message">HTTP request message</h3>
+<ul>
+<li>Two types: request and response</li>
+<li>Applying the ASCII format, which is a human readable format</li>
+</ul>
+<h4 id="general-format">General format</h4>
+<ul>
+<li>Reuest line</li>
+<li>Header lines</li>
+<li>Body: contains the user input if the user is using post method
+<ul>
+<li>eg: user input typed in the search box</li>
+<li>POST method</li>
+<li>URL method</li>
+</ul>
+</li>
+</ul>
+<h3 id="http-response-message">HTTP response message</h3>
+<ul>
+<li>Status line: versions of HTTP protocol the server is running</li>
+<li>Header lines:</li>
+<li>Data objects requested by the client</li>
+</ul>
+<h4 id="response-status-codes">Response status codes</h4>
+<ul>
+<li>200: ok</li>
+<li>301: requested object moved permanently, new location will be specified in this message</li>
+<li>400: bad request, probably due to mistyping in the URL. Can also be due to something wrong on the server side
+<ul>
+<li>The API exists, but you called the wrong API request</li>
+</ul>
+</li>
+<li>404: requested file not provided by the server side :(((((((
+<ul>
+<li>Also means API error. The API does not even exist</li>
+</ul>
+</li>
+<li>505: some internal errors in the server :(</li>
+</ul>
+<hr>
+<h1 id="jan-29-tuesday">Jan 29, Tuesday</h1>
+<h2 id="user-server-state-cookies">User-server state: cookies</h2>
+<ul>
+<li>Servers do not maintain information for clients</li>
+<li>Not so convenient, we want to keep track of the user data and let the server identify specific user</li>
+<li>eg: unique user ID on a website
+<ul>
+<li>your browser will use that ID upon the HTTP request and the server would know who you are</li>
+</ul>
+</li>
+<li>Refer to slides on the process of HTTP request with cookies and cookies specific information sent by server (kept in backend database)</li>
+</ul>
+<h3 id="cookies-can-be-used-for">Cookies can be used for</h3>
+<ul>
+<li>authorization</li>
+<li>shopping carts</li>
+<li>can also violate privacy, can be shut down</li>
+</ul>
+<h2 id="web-caches-proxy-server">Web Caches (proxy server)</h2>
+<ul>
+<li>Satisfying user request without involving origin server</li>
+</ul>
+<h3 id="forward-proxy-we-are-talking-about-this-one">Forward Proxy (we are talking about this one)</h3>
+<ul>
+<li>Closer to the client side</li>
+<li>Client first go through cache for information
+<ul>
+<li>Client send HTTP request to proxy server</li>
+<li>Proxy server process data
+<ul>
+<li>If information available, send HTTP response back to the client directly</li>
+<li>Else request information from origin server with HTTP request, receive HTTP response from origin server</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Reduces traffic through the public internet, saves client time</li>
+<li>Through HTTP protocol and origin server, the proxy server would know what to keep and how long to keep</li>
+</ul>
+<h3 id="reverse-proxy">Reverse Proxy</h3>
+<ul>
+<li>Closer to the server side</li>
+</ul>
+<h3 id="caching-example">Caching Example</h3>
+<h4 id="without-web-cache-mechanism">Without web cache mechanism</h4>
+<ul>
+<li>Without using caching, access link becomes most utilized by the browsers to go directly to the origin server</li>
+<li>Total delay = internet delay + access delay + LAN delay</li>
+</ul>
+<h4 id="increase-access-link-capacity-without-web-cache">Increase access link capacity without web cache</h4>
+<ul>
+<li>Time it takes to go through access link decreased to 10%!</li>
+</ul>
+<h4 id="install-local-web-cache-server">Install local web cache server</h4>
+<ul>
+<li>Attach a cache server to the local institutional server</li>
+<li>How to calculate total delay
+<ul>
+<li>Total delay that could be processed by the local web cache</li>
+<li>Total delay that could only be processed by the origin server</li>
+</ul>
+</li>
+</ul>
+<h3 id="conditional-get">Conditional GET</h3>
+<ul>
+<li>Goal: he server won't send object if cache has up-to-date cached version in the web cache server
+<ul>
+<li>No object transmission delay</li>
+<li>Lower link utilization</li>
+</ul>
+</li>
+<li>Proxy request the date of data last modified from server</li>
+<li>Server send back the date of data last modified
+<ul>
+<li>If the object has not been modified since the date specified
+<ul>
+<li>HTTP 304 Not modified</li>
+<li>No object attached</li>
+</ul>
+</li>
+<li>If the object has been modified
+<ul>
+<li>HTTP 200 OK</li>
+<li>Object included</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="electronic-mail">Electronic Mail</h2>
+<ul>
+<li>Three major components
+<ul>
+<li>user agents
+<ul>
+<li>the mail readers</li>
+<li>composing, editing, reading mail messages</li>
+<li>eg: Outlook, iPhone mail client</li>
+</ul>
+</li>
+<li>mail server
+<ul>
+<li>mailbox contains incoming messages for user</li>
+<li>message queue of outgoing messages to be sent</li>
+</ul>
+</li>
+<li>SMTP (simple mail transfer protocol)
+<ul>
+<li>protocol between mail servers for exchanging mail messages</li>
+<li>client side of the mail server send message to server side of the mail server with SMTP protocol</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Steps of sending emails
+<ol>
+<li>User sender compose email on UA</li>
+<li>UA use SMTP protocol to transfer message to mail server of user sender</li>
+<li>Client side of sender's mail server connect with server side of recepient's mail server with SMTP protocol (the handshaking process)</li>
+<li>Sender's mail server transfers the mail message to recepeint's mail server with TCP connection</li>
+<li>Closure of the connection</li>
+<li>Recepient's mail server send the message to recepient's UA</li>
+</ol>
+</li>
+</ul>
+<h3 id="smtp-protocol">SMTP protocol</h3>
+<ul>
+<li>SMTP uses persistent connections</li>
+<li>SMTP client side <code>push</code> information to other mail server
+<ul>
+<li>unlike HTTP which pull information</li>
+</ul>
+</li>
+<li>multiple objects sent in multipart message</li>
+</ul>
+<h3 id="mail-message-format">Mail message format</h3>
+<ul>
+<li>RFC 822: standard for text message format
+<ul>
+<li>header lines: To, From, Subject
+<ul>
+<li>Note: different from SMTP commands MAIL FROM, RCPT TO, etc.</li>
+</ul>
+</li>
+<li>body: the message body content, ASCII character only</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+    </body>
+    </html>
