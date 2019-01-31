@@ -565,7 +565,7 @@ Hide behind your system/application.
   - Total delay that could only be processed by the origin server
   
 ### Conditional GET
-- Goal: he server won't send object if cache has up-to-date cached version in the web cache server
+- Goal: the server won't send object if cache has up-to-date cached version in the web cache server
   - No object transmission delay
   - Lower link utilization
 - Proxy request the date of data last modified from server
@@ -579,29 +579,29 @@ Hide behind your system/application.
 
 ## Electronic Mail
 - Three major components
-    - user agents
+    - `user agents`
         - the mail readers
         - composing, editing, reading mail messages 
         - eg: Outlook, iPhone mail client
-    - mail server
+    - `mail server`
         - mailbox contains incoming messages for user
         - message queue of outgoing messages to be sent
-    - SMTP (simple mail transfer protocol)
+    - `SMTP` (simple mail transfer protocol)
         - protocol between mail servers for exchanging mail messages
-        - client side of the mail server send message to server side of the mail server with SMTP protocol
+        - **client side** of the mail server *send* message to **server side** of the mail server with `SMTP protocol`
 - Steps of sending emails
     1. User sender compose email on UA
-    2. UA use SMTP protocol to transfer message to mail server of user sender
-    3. Client side of sender's mail server connect with server side of recepient's mail server with SMTP protocol (the handshaking process)
-    4. Sender's mail server transfers the mail message to recepeint's mail server with TCP connection
+    2. UA transfer message to mail server of user sender with protocol depending on the specific user agent application
+    3. Client side of sender's mail server set up `TCP connection` with server side of recepient's mail server to **allow** SMTP connection between two end servers
+    4. Sender's mail server transfers the mail message to recepeint's mail server with `SMTP protocol`
     5. Closure of the connection
     6. Recepient's mail server send the message to recepient's UA 
     
 ### SMTP protocol 
-- SMTP uses persistent connections
+- SMTP uses **persistent** connections
 - SMTP client side `push` information to other mail server
-    - unlike HTTP which pull information
-- multiple objects sent in multipart message
+    - unlike HTTP which `pull` information
+- **multiple** objects sent in **multipart** message
 
 ### Mail message format
 - RFC 822: standard for text message format
