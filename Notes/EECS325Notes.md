@@ -4,6 +4,7 @@ Yue Shu
 
 Spring 2019
 
+-----
 - [EECS325 Computer Networks](#eecs325-computer-networks)
 - [Jan 15, Tuesday](#jan-15-tuesday)
 - [Chapter One: Introduction](#chapter-one-introduction)
@@ -100,6 +101,7 @@ Spring 2019
     - [SMTP protocol](#smtp-protocol)
     - [Mail message format](#mail-message-format)
 
+-----
 # Jan 15, Tuesday
 
 Refer to the syllbus available on canvas.
