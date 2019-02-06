@@ -84,7 +84,7 @@ Spring 2019
     - [HTTP response message](#http-response-message)
       - [Response status codes](#response-status-codes)
 - [Jan 29, Tuesday](#jan-29-tuesday)
-  - [User-server state: cookies](#user-server-state-cookies)
+  - [User-server state: stateful cookies](#user-server-state-stateful-cookies)
     - [Cookies can be used for](#cookies-can-be-used-for)
   - [Web Caches (proxy server)](#web-caches-proxy-server)
     - [Forward Proxy (we are talking about this one)](#forward-proxy-we-are-talking-about-this-one)
@@ -96,7 +96,26 @@ Spring 2019
     - [Conditional GET](#conditional-get)
   - [Electronic Mail](#electronic-mail)
     - [SMTP protocol](#smtp-protocol)
+    - [Message Retrieving Protocols](#message-retrieving-protocols)
+      - [POP3 protocol](#pop3-protocol)
+      - [IMAP](#imap)
     - [Mail message format](#mail-message-format)
+- [Feb 5, Tuesday](#feb-5-tuesday)
+  - [DNS (Domain Name System)](#dns-domain-name-system)
+    - [DNS services](#dns-services)
+    - [DNS structure](#dns-structure)
+    - [DNS: distributed, hierarchical database](#dns-distributed-hierarchical-database)
+      - [TLD, authoritative servers](#tld-authoritative-servers)
+      - [Local DNS name server](#local-dns-name-server)
+    - [DNS name resolation example](#dns-name-resolation-example)
+      - [Iterated query](#iterated-query)
+      - [Recursive query](#recursive-query)
+    - [DNS: caching, updating records](#dns-caching-updating-records)
+    - [DNS records](#dns-records)
+    - [DNS protocol, messages](#dns-protocol-messages)
+    - [Inserting recoreds into DNS](#inserting-recoreds-into-dns)
+    - [Attackin DNS](#attackin-dns)
+      - [DDoS attacks](#ddos-attacks)
 
 # Jan 15, Tuesday
 
@@ -521,12 +540,13 @@ Hide behind your system/application.
 
 # Jan 29, Tuesday
 
-## User-server state: cookies
+## User-server state: stateful cookies
 - Servers do not maintain information for clients
 - Not so convenient, we want to keep track of the user data and let the server identify specific user
 - eg: unique user ID on a website
   - your browser will use that ID upon the HTTP request and the server would know who you are 
 - Refer to slides on the process of HTTP request with cookies and cookies specific information sent by server (kept in backend database)
+- For HTTP cookies, stored in the browser instead of devices 
 
 ### Cookies can be used for
 - authorization
@@ -568,8 +588,8 @@ Hide behind your system/application.
 - Goal: the server won't send object if cache has up-to-date cached version in the web cache server
   - No object transmission delay
   - Lower link utilization
-- Proxy request the date of data last modified from server
-- Server send back the date of data last modified 
+- Proxy (cache server) request if the data has been modified since a specific time from the origin server
+- Server send back a message indicating if the data has been modified 
   - If the object has not been modified since the date specified
     - HTTP 304 Not modified
     - No object attached
@@ -592,10 +612,10 @@ Hide behind your system/application.
 - Steps of sending emails
     1. User sender compose email on UA
     2. UA transfer message to mail server of user sender with protocol depending on the specific user agent application
-    3. Client side of sender's mail server set up `TCP connection` with server side of recepient's mail server to **allow** SMTP connection between two end servers
+    3. Client side of sender's mail server set up `TCP connection` with server side of recepient's mail server to **allow** SMTP connection between two end servers (the hand shaking process with SMTP)
     4. Sender's mail server transfers the mail message to recepeint's mail server with `SMTP protocol`
     5. Closure of the connection
-    6. Recepient's mail server send the message to recepient's UA 
+    6. Recepient's UA retrieve the message from mail server using `mail retrieving protocols` (IMAP, POP3)
     
 ### SMTP protocol 
 - SMTP uses **persistent** connections
@@ -603,17 +623,123 @@ Hide behind your system/application.
     - unlike HTTP which `pull` information
 - **multiple** objects sent in **multipart** message
 
+### Message Retrieving Protocols
+#### POP3 protocol
+- Two different modes
+  - Download and delete
+  - Download and keep
+
+#### IMAP
+- Keep all messages at server
+- Allow user toorganize meesgae in folders 
+
 ### Mail message format
 - RFC 822: standard for text message format
     - header lines: To, From, Subject
         - Note: different from SMTP commands MAIL FROM, RCPT TO, etc.
     - body: the message body content, ASCII character only 
-    
-    
+  
+
 ---
 
+# Feb 5, Tuesday
+
+## DNS (Domain Name System)
+- Indentifier for internet hosts, routers:
+  - IP address (32 bit): used for addessing datagrams
+- Distributed database
+- application-layer protocol
+- Used to interprete host name to IP addresses
+
+### DNS services
+- Translate hostname to IP address
+- Host aliasing: canonical, alias names 
+  - `Canonical name`: Used to point one main domain to multiple subdomians
+    - makes sure you don't need to change multiple records if you want to change your IP address
+    - Structure: Alias name - IP address - canonoical name - subdomains?
+  - Mail server aliasing: you simply use @case.edu instead of the full domian name
+  - Load distribution: linking many IP addresses corresponding to one name
+
+### DNS structure
+  - Do not centralize DNS for the sake of scalability
+  
+### DNS: distributed, hierarchical database
+Take Amazon as an example?
+- root servers: multiple root servers accross the globe managed by 13 organizations
+
+#### TLD, authoritative servers
+- top-level domain (TLD) servers:  
+  - eg: .edu, com, etc. 
+  - Responsible for com, org, net, edu, etc. and all top-level country domains
+- authorative DNS servers:
+  - organizations own DNS server, providing authorative hostnames to IP mappings for organizations named hosts
+  - maintained by organization or service provider
+
+#### Local DNS name server
+- Does not striclty belong to hierarchy
+- each residential ISP, company, university, has one "default name server"
+- 
+- when host makes DNS query, query is sent to local DNS server
+  - has local cache of recent name-to-address translation pairs (but may be out of date!)
+  - acts as proxy, forwards query into hierarchy
+
+### DNS name resolation example
+#### Iterated query 
+- Local DNS server is majorly in charge of generating all the requests to different servers
+- Requesting host sending request to the local DNS server
+- Local DNS server keeps querying other level of servers to search for the IP address if it does not have the cache of the IP address of a certain layer following the sequence below
+  - root DNS server
+  - TLD DNS server
+  - authorative DNS server
+- eg: the local DNS server queries the TLD DNS server directly if it has cached the TLD address, so it skips the root DNS server
+
+#### Recursive query 
+- The contacted name servers are in charge of looking for the IP address and sending queries to each other
+- Heavy load at upper level layers: root server, TLD DNS server, etc. 
+
+### DNS: caching, updating records 
+- once (any) name server learns mapping, it caches mapping
+  - cache entries timeout (disappear) after some time (TTL)
+  - TLD servers typically cached in local name servers
+    - thus root name server not often visited
+  - cached entries may be out-of-date (best effort name-to-address translation!)
+  - update/notify mechanisms proposed IETF standard
 
 
+### DNS records
+- DNS: distributed database storing resource records (RR)
+- RR format: (name, value, type, ttl)
+  - type=A
+    - name is hostname
+    - value is IP address
+  - tpe=NS
+    - name is domain
+    - value is hostname of the authorative name server for this domain
+  - type=CNAME
+    - name is alias name for some "canonical" name
+    - value is canonical name 
+    - eg: www.ibm.com = servereast.backup2.ibm.com
+  - type=MX
+    - value is name of mailserver associated with name
 
+### DNS protocol, messages  
 
+both query and reply messages have the sae message format
+- message header
+  - identification: 16 bit # for query, reply to query uses same #
+  - flags:
+    - query or reply
+    - recursion desired
+    - recursion available
+    - reply is authoritative
 
+### Inserting recoreds into DNS
+-  register name gentsk.com at DNS registrar lmao
+   - provide names, IP addresses of the authoritative name server (primary and secondary)
+   - registrar inserts two RRs into .com TLS server
+- Create authoritative server type A record for www.gentsk.com, type MX record for gentsk.com
+
+### Attackin DNS
+- DNS applies no encryption machanism for the sake of efficiency 
+- 
+#### DDoS attacks
