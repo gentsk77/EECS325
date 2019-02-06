@@ -4,6 +4,7 @@ Yue Shu
 
 Spring 2019
 
+-----
 - [EECS325 Computer Networks](#eecs325-computer-networks)
 - [Jan 15, Tuesday](#jan-15-tuesday)
 - [Chapter One: Introduction](#chapter-one-introduction)
@@ -19,6 +20,7 @@ Spring 2019
     - [Your home network](#your-home-network)
     - [Enterprise network](#enterprise-network)
 - [Jan 17, Thursday](#jan-17-thursday)
+  - [Idle Layer](#idle-layer)
     - [Wireless LANs](#wireless-lans)
     - [Wide-area Wireless Access](#wide-area-wireless-access)
     - [Process of Sending Data Packets](#process-of-sending-data-packets)
@@ -60,6 +62,7 @@ Spring 2019
   - [Network Security](#network-security)
     - [Malware](#malware)
 - [Jan 24, Thursday](#jan-24-thursday)
+  - [Idle Layer](#idle-layer-1)
     - [Denial of Service (DoS)](#denial-of-service-dos)
     - [Packet "Sniffing"](#packet-%22sniffing%22)
 - [Chapter Two: Application Layer](#chapter-two-application-layer)
@@ -117,6 +120,7 @@ Spring 2019
     - [Attackin DNS](#attackin-dns)
       - [DDoS attacks](#ddos-attacks)
 
+-----
 # Jan 15, Tuesday
 
 Refer to the syllbus available on canvas.
@@ -195,7 +199,7 @@ Has institutional mail, web servers; high transmission rate
 ---
 
 # Jan 17, Thursday
-## Idle Layer <!-- omit in toc -->
+## Idle Layer 
 ### Wireless LANs
 
 - Cover smaller area. Has three different protocols that support different transmission rate
@@ -426,7 +430,7 @@ Hide behind your system/application.
 ---
 
 # Jan 24, Thursday
-## Idle Layer <!-- omit in toc -->
+## Idle Layer 
 ### Denial of Service (DoS)
 
 ### Packet "Sniffing"
