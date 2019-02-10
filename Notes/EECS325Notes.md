@@ -110,7 +110,7 @@ Spring 2019
     - [DNS: distributed, hierarchical database](#dns-distributed-hierarchical-database)
       - [TLD, authoritative servers](#tld-authoritative-servers)
       - [Local DNS name server](#local-dns-name-server)
-    - [DNS name resolation example](#dns-name-resolation-example)
+    - [DNS name resolution example](#dns-name-resolution-example)
       - [Iterated query](#iterated-query)
       - [Recursive query](#recursive-query)
     - [DNS: caching, updating records](#dns-caching-updating-records)
@@ -119,6 +119,23 @@ Spring 2019
     - [Inserting recoreds into DNS](#inserting-recoreds-into-dns)
     - [Attackin DNS](#attackin-dns)
       - [DDoS attacks](#ddos-attacks)
+- [Feb 7, Thursday](#feb-7-thursday)
+  - [Socket programming](#socket-programming)
+    - [Socket with UDP](#socket-with-udp)
+      - [UDP communication process](#udp-communication-process)
+    - [Socket with TCP](#socket-with-tcp)
+      - [TCP ommunication process](#tcp-ommunication-process)
+- [Chapter 3: Transport Layer](#chapter-3-transport-layer)
+  - [Transport layer services and protocols](#transport-layer-services-and-protocols)
+    - [Transport vs. network layer](#transport-vs-network-layer)
+    - [Multiplexing and demultiplexing](#multiplexing-and-demultiplexing)
+      - [How demultiplexing works](#how-demultiplexing-works)
+      - [Connectionless demultiplexing](#connectionless-demultiplexing)
+      - [Connection-oriented demultiplexing](#connection-oriented-demultiplexing)
+      - [UDP: segment header](#udp-segment-header)
+  - [Principle of reliable data transfer](#principle-of-reliable-data-transfer)
+    - [Reliable transfer over a reliable channel](#reliable-transfer-over-a-reliable-channel)
+    - [channel with bit errors](#channel-with-bit-errors)
 
 -----
 # Jan 15, Tuesday
@@ -643,7 +660,6 @@ Hide behind your system/application.
         - Note: different from SMTP commands MAIL FROM, RCPT TO, etc.
     - body: the message body content, ASCII character only 
   
-
 ---
 
 # Feb 5, Tuesday
@@ -666,6 +682,7 @@ Hide behind your system/application.
 
 ### DNS structure
   - Do not centralize DNS for the sake of scalability
+  - Centralized service cannot support all the flow?
   
 ### DNS: distributed, hierarchical database
 Take Amazon as an example?
@@ -682,12 +699,12 @@ Take Amazon as an example?
 #### Local DNS name server
 - Does not striclty belong to hierarchy
 - each residential ISP, company, university, has one "default name server"
-- 
+  - also called default name server
 - when host makes DNS query, query is sent to local DNS server
   - has local cache of recent name-to-address translation pairs (but may be out of date!)
   - acts as proxy, forwards query into hierarchy
 
-### DNS name resolation example
+### DNS name resolution example
 #### Iterated query 
 - Local DNS server is majorly in charge of generating all the requests to different servers
 - Requesting host sending request to the local DNS server
@@ -696,6 +713,7 @@ Take Amazon as an example?
   - TLD DNS server
   - authorative DNS server
 - eg: the local DNS server queries the TLD DNS server directly if it has cached the TLD address, so it skips the root DNS server
+- more secured because when attacked by hacker, only one way of information is hacked, and the user will be able to tell soemthing is wrong, unlike in the recursive query, where the amplification effect will work
 
 #### Recursive query 
 - The contacted name servers are in charge of looking for the IP address and sending queries to each other
@@ -713,17 +731,17 @@ Take Amazon as an example?
 ### DNS records
 - DNS: distributed database storing resource records (RR)
 - RR format: (name, value, type, ttl)
-  - type=A
+  - `type=A`
     - name is hostname
     - value is IP address
-  - tpe=NS
+  - `tpe=NS`
     - name is domain
     - value is hostname of the authorative name server for this domain
-  - type=CNAME
+  - `type=CNAME`
     - name is alias name for some "canonical" name
     - value is canonical name 
     - eg: www.ibm.com = servereast.backup2.ibm.com
-  - type=MX
+  - `type=MX`
     - value is name of mailserver associated with name
 
 ### DNS protocol, messages  
@@ -744,6 +762,110 @@ both query and reply messages have the sae message format
 - Create authoritative server type A record for www.gentsk.com, type MX record for gentsk.com
 
 ### Attackin DNS
-- DNS applies no encryption machanism for the sake of efficiency 
-- 
+
+- root servers are relatively safe
+- domain level servers are more dangerous since more user information goes thru this level
+- DNS applies no encryption machanism for the sake of efficiency, all messages are plain text
 #### DDoS attacks
+see slides for more details 
+
+# Feb 7, Thursday
+## Socket programming
+
+- goal: build client-server 
+- `socket`: door between application process and end- end-transport protocol
+  - two socket types:
+    - `UDP`
+    - `TCP`
+
+### Socket with UDP
+- no "connection" between client and server
+- no handshaking before sending data
+- sender explicitly attaches IP address and port number to each packet
+- receiver extract sender `IP address` and `port number` from the packet
+- transmitted data may be lost or received out-of-order
+- provides unreliable transfer of groups of bytes (􏰁datagrams􏰀) between client and server
+#### UDP communication process
+- server run on serverIP
+- server creates socket, port = x
+- client create socket
+- client create datagram with server IP and port=x, send datagram via clientSocket
+- server read datagram from serverSocket
+- server write reply to server socket specifying client address and port number
+- client read datagra from client socket
+- client close client socket
+
+### Socket with TCP
+- server process must run first
+- server must create socket that welcomes client's contact
+- client must contact server
+- client contacts server by creating TCP socket, specifying IP address, port number of server process
+- when client creates socket, client TCP establishes connectiont to server TCP
+- when server contacted by client, server TCP creates new socket for server process to communicate with client 
+- reliable communication between server and client
+
+#### TCP ommunication process
+- server create socket, port=x, for incoming request
+- server wait for incoming connection request
+- client create socket, connect to hostid, port= x
+- client send request using clientSocket
+- server read request from connectionSocket
+- server write reply to connetionSocket
+- client read request from client socket
+- server closes connectionSocket
+- client closes client socket
+
+
+# Chapter 3: Transport Layer
+
+## Transport layer services and protocols 
+
+- provide logical communication between app processes running on different hosts
+- end to end system protocols 
+
+### Transport vs. network layer
+- network layer: logical communication between hosts
+- transport layer: logical communication between processes, relies on and enhances network layer
+- processes communicate based on the communication between hosts
+
+### Multiplexing and demultiplexing
+- `multiplexing`: happens on sender end. Handles data from multiple sockets and transport header (later used for demultiplexing)
+- `demultiplexing`: on receiver end. Use header info to deliver received segments to correct socket. 
+
+
+#### How demultiplexing works 
+see slides, wait for review :x
+
+#### Connectionless demultiplexing
+see slides, wait for review :x
+used by UDP
+
+#### Connection-oriented demultiplexing
+used by TCP
+
+#### UDP: segment header 
+- source port number
+- destination portnumber 
+- IP address
+- `checksum`: a signature computing the data you transmit. Used to detect if there are errors in the header.
+  - the receiver compute the checksum of the received message and compares that with the checksum included in the header to see if there is an error
+    - if doesnt match, there is an error
+    - else we still dont know if its correct
+  - checksum cannot be all zero since receiver will consider it as checksum not computed. we use all ones instead 
+
+## Principle of reliable data transfer
+- important in application, transport, link layers
+- use finite state machines (FSM) to specify sender, receiver 
+
+### Reliable transfer over a reliable channel
+- underlying chennel perfectly relable
+- separate FSMs for sender, receiver:
+  - sender sends data into underlying channel
+  - receiver reads data from underlying channel
+- very simple behaviors for both sender and receiver
+
+### channel with bit errors
+- underlying channels may flip bits in the packet
+- still no packet loss
+- `acknowledgements (ACKs)`: receiver explicitly tells sender that packet received OK
+- `negative acknowledgements`: 
