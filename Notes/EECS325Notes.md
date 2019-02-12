@@ -128,14 +128,27 @@ Spring 2019
 - [Chapter 3: Transport Layer](#chapter-3-transport-layer)
   - [Transport layer services and protocols](#transport-layer-services-and-protocols)
     - [Transport vs. network layer](#transport-vs-network-layer)
-    - [Multiplexing and demultiplexing](#multiplexing-and-demultiplexing)
-      - [How demultiplexing works](#how-demultiplexing-works)
-      - [Connectionless demultiplexing](#connectionless-demultiplexing)
-      - [Connection-oriented demultiplexing](#connection-oriented-demultiplexing)
-      - [UDP: segment header](#udp-segment-header)
+    - [Reliable In-order delivery (TCP)](#reliable-in-order-delivery-tcp)
+    - [Unreliable unordered delivery (UDP)](#unreliable-unordered-delivery-udp)
+  - [Multiplexing and demultiplexing](#multiplexing-and-demultiplexing)
+    - [How demultiplexing works](#how-demultiplexing-works)
+    - [Connectionless demultiplexing](#connectionless-demultiplexing)
+    - [Connection-oriented demultiplexing](#connection-oriented-demultiplexing)
+  - [UDP: User Datagram Protocol](#udp-user-datagram-protocol)
+    - [UDP: segment header](#udp-segment-header)
   - [Principle of reliable data transfer](#principle-of-reliable-data-transfer)
-    - [Reliable transfer over a reliable channel](#reliable-transfer-over-a-reliable-channel)
-    - [channel with bit errors](#channel-with-bit-errors)
+    - [rdt1.0: Reliable transfer over a reliable channel](#rdt10-reliable-transfer-over-a-reliable-channel)
+    - [rdt2.0: Channel with bit errors](#rdt20-channel-with-bit-errors)
+- [Feb 12, Tuesday](#feb-12-tuesday)
+      - [Fatal Flaw](#fatal-flaw)
+    - [rdt2.1: handles garbled ACK/NAKs](#rdt21-handles-garbled-acknaks)
+    - [rdt2.2: NAK-free protocol](#rdt22-nak-free-protocol)
+    - [rdt3.0: channels with errors and loss](#rdt30-channels-with-errors-and-loss)
+      - [rdt3.0 in action](#rdt30-in-action)
+      - [Performance of rdt3.0](#performance-of-rdt30)
+    - [Pipelined protocols](#pipelined-protocols)
+      - [Go-back-N](#go-back-n)
+      - [Selective Repeat:](#selective-repeat)
 
 -----
 # Jan 15, Tuesday
@@ -822,28 +835,44 @@ see slides for more details
 
 - provide logical communication between app processes running on different hosts
 - end to end system protocols 
+- Data units transferred within the unit: segments
 
 ### Transport vs. network layer
 - network layer: logical communication between hosts
-- transport layer: logical communication between processes, relies on and enhances network layer
+- transport layer: logical communication between two end processes, relies on and enhances network layer
 - processes communicate based on the communication between hosts
 
-### Multiplexing and demultiplexing
+### Reliable In-order delivery (TCP)
+
+### Unreliable unordered delivery (UDP)
+
+## Multiplexing and demultiplexing
 - `multiplexing`: happens on sender end. Handles data from multiple sockets and transport header (later used for demultiplexing)
 - `demultiplexing`: on receiver end. Use header info to deliver received segments to correct socket. 
 
+### How demultiplexing works 
+host uses IP addresses & port numbers to direct segment to appropriate socket
+32 bits
 
-#### How demultiplexing works 
-see slides, wait for review :x
-
-#### Connectionless demultiplexing
+### Connectionless demultiplexing
 see slides, wait for review :x
 used by UDP
 
-#### Connection-oriented demultiplexing
-used by TCP
+### Connection-oriented demultiplexing
+- used by TCP, identified by 4-tuple
+  - source IP address
+  - source port number • dest IP address
+  - dest port number
+- demux: receiver uses all four values to direct segment to appropriate socket
+- server host may support many simultaneous TCP sockets, each socket identified by its own 4-tuple
+- web servers have different sockets for each connecting client
 
-#### UDP: segment header 
+## UDP: User Datagram Protocol
+- Connectionless: no handshaking between UDP sender, receiver
+- reliable transfer over UDP
+
+
+### UDP: segment header 
 - source port number
 - destination portnumber 
 - IP address
@@ -855,17 +884,155 @@ used by TCP
 
 ## Principle of reliable data transfer
 - important in application, transport, link layers
+- Most important API:
+  - `rdt_send()`: called from above (by the app). Passed data to deliver to receiver upper layer
+  - `rdt_rcv()`: called when packet arrives on rcv-side of channel
 - use finite state machines (FSM) to specify sender, receiver 
 
-### Reliable transfer over a reliable channel
-- underlying chennel perfectly relable
+### rdt1.0: Reliable transfer over a reliable channel
+- underlying chennel perfectly reliable
 - separate FSMs for sender, receiver:
   - sender sends data into underlying channel
   - receiver reads data from underlying channel
-- very simple behaviors for both sender and receiver
+- very simple behaviors for both sender and receiver since both underlying layers are completely reliable 
+- Both sender and receiver have only one state. There are still state transitions, but always end up with the original state 
+- **Sender**: 
+  - wait for call from above 
+  - rdt_send(data)
+  - packet = make_pkt(data)
+  - udt_send(packet)
+- **Receiver**: 
+  - Wait call from below 
+  - rdt_rcv(packet)
+  - extract (packet,data) 
+  - deliver_data(data)
 
-### channel with bit errors
+### rdt2.0: Channel with bit errors
+
 - underlying channels may flip bits in the packet
 - still no packet loss
 - `acknowledgements (ACKs)`: receiver explicitly tells sender that packet received OK
-- `negative acknowledgements`: 
+- `negative acknowledgements`: receiver explicitly tells sender that pkt had errors
+  - sender retransmits pkt on receipt of NAK
+- **Sender** has two states:
+  1.  Wait for call from above
+    - rdt_send(data)
+    - sndpkt = make_pkt(data, checksum)
+    - udt_send(sndpkt)
+    - transitions to state `2`
+  2.  Wait for ACK or NAK 
+    - rdt_rcv(rcvpkt) && isNAK(rcvpkt)
+      - udt_send(sndpkt)
+      - transitions to state `2`
+    - rdt_rcv(rcvpkt) && isACK(rcvpkt)
+      - transitons to state `1`
+- **Receiver** has one state with two transitions:
+  1. Wait for call from below
+    - rdt_rcv(rcvpkt) && notcorrupt(rcvpkt)
+      - extract(rcvpkt,data) 
+      - deliver_data(data) 
+      - udt_send(ACK)
+    - rdt_rcv(rcvpkt) && corrupt(rcvpkt)
+      - udt_send(NAK)
+    - Go back to state `1`
+
+# Feb 12, Tuesday
+
+#### Fatal Flaw 
+- The acknowledgement message can also be corrupted
+- sender doesn't know what happened at receiver
+- can't just retransmit: possible duplicate at receiver end 
+- **Solutions**:
+  - sender retransmits current pkt if ACK/NAK corrupted
+  - sender adds sequence number to each pkt
+  - receiver discards duplicate pkt 
+- Sender use the stop and wait model
+  -  it will not send another packet if it does not receive any feedback message from the receiver 
+  -  This guarantees the sender always sends only one packet at a time 
+  -  Receiver gets to differentiate the duplicate packet 
+
+### rdt2.1: handles garbled ACK/NAKs
+- Upgrade the rdt2.0 model 
+- Doubles the number of states
+*Refer to the slides, need revision*
+- **Sender**: 
+  - seq number added to pkt
+  - two seq. #s (0,1) will suffice
+  - must check if received ACK/NAK corrupted
+  - state must remember whether expected pkt should have seq # of 0 or 1
+  1. wait for call 0 from above 
+     - rdt_send(data))
+
+- **Receiver**: 
+  - must check if received packet is duplicate
+  - state indicates whether 0 or 1 is expected pkt seq #
+  1. Wait for 0 from below 
+  [Attach images here later]
+### rdt2.2: NAK-free protocol 
+Alter from the rdt2.1 by dropping NAK message and have one more check message function
+  [Attach images here later]
+### rdt3.0: channels with errors and loss
+- new assumption: underlying channel can also lose packets (data, ACKs)
+- approach: sender waits reasonable amount of time for ACK 
+- retransmits if no ACK received in this time
+- if pkt (or ACK) just delayed (not lost):
+  - retransmission will be duplicate, but seq. #'s already handles this
+  - receiver must specify seq # of pkt being ACKed
+- requires countdown timer
+
+[Attach images here later]
+
+#### rdt3.0 in action
+[Attach images here later]
+
+#### Performance of rdt3.0
+- rdt3.0 is correct, but with low performance 
+- [See slides for datails on the example]
+- want to calculate utilization of the sender 
+  - ratio between transmission time and total amount of time: $$ U_{sender} = \frac{L/R}{RTT+L/R} $$
+- network protocol limits use of physical resources
+
+### Pipelined protocols
+- `pipelining`: sender allows multiple, in-flight, yet- to-be-acknowledged pkts
+- two generic forms of pipelined protocols: 
+  - `go-Back-N`
+  - `selective repeat`
+- increase utilization by sending multiple pkts together:
+  - eg: three packets, then utilization of sender becomes three times as large: $$ U_{sender} = \frac{3L/R}{RTT+L/R} $$
+
+#### Go-back-N
+
+- sender can have up to N unacked packetes in pipeline
+- receiver only sends cumulative ack
+  - does not ack packet if there's a gap
+- Sender has timer for oldest unacked packet
+  - when timer expires, retransimit all unacked packets 
+  - original design: only one timer. but now can have multiple timers?
+- **Sender**:
+  - k-bit seq number in pkt header
+  - window of up to N, consecutive unack'ed pkts allowed
+  - [Attach images here later]
+  - ACK(n): ACKs all pkts up to, including seq # n - cumulative ACK
+    - may receive duplicate ACKs (see receiver)
+  - timer for oldest in-flight pkt
+  - timeout(n): retransmit packet n and all higher seq # pkts in window
+  - [Attach images here later for sender FSM]
+- **Receiver**:
+  - applies cumulative acknowledgement
+  - drop all successive packets if one intermediate packet was loss
+  -  resend ack for the last packet received in correct order until the loss packet was received
+  - ACK-only: always send ACK for correctly-received pkt with highest in-order seq #
+    - may generate duplicate ACKs
+    - need only remember `expectedseqnum`
+  - out-of-order pkt:
+    - discard (don't buffer): no receiver buffering
+    - re-ACK pkt with highest in-order seq #
+  - [Attach images here later for receiver FSM]
+
+
+#### Selective Repeat:
+- sender can have up to N unack'ed packets in pipeline
+- rcvr sends individual ack for each packet
+- sender maintains different timers for each unacked packets 
+  - when timer expires, retransmit only that unacked packet
+ 
