@@ -139,10 +139,9 @@ Spring 2019
   - [Principle of reliable data transfer](#principle-of-reliable-data-transfer)
     - [rdt1.0: Reliable transfer over a reliable channel](#rdt10-reliable-transfer-over-a-reliable-channel)
     - [rdt2.0: Channel with bit errors](#rdt20-channel-with-bit-errors)
-- [Feb 12, Tuesday](#feb-12-tuesday)
-  - [(Continue with rdt2.0)](#continue-with-rdt20)
-    - [](#)
       - [Fatal Flaw](#fatal-flaw)
+- [Feb 12, Tuesday](#feb-12-tuesday)
+  - [(Continue with rdt)](#continue-with-rdt)
     - [rdt2.1: handles garbled ACK/NAKs](#rdt21-handles-garbled-acknaks)
     - [rdt2.2: NAK-free protocol](#rdt22-nak-free-protocol)
     - [rdt3.0: channels with errors and loss](#rdt30-channels-with-errors-and-loss)
@@ -938,10 +937,8 @@ used by UDP
       - udt_send(NAK)
     - Go back to state `1`
 
-# Feb 12, Tuesday
-## (Continue with rdt2.0)
-### 
 #### Fatal Flaw 
+
 - The acknowledgement message can also be corrupted
 - sender doesn't know what happened at receiver
 - can't just retransmit: possible duplicate at receiver end 
@@ -954,6 +951,9 @@ used by UDP
   -  This guarantees the sender always sends only one packet at a time 
   -  Receiver gets to differentiate the duplicate packet 
 
+
+# Feb 12, Tuesday
+## (Continue with rdt)
 ### rdt2.1: handles garbled ACK/NAKs
 - Upgrade the rdt2.0 model 
 - Doubles the number of states
