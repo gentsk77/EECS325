@@ -140,6 +140,8 @@ Spring 2019
     - [rdt1.0: Reliable transfer over a reliable channel](#rdt10-reliable-transfer-over-a-reliable-channel)
     - [rdt2.0: Channel with bit errors](#rdt20-channel-with-bit-errors)
 - [Feb 12, Tuesday](#feb-12-tuesday)
+  - [(Continue with rdt2.0)](#continue-with-rdt20)
+    - [](#)
       - [Fatal Flaw](#fatal-flaw)
     - [rdt2.1: handles garbled ACK/NAKs](#rdt21-handles-garbled-acknaks)
     - [rdt2.2: NAK-free protocol](#rdt22-nak-free-protocol)
@@ -937,7 +939,8 @@ used by UDP
     - Go back to state `1`
 
 # Feb 12, Tuesday
-
+## (Continue with rdt2.0)
+### 
 #### Fatal Flaw 
 - The acknowledgement message can also be corrupted
 - sender doesn't know what happened at receiver
