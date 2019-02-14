@@ -1,8 +1,7 @@
 
 # EECS325 Computer Networks
-Yue Shu
-
-Spring 2019
+  Yue Shu
+  Spring 2019
 
 -----
 - [EECS325 Computer Networks](#eecs325-computer-networks)
@@ -150,6 +149,13 @@ Spring 2019
     - [Pipelined protocols](#pipelined-protocols)
       - [Go-back-N](#go-back-n)
       - [Selective Repeat:](#selective-repeat)
+  - [Connection oriented transport: TCP](#connection-oriented-transport-tcp)
+    - [TCP segment structure](#tcp-segment-structure)
+    - [TCP seq. numbers, ACKs](#tcp-seq-numbers-acks)
+    - [TCP round trip time, timeout](#tcp-round-trip-time-timeout)
+    - [TCP reliable data transfer](#tcp-reliable-data-transfer)
+    - [Flow control](#flow-control)
+    - [Connection management](#connection-management)
 
 -----
 # Jan 15, Tuesday
@@ -951,7 +957,6 @@ used by UDP
   -  This guarantees the sender always sends only one packet at a time 
   -  Receiver gets to differentiate the duplicate packet 
 
-
 # Feb 12, Tuesday
 ## (Continue with rdt)
 ### rdt2.1: handles garbled ACK/NAKs
@@ -965,15 +970,16 @@ used by UDP
   - state must remember whether expected pkt should have seq # of 0 or 1
   1. wait for call 0 from above 
      - rdt_send(data))
-
 - **Receiver**: 
   - must check if received packet is duplicate
   - state indicates whether 0 or 1 is expected pkt seq #
   1. Wait for 0 from below 
   [Attach images here later]
+
 ### rdt2.2: NAK-free protocol 
 Alter from the rdt2.1 by dropping NAK message and have one more check message function
   [Attach images here later]
+
 ### rdt3.0: channels with errors and loss
 - new assumption: underlying channel can also lose packets (data, ACKs)
 - approach: sender waits reasonable amount of time for ACK 
@@ -1005,19 +1011,23 @@ Alter from the rdt2.1 by dropping NAK message and have one more check message fu
 
 #### Go-back-N
 
-- sender can have up to N unacked packetes in pipeline
-- receiver only sends cumulative ack
+- `sender`: can have up to N unacked packetes in pipeline
+- `receiver`: only sends cumulative ack
   - does not ack packet if there's a gap
-- Sender has timer for oldest unacked packet
+- Sender has timer for *oldest unacked packet*
   - when timer expires, retransimit all unacked packets 
   - original design: only one timer. but now can have multiple timers?
+
+**The logic is:**
+
 - **Sender**:
   - k-bit seq number in pkt header
   - window of up to N, consecutive unack'ed pkts allowed
   - [Attach images here later]
-  - ACK(n): ACKs all pkts up to, including seq # n - cumulative ACK
+  - two `pointers` in the window to point to the `sender base` and the `nextseqnum`
+  - ACK(n): ACKs all pkts up to and including seq # n: cumulative ACK
     - may receive duplicate ACKs (see receiver)
-  - timer for oldest in-flight pkt
+  - there is only one timer, and it is for oldest in-flight pkt
   - timeout(n): retransmit packet n and all higher seq # pkts in window
   - [Attach images here later for sender FSM]
 - **Receiver**:
@@ -1027,15 +1037,130 @@ Alter from the rdt2.1 by dropping NAK message and have one more check message fu
   - ACK-only: always send ACK for correctly-received pkt with highest in-order seq #
     - may generate duplicate ACKs
     - need only remember `expectedseqnum`
-  - out-of-order pkt:
-    - discard (don't buffer): no receiver buffering
-    - re-ACK pkt with highest in-order seq #
+  - the receiver does not buffer out-of-order pkt, instead, the receiver discards all packets untill receiving the packet in the correct order
+  - re-ACK pkt with highest in-order seq #
   - [Attach images here later for receiver FSM]
+- [Attach images here later for GBN in action]
 
+ # Feb 14, Thursday 
+
+- **GBN window size and sequence number**
+  - [Attach images here later for GBN erroneous example]
+    - `window size` $= 2^k = 4 $
+    - `k`: length of sequence number 
+    - would not work because of the oversize window size 
+  - [attach image for correct example]
+    - `window size` $= 2^k - 1 = 3 $
+  - Correct window size should be at least 1 less than the 2's exponential of sequence number 
+- **real life case in TCP**
+  - the size of increment in receiver's ACK value is related to the lenght of the data sent to the receiver 
 
 #### Selective Repeat:
 - sender can have up to N unack'ed packets in pipeline
-- rcvr sends individual ack for each packet
+  - sender only resends pkts for which ACK not received
+- receiver sends individual ack for each packet
+  - receiver buffers pkts, as needed, for eventual in-order delivery to upper layer
 - sender maintains different timers for each unacked packets 
   - when timer expires, retransmit only that unacked packet
+
+**The logic is:**
+
+- **sender**:
+  - data from above: 
+    - if next available seq number in window, send pkt
+  - timeout(n): 
+    - resend pkt n, restart timer 
+  - ACK(n) in `[sendbase, sendbase+N]`:
+    - mark pkt n as received
+    - if n smallest unACked pkt, advance window base to next unACKed seq number 
+- **receiver**
+  - pkt n in `[rcvbase,rcvbase+N-1]`:
+    - send ACK(n)
+    - buffer out of order pkt
+    - deliver buffered in order pkts, advance window to next not yet received pkt
+  - pkt n in `[rcvbase,rcvbase-1]`:
+    - ACK(n)
+  - else:
+    - ignore 
+
+- **Selective repeat dilemma:**
+  - see slides, attach image here
+
+## Connection oriented transport: TCP
+
+### TCP segment structure
+
+- acknowledgement number: used by receiver to indicate what seq number receiving and what seq number expecting 
+- sequence number: counting by bytes of data instead of segments
+  - so is acknowledgement number 
+- URG: urgent data
+- ACK: ACK # valid 
+- receive window: how many more bytes of data the receiver is willing to accept 
+
+### TCP seq. numbers, ACKs
+
+- TCP protocol is very similar to GBN 
+- [attach image of segement sample]
+- `sequence number`: first byte of sent segment data
+- `acknowledgements`: 
+  - next byte expected by the receiver 
+  - cumulative ACK
+- both numbers incremented according to the length of data segments
+- TCP doesn't specify how to handle out of order segments, addressed by implementor 
+- [attach example]
+  - two hosts tranferring data, both sender and receiver
+
+### TCP round trip time, timeout
+wait for reviewing....
+
+### TCP reliable data transfer 
+- TCP creates rdt service on top of IP's unreliable service 
+  - pipelined segments
+  - cumulative acks
+  - single retransmission timer
+  - allows out of order packets 
+- retransmission is triggered by two factors:
+  - timeout events
+  - duplicate acks 
+- **sender events**:
+  - data rcvd fomapp:
+    - create segment with seq #
+    - seq # is first byte of sent segment data
+    - start timer if not already running
+      - think of timer as for oldest unacked segment
+      - expiration interval: `TimeOutInterval`
+  - time out:
+    - only retransmit segment that caused timeout
+      - unlike GBN which transmitted all successive packets 
+    - restart timer
+  - ack rcvd:
+    - if ack acknowledges previously unacked segments
+      - update what is known to be ACKed
+      - start timer if there are still unacked segments
+  - [attach simplified FSM for TCP sender here]
+
+- **receiver events**
+  - event at receiver
+    - [image]
+  - TCP receiver action
+    - [image]
+
+- **TCP retransmission scenarios**
+  - [attach image]
+- TCP fast retransmit
+  - time-outperiod often relatively long: long delay before resending lost packet
+  - detect lost segments via duplicate ACKs.
+    - sender often sends many segments back- to-back
+    - if segment is lost, there will likely be many duplicate ACKs.
+  
+### Flow control
+- receiver controls sender, so sender won't overflow receiver's buffer by transmitting too much, too fast
+- receiver advertises free buffer space by including rwnd value in TCP header of receiver-to-sender segments
+
+### Connection management
+- sender and receiver handshakes before exchanging data
+  - agree to establish connection (each knowing the other willing
+ to establish connection)
+    - `req_conn(x)` + `acc_conn(x)`
+  - agree on connection parameters
  
