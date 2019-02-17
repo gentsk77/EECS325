@@ -39,14 +39,14 @@
       - [Circuit Switching](#circuit-switching)
       - [Packet Switching](#packet-switching)
   - [Internet Structure: network of networks](#internet-structure-network-of-networks)
-  - [Four Sources of Delay](#four-sources-of-delay)
+  - [Delay, loss, and throughput in networks](#delay-loss-and-throughput-in-networks)
     - [Process Delay](#process-delay)
     - [Transmission Delay](#transmission-delay)
     - [Queueing Delay](#queueing-delay)
     - [Propogation Delay](#propogation-delay)
+    - [Real internet delays and routes](#real-internet-delays-and-routes)
     - [Packet Loss](#packet-loss)
-  - [Throughput](#throughput)
-    - [Bottleneck link](#bottleneck-link)
+    - [Throughput](#throughput)
 - [January 22, Tuesday](#january-22-tuesday)
   - [Protocol Layers](#protocol-layers)
     - [Internet Protocol Stack: End to End Protocol](#internet-protocol-stack-end-to-end-protocol)
@@ -294,7 +294,10 @@ $$packet~transmission~delay = time~needed~to~transmit~L-bit~packet~into~link = \
 
 ## Network Core
 
-The network core is a mesh of interconnected routers 
+= The network core is a mesh of interconnected routers 
+- Ther are two network cores:
+  - `packet switching`
+  - `circuit switching`
 
 ![network core example](/Images/networkcore.png)
 
@@ -328,6 +331,8 @@ The network core is a mesh of interconnected routers
 - Routers do not know the buffer condition of each other. 
 - The routing process is completed by software of routers.
 
+![routing and forwarding example](/Images/routing&forwarding.png)
+
 #### Forwarding
 
 - The action the router performs according to local forwarding table 
@@ -335,9 +340,12 @@ The network core is a mesh of interconnected routers
 
 ### Circuit switching
 
-- Dedicated resource shared by users. 
-- Resources remain idle if not in use. 
-- Circuit switching is no longer in use right now. Mostly replaced by packet switching. 
+![circuit switching example](/Images/circuit_switching.png)
+
+- dedicated resource for the user, there is no sharing for a particular circuit
+- circuit segment remains idle if not in use. 
+- commonly used in traditional telephone networks 
+- circuit switching is no longer in use right now. Mostly replaced by packet switching. 
 
 #### FDM (Frequency Devision Multiplexing)
 
@@ -350,7 +358,7 @@ The network core is a mesh of interconnected routers
 
 ### Packet Switching VS Circuit Switching
 
-refer to the slides for an example 
+![packet switching vs circuit switching example](/Images/packetVScircuit.png)
 
 #### Circuit Switching
 
@@ -359,9 +367,8 @@ Only allow limited amount of users. Reserve resources for limited users.
 #### Packet Switching
 
 - Allow resource to be shared. Thus could accomodate more users.
-
-- Could have `congestions`: `packet lost/delay`, need good protocol for reliable data transfer, `congestion control`.
-
+- Could have `congestions`: `packet lost/delay` 
+- need good protocol for reliable data transfer, `congestion control`.
 
 ## Internet Structure: network of networks 
 
@@ -369,60 +376,108 @@ We need to connect different access networks with each other. But how?
 
 With a global ISP? NO, need the same agreement 
 
-With __different core ISPs interconnected to each other__? YES!
+With **different core ISPs interconnected to each other**? YES!
 
+![internet structure example](/Images/internet_structure.png)
+
+- `ISP`: internet service providers
+- End systems connect to Internet via access ISPs
+  - residential, company and university ISPs
+- Access ISPs in turn must be interconnected.
 - Different `core ISPs` connected by `peering links` and `IXP hubs` (internet exchanging point) 
-
 - Core ISPs connected to `regional ISPs`
 
-- `Content providers` (eg: Google) with multiple `data centers` connected to IXP and connected directly to the regional ISPs 
+![internet hierarchy example](/Images/internet_hierarchy.png)
 
+- at center: small number of well-connected large networks
+- tier-1 commercial ISPs (e.g., Level 3, Sprint, AT&T, NTT), national &
+international coverage
+- `Content providers`: private network (eg: Google) with multiple `data centers` connecting to IXP, tier-1 and regional ISPs directly 
 - `POP`: point of presence. Frequently used by content providers to get closer to their end users
 
+---
 
+## Delay, loss, and throughput in networks
 
-## Four Sources of Delay 
+![packet delay example](/Images/packet_delay.png)
 
 The sequence is: arrive at router - `process` - `queueing` - `transmission` - leave router - `propogation` - arrive at next router
 
 ### Process Delay
 
-The time the router takes to process the entire packet upon arrival 
+- $d_{proc}$: the time the router takes to process the entire packet upon arrival 
+- also called `nodal processing`
+- check bit error 
+- determine output link
+- typically < msec
 
 ### Transmission Delay
 
-The time the router takes to process and direct the packet bits by bits in the router (The time the toll station takes to serve the entire caravan car by car)
-
+- $d_{trans}$: the time the router takes to process and direct the packet bits by bits in the router *(The time the toll station takes to serve the entire caravan car by car)*
+- `L`: packet length (bits)
+- `R`: link bandwidth (bps)
+- $d_{trans} = L/R$
 
 ### Queueing Delay
 
-- Time interval between arrival and being sent again while waiting in the router. (The time one caravan waits while the former caravan is being serviced)
-- Calculate length of queueing delay by determining the value of average queueing delay
-- Can lead to data loss.
+- $d_{queue}$: time interval between arrival and being sent again while waiting at the output link for transmission. *(The time one caravan waits while the former caravan is being serviced)*
+- depends on congestion level of router
+- calculate length of queueing delay by determining the value of average queueing delay
+- can lead to data loss
+
+![queueing delay example](/Images/queueing_delay.png)
+
+- `R`: link bandwidth (bps)
+- `L`: packet length (bits)
+- `a`: average packet arrival rate
+- traffic intensity $= La/R$
+  - $La/R \approx 0$: average queueing delay small
+  - $La/R \to 1$: average queueing delay large
+  - $La/R > 1$: more packets arriving than can be serviced, average delay infinite
 
 ### Propogation Delay
 
-- The time it takes the packets to travel in the link from one router to the next. (The time the caravan takes to travel to the next toll station)
+- $d_{prop}$: the time it takes the packets to travel in the link from one router to the next. *(The time the caravan takes to travel to the next toll station)*
 - Usually very fast
+- `d`: length of physical link
+- `s`: propagation speed (~$2\times 10^8~m/sec$)
+- $d_{prop} = d/s$
+
+### Real internet delays and routes
+
+![traceroute example](/Images/traceroute.png)
+
+- `traceroute` program: provides delay measurement from source to router along end-to-end internet path towards destination
+  - for all i: 
+    - sends three packets that will reach router i on path towards destination
+    - router i will return packets to sender
+    - sender records the time interval between sending and receiving of the packet
 
 ### Packet Loss 
 
 - `Packet loss`: packets can be dropped due to insufficient `buffer size`
 - `Buffer size`: the storage size of packets that could be stored in the router
 
-## Throughput
+### Throughput
 
-Rate (bits/time unit) at which bits transferred between sender/receiver
+![throughput example](/Images/throughput.png)
 
-### Bottleneck link
-
-Link on end to end path that has smaller transmission rate
+- `throughput`: rate ($bits/time~unit$) at which bits transferred between sender and receiver
+- `instantaneous`: rate at given point in time
+- `average`: rate over longer period of time
+- $R_s < R_c$: average end to end throughput $= R_s$
+  ![Rs smaller than Rc example](/Images/Rs_smaller_Rc.png)
+- $R_s > R_c$: average end to end throughput $= R_c$
+  ![Rs larger than Rc example](/Images/Rs_larger_Rc.png)
+- `bottleneck link`: link on end to end path that has **smaller** transmission rate
+- **internet scenario:**
+  ![throughput internet scenario example](/Images/throughput_scenario.png)
+  - per-connection end to end throughput: $min(R_c, R_s, R/10)$
+  - in practice, $R_c$ or $R_s$ is often bottleneck
 
 ---
 
 # January 22, Tuesday 
-
-Revisiting slides on last Thursday
 
 ## Protocol Layers
 
