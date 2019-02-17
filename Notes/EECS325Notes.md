@@ -50,21 +50,14 @@
 - [January 22, Tuesday](#january-22-tuesday)
   - [Protocol Layers](#protocol-layers)
     - [Internet Protocol Stack: End to End Protocol](#internet-protocol-stack-end-to-end-protocol)
-      - [Application](#application)
-      - [Transport](#transport)
-      - [Network](#network)
-      - [Link](#link)
-      - [Physical](#physical)
     - [ISO/OSI reference model](#isoosi-reference-model)
-      - [Presentation](#presentation)
-      - [Session](#session)
     - [Process of data transfer between end users](#process-of-data-transfer-between-end-users)
   - [Network Security](#network-security)
     - [Malware](#malware)
-- [Jan 24, Thursday](#jan-24-thursday)
-  - [Idle Layer](#idle-layer-1)
     - [Denial of Service (DoS)](#denial-of-service-dos)
     - [Packet "Sniffing"](#packet-%22sniffing%22)
+    - [IP spoofing](#ip-spoofing)
+- [Jan 24, Thursday](#jan-24-thursday)
 - [Chapter Two: Application Layer](#chapter-two-application-layer)
   - [Application Architecture](#application-architecture)
     - [Client-Server Architecture](#client-server-architecture)
@@ -488,79 +481,106 @@ The sequence is: arrive at router - `process` - `queueing` - `transmission` - le
   
 ### Internet Protocol Stack: End to End Protocol
 
-#### Application
-- Supporting the network applications. 
-- eg: FTP, HTTP, SMTP 
-- HTTP is developed based on TCP 
+![internet layer stack example](/Images/internet_layer_stack.png)
 
-####  Transport
+- **application layer**
+  - Supporting the network applications. 
+  - eg: FTP, HTTP, SMTP 
+  - HTTP is developed based on TCP 
 
-- Interprocess data transfer
-- Only happens between two end systems to let two processes communicate with each other
-- eg: TCP (guarantee reliability of data transfer, contains congestion control), UDP
-- TCP is slower than UDP. Most game/game streaming applications use UDP rather than TCP. But TCP contains reliability, whereas UDP does not guarantee
-- Not necessary for the routers/switches to support the transport layer protocols, although most devices now days can also support such layer. 
+- **transport layer**
+  - Interprocess data transfer
+  - Only happens between two end systems to let two processes communicate with each other
+  - eg: TCP (guarantee reliability of data transfer, contains congestion control), UDP (unreliable data transfer)
+  - TCP is slower than UDP. Most game or streaming applications use UDP rather than TCP. But TCP contains reliability, whereas UDP does not guarantee
+  - Not necessary for the routers/switches to support the transport layer protocols, although most devices now days can also support such layer. 
 
-####  Network
+- **network layer**
+  - Both routing and forwarding are in this layer. 
+  - Routing of datagrams from source to destination.
+  - Only IP protocol
+  - `IP protocol`: consists of different routing protocols 
 
-- Both routing and forwarding are in this layer. 
-- Routing of datagrams from source to destination.
-- Only IP protocol
-- IP protocol: consists of different routing protocols 
+- **link layer**
+  - Only used to transfer data within two neighbouring network elements (router to router, switches to switches, etc.)
+  - Do not connect two end users
+  - eg: Ethernet (wired connection), 802.11 (WiFi, wireless connection), PPP 
 
-####  Link
-
-- Only used to transfer data within two neighbouring network elements (router to router, switches to switches, etc.)
-- Do not connect two end users
-- eg: Ethernet (wired connection), 802.11 (WiFi, wireless connection), PPP 
-
-####  Physical 
-
-- Basically are just bits on the wire
+- **physical layer**
+  - Basically are just bits on the wire
 
 ### ISO/OSI reference model
 
-- Includes two extra layers
-- Just below the application layer
+![ISO reference model exmaple](/Images/ISOmodel.png)
+
+- Includes two extra layers that internet stack does not share
+- These services must be implemented in application if needed 
 - Not necessary for all applications, thus can be combined with application layer
 
-#### Presentation 
+- **presentation layer**
+  - allows application to describe/interpret the meaning of data: encryption, compression, machine-specific conventions etc. 
 
-- Allows application to describe/interpret the meaning of data: encryption, compression etc. 
-
-#### Session
-
-- Synchronization, checkpointing, recovery of data exchange
+- **session layer**
+  - synchronization, checkpointing, recovery of data exchange
 
 ### Process of data transfer between end users
-- Data are transferred with encapsulation
-- Each layer generates a specific type of header and attach it to the message being tranferred. The header contains layer specific information (eg: ip address by the network layer), and only corresponding layers can decrypt it.
+
+- Data are transferred with `encapsulation`
+- Each layer generates a specific type of `header` and attach it to the `message` being tranferred. 
+- The header contains *layer specific information* (eg: ip address by the network layer), and **only corresponding layers** can decrypt it.
 - While the headers are being transferred between different layers, some of the headers might be changed, such as the data link layer, and the network layer for specific applications
 - Tranport layer information (header) will never be changed
+
+![encapsulation exmaple](/Images/encapsulation.png)
+
 - The process: [application layer] - message -> [transport layer] - segment -> [network layer] - datagram -> [link layer] - frame -> [physical layer]
 - Each layer can only see the correct corresponded header
-- The layers try to interpret/decapsulate the packets even though they might not understand??
+- The layers try to interpret/decapsulate the packets even though they might not understand
 - [source] - encapsulated packets -> [router]
 - Router drop the network header and check how to head the packet to the next link
+- A new network layer header is attached to the packet
 - [router] - encapsulated packets -> [destination]
 - The destination end user decrpt the packet encapsulated with layers of headers
 
+---
+
 ## Network Security
+
 ### Malware
-Hide behind your system/application.
-- Virus: need to be exectued to infect your devices 
-- Worm: if your pc is infected, your mobile device can also get infected
-- Spywre: record yoru keystrokes 
-- Once infected, the host can be enrolled in botnet, used by the hacker to attack servers illegally. 
+
+- Hide behind your system/application.
+- can get in host from:
+  - `virus`: need to be exectued to infect your devices 
+  - `worm`: if your pc is infected, your mobile device can also get infected
+- `spywre malware`: record your keystrokes. Once infected, the host can be enrolled in `botnet`, used by the hacker to attack servers illegally, such as spam and DDoS attacks. 
 - By hacking other machines, the hackers utilize others' devices and hide their identities. 
+
+### Denial of Service (DoS)
+
+![Dos example](/Images/DoS.png)
+
+Attackers make resources (server, bandwidth) unavailable to legitimate traffic by overwhelming resource with bogus traffic
+  1. select target
+  2. break into hosts around the network (see botnet) 
+  3. send packets to target from compromised hosts
+
+### Packet "Sniffing"
+
+![packet sniffing example](/Images/packet_sniffing.png)
+
+- broadcast media (shared Ethernet, wireless)
+- promiscuous network interface reads/records all packets (eg: including passwords) passing by
+- wireshark software used for end-of-chapter labs is a (free) packet-sniffer
+
+### IP spoofing
+
+![IP spoofing example](/Images/IP_spoofing.png)
+
+send packet with false source address
 
 ---
 
 # Jan 24, Thursday
-## Idle Layer 
-### Denial of Service (DoS)
-
-### Packet "Sniffing"
 
 # Chapter Two: Application Layer
 
