@@ -85,10 +85,11 @@
     - [Conditional GET](#conditional-get)
   - [Electronic Mail](#electronic-mail)
     - [SMTP protocol](#smtp-protocol)
-    - [Message Retrieving Protocols](#message-retrieving-protocols)
+    - [Mail message format](#mail-message-format)
+    - [Message access Protocols](#message-access-protocols)
       - [POP3 protocol](#pop3-protocol)
       - [IMAP](#imap)
-    - [Mail message format](#mail-message-format)
+      - [HTTP](#http)
 - [Feb 5, Tuesday](#feb-5-tuesday)
   - [DNS (Domain Name System)](#dns-domain-name-system)
     - [DNS services](#dns-services)
@@ -798,6 +799,7 @@ send packet with false source address
 ---
 
 ## Electronic Mail
+
 - Three major components
     - `user agents`
         - the mail readers
@@ -809,36 +811,61 @@ send packet with false source address
     - `SMTP` (simple mail transfer protocol)
         - protocol between mail servers for exchanging mail messages
         - **client side** of the mail server *send* message to **server side** of the mail server with `SMTP protocol`
-- Steps of sending emails
+- **Steps of sending emails**
+    ![sending email process example](/Images/sending_email.png)
     1. User sender compose email on UA
     2. UA transfer message to mail server of user sender with protocol depending on the specific user agent application
-    3. Client side of sender's mail server set up `TCP connection` with server side of recepient's mail server to **allow** SMTP connection between two end servers (the hand shaking process with SMTP)
-    4. Sender's mail server transfers the mail message to recepeint's mail server with `SMTP protocol`
+    3. Client side of SMTP (the sender) set up `TCP connection` with the receiver's mail server to **allow** SMTP connection between two end servers (the hand shaking process with SMTP)
+    4. SMTP client transfers the mail message to recepeint's mail server with `SMTP protocol` over TCP connection
     5. Closure of the connection
     6. Recepient's UA retrieve the message from mail server using `mail retrieving protocols` (IMAP, POP3)
     
 ### SMTP protocol 
-- SMTP uses **persistent** connections
-- SMTP client side `push` information to other mail server
-    - unlike HTTP which `pull` information
-- **multiple** objects sent in **multipart** message
 
-### Message Retrieving Protocols
+- SMTP uses **persistent** connections
+- SMTP requires message (header and body) to be in 7-bit ASCII
+- uses CRLF.CRLF to determine end of message
+- SMTP client side `push` information to other mail server
+  - unlike HTTP which `pull` information
+- **multiple** objects sent in **multipart** message
+  - unlike HTTP: each object encapsulatd in its own response message
+
+### Mail message format
+
+- SMTP: protocol for exchanging email messages
+- RFC 822: standard for text message format
+    - header lines: To, From, Subject
+        - Note: different from SMTP commands MAIL FROM, RCPT TO, etc.
+    - body: the message body content, ASCII character only 
+
+### Message access Protocols
+
 #### POP3 protocol
+- `POP`: post office protocol
+- authorization, download
+  - **authorization phase**:
+    - `user:` decaler user name
+    - `pass:` password
+  - **transaction phase**:
+    - `list:` list message numbers
+    - `retr:` retrieve message by number
+    - `dele:` delete
+    - `quit`
 - Two different modes
   - Download and delete
   - Download and keep
 
 #### IMAP
+- `IMAP`: internet mail access protocol
+- more features, including manipulation of stored messages on server
 - Keep all messages at server
 - Allow user toorganize meesgae in folders 
+- keeps user state across sessions
+  - names of folders and mappings between message IDs and folder name
 
-### Mail message format
-- RFC 822: standard for text message format
-    - header lines: To, From, Subject
-        - Note: different from SMTP commands MAIL FROM, RCPT TO, etc.
-    - body: the message body content, ASCII character only 
-  
+#### HTTP
+- used by gmail, hotmail, yahoo! mail, etc. 
+
 ---
 
 # Feb 5, Tuesday
