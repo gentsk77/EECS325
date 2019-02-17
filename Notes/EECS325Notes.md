@@ -61,11 +61,7 @@
 - [Chapter Two: Application Layer](#chapter-two-application-layer)
   - [Application Architecture](#application-architecture)
     - [Client-Server Architecture](#client-server-architecture)
-      - [Server](#server)
-      - [Client](#client)
-      - [Communication process](#communication-process)
     - [P2P architecture](#p2p-architecture)
-      - [Process of communication](#process-of-communication)
     - [Sockets](#sockets)
     - [Addressing processes](#addressing-processes)
     - [App-layer protocol defines](#app-layer-protocol-defines)
@@ -76,14 +72,11 @@
       - [Non persistant HTTP connections](#non-persistant-http-connections)
       - [Persistant HTTP connections](#persistant-http-connections)
     - [HTTP request message](#http-request-message)
-      - [General format](#general-format)
     - [HTTP response message](#http-response-message)
       - [Response status codes](#response-status-codes)
 - [Jan 29, Tuesday](#jan-29-tuesday)
-  - [User-server state: stateful cookies](#user-server-state-stateful-cookies)
-    - [Cookies can be used for](#cookies-can-be-used-for)
-  - [Web Caches (proxy server)](#web-caches-proxy-server)
-    - [Forward Proxy (we are talking about this one)](#forward-proxy-we-are-talking-about-this-one)
+    - [User-server state: stateful cookies](#user-server-state-stateful-cookies)
+    - [Web Caches (proxy server)](#web-caches-proxy-server)
     - [Reverse Proxy](#reverse-proxy)
     - [Caching Example](#caching-example)
       - [Without web cache mechanism](#without-web-cache-mechanism)
@@ -587,31 +580,37 @@ send packet with false source address
 ## Application Architecture
 
 ### Client-Server Architecture
-#### Server
-- Always-on host
-- Have a permanent public IP address in most cases
-- Have more servers to cater more requests: have data centers
-- Data center: a building stores only servers, routers, switches etc.  An approach for server providers to scale up?
 
+- **server**
+  - Always-on host
+  - Have a permanent public IP address in most cases
+  - Have more servers to cater more requests: have data centers
+  - data center: a building stores only servers, routers, switches etc.  An approach for server providers to scale up?
 
-#### Client
-- Dynamic IP adress depanding on server
-- Does not communicate directly with each other. 
-- [Client] - message -> [Server] - message -> [Client]
+- **client**
+  - communicate with the server
+  - may be intermittently connected
+  - Dynamic IP adress depanding on server
+  - Does not communicate directly with each other. 
+  - [Client] - message -> [Server] - message -> [Client]
 
-#### Communication process
-- Clients initiate connections
-- Server waits to be contracted by clients
+- **communication process**
+  - `process`: program running within a host
+  - client process: initiate communication
+  - server process: waits to be contracted by clients
 
 ### P2P architecture
-- No need to always deploy the servers for the client to share contents
-- End systems can directly communicate with each other
-- Peers request and provide serivce to each other, which pertains self scalability: both new capacity and demands are brought to the architecture when new peers show up
+- no always-on server
+- end systems can directly communicate with each other
+- peers request and provide serivce to each other, which pertains **self scalability**: 
+  - both new capacity and demands are brought to the architecture when new peers show up
+- peers are intermittently connected and change IP addreesses 
+  - more complexed management
 
-#### Process of communication
-- Start inter-process communication defiend by OS
-- Process: program running within a host
-- Processes in different host communicate by exchanging messages
+- **communication process**: 
+  - within same host, two processes communicate using inter-process communication defined by OS
+  - processes in different host communicate by exchanging messages
+  - aside: applications with P2P architectures have client processes & server processes
 
 ### Sockets
 
@@ -634,46 +633,78 @@ send packet with false source address
 - Flow control: by receiving side(?) to make sure receivers do not get overwhelmed by sender messages
 - Congestion control: by sending side to make sure internet resources are also shared by other end systems 
 
+---
+
 ## Web and HTTP
 
 - Internet objects are addressable by URL which consists of a host name + a path name
+- `HTTP`: hypertext transfer protocol
+  - web's application layer protocol
+  - applies the **client/server model**
+    - **client**: browser that requests, receives (with HTTP protocol), and displays web objects
+    - **server**: web server sends objects (with HTTP protocol) in response to requests
 
 ### HTTP connections
-- HTTP is using TCP protocal
-- Client initiates TCP connection to server using port 80
+
+- HTTP is using `TCP` protocal
+- **Client initiates TCP connection to server** using `port 80`
 - Server accpets the TCP connection from client
 - HTTP messages (application layer protocol messages) exchanged between browser (HTTP client) and Web server
 - The server closes the TCP connection (sometimes the client can also close the connetion by accident, in which case the server might not konw, and the server will close the connection after a certain amount of time -- connection timeout)
 - HTTP is stateless, servers do not need to maintain a certain state of past client requests
 - SSL: provides secured library for TCP. TCP does not use SSL by default
 - HTTPs is TCP using SSL?
+- `RTT`: **run trip time**, the time it takes the small packet to travel from the client to the server and then back from the server to the packet. Cannot avoid this time no matter what.
+
 
 #### Non persistant HTTP connections
-- At most one object can be sent over TCP connection, which will be closed by the server after one request message and resoponse
+
+- **At most one object** can be sent over TCP connection, which will be closed by the server after one request message and resoponse
 - To download multiple objects, the HTTP client should build up multiple connections
 - After downloading the first object receiving from the server, in order to download a second object, the HTTP client should establish the TCP connection with the server again, and repeat sending out requests etc. 
-- RTT (Run Trip Time): the time it takes the small packet to tranvel from the client to the server and then back from the server to the packet. Cannot avoid this time no matter what.
-- Initiate TCP connection: 1 RTT (must happen before sending HTTP request)
-- Send HTTP request and receive file back from server: 1 RTT + some time to transmit the file
-- Cost 2 RTT to request and receive in total 
+- **response time**:
+  ![non-persistent HTTP response time example](/Images/np_HTTP_response.png)
+  - Initiate TCP connection: 1 RTT (must happen before sending HTTP request)
+  - Send HTTP request and receive file back from server: 1 RTT + some time to transmit the file
+  - Cost $2 RTT + file~transmission~time$ to request and receive in total 
+- issues: 
+  - requeires $2RTT$ per object
+  -  OS overhead for each TCP connection
+  -  browsers often open parallel TCP connections to featch referenced objects
+
 
 #### Persistant HTTP connections
-- Only need to set up the TCP connection once, all later on request and response can be communicated within the connection established
-- Cost only 1 RTT roughly
+- only need to set up the TCP connection once
+- server leaves connection open after sending response
+- all later on HTTPmessages between same client/server sent over open connection
+- client sends requests as soon as it encounters a referenced object
+- Cost only $1 RTT$ roughly
 
 ### HTTP request message
+
+![HTTP request message example](/Images/HTTP_request_msg.png)
+
 - Two types: request and response 
 - Applying the ASCII format, which is a human readable format
+- **general format**
 
-#### General format
-- Reuest line
-- Header lines
-- Body: contains the user input if the user is using post method 
-  - eg: user input typed in the search box 
-  - POST method
-  - URL method
+![HTTP request message format example](/Images/HTTP_request_msg_format.png)
+
+  - Reuest line
+  - Header lines
+  - Body: contains the user input if the user is using post method 
+    - eg: user input typed in the search box 
+    - `POST` method
+      - web page often includes form input
+      - input is uploaded to server in entity body
+    - `URL` method
+      - use GET method
+      - input is uploaded in URL field of request line
 
 ### HTTP response message
+
+![HTTP response message example](/Images/HTTP_response_msg.png)
+
 - Status line: versions of HTTP protocol the server is running
 - Header lines: 
 - Data objects requested by the client
@@ -691,36 +722,49 @@ send packet with false source address
 
 # Jan 29, Tuesday
 
-## User-server state: stateful cookies
+### User-server state: stateful cookies
+
 - Servers do not maintain information for clients
 - Not so convenient, we want to keep track of the user data and let the server identify specific user
 - eg: unique user ID on a website
   - your browser will use that ID upon the HTTP request and the server would know who you are 
-- Refer to slides on the process of HTTP request with cookies and cookies specific information sent by server (kept in backend database)
+  ![cookies example](/Images/cookies.png)
 - For HTTP cookies, stored in the browser instead of devices 
+- **cookies can be used for**
+  - authorization
+  - shopping carts
+  - recommendations
+  - can also violate privacy, can be shut down
+- how to keep state:
+  - protocol endpoints: maintain state at sender/receiver over multiple transactions
+  - cookies: http messages carry state
 
-### Cookies can be used for
-- authorization
-- shopping carts
-- can also violate privacy, can be shut down
+### Web Caches (proxy server)
 
-## Web Caches (proxy server)
 - Satisfying user request without involving origin server
-
-### Forward Proxy (we are talking about this one)
-- Closer to the client side
-- Client first go through cache for information
-    - Client send HTTP request to proxy server
-    - Proxy server process data
-        - If information available, send HTTP response back to the client directly
-        - Else request information from origin server with HTTP request, receive HTTP response from origin server
-- Reduces traffic through the public internet, saves client time
-- Through HTTP protocol and origin server, the proxy server would know what to keep and how long to keep
+- **Forward Proxy** (we are talking about this one):
+  ![web cache example](/Images/web_cache.png)
+  - Closer to the client side
+  - Client first sends all HTTP request to cache for information
+      - Client send HTTP request to proxy server
+      - Proxy server process data
+          - If information available, send HTTP response back to the client directly
+          - Else request information from origin server with HTTP request, receive HTTP response from origin server
+  - cache acts as both client and server
+  - typically, cache is installed by ISP 
+  - Reduces traffic through the public internet, saves client time
+  - Through HTTP protocol and origin server, the proxy server would know what to keep and how long to keep
 
 ### Reverse Proxy
 - Closer to the server side 
 
 ### Caching Example
+
+- original without proxy:
+![caching problem example](/Images/caching.png)
+- install local cache:
+![caching problem solution example](/Images/caching_solution.png)
+
 
 #### Without web cache mechanism
 - Without using caching, access link becomes most utilized by the browsers to go directly to the origin server
@@ -736,6 +780,9 @@ send packet with false source address
   - Total delay that could only be processed by the origin server
   
 ### Conditional GET
+
+![conditional GET example](/Images/conditional_GET.png)
+
 - Goal: the server won't send object if cache has up-to-date cached version in the web cache server
   - No object transmission delay
   - Lower link utilization
@@ -747,6 +794,8 @@ send packet with false source address
   - If the object has been modified
     - HTTP 200 OK
     - Object included 
+
+---
 
 ## Electronic Mail
 - Three major components
