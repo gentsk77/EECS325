@@ -1,57 +1,257 @@
-<!DOCTYPE html>
-    <html>
-    <head>
-        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-        <title>EECS325 Computer Networks</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
-        <style>
-.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
-</style>
-        <style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
-                font-size: 14px;
-                line-height: 1.6;
-            }
-        </style>
-        
-        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+<!DOCTYPE html><html><head>
+      <title>EECS325Notes</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\GenTsuki\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.11\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
     </head>
-    <body>
-        <h1 id="eecs325-computer-networks">EECS325 Computer Networks</h1>
-<p>Yue Shu</p>
-<p>Spring 2019</p>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="eecs325-computer-networks">EECS325 Computer Networks</h1>
+
+<p>Yue Shu<br>
+Spring 2019</p>
+<hr>
 <ul>
 <li><a href="#eecs325-computer-networks">EECS325 Computer Networks</a></li>
 <li><a href="#jan-15-tuesday">Jan 15, Tuesday</a></li>
 <li><a href="#chapter-one-introduction">Chapter One: Introduction</a>
 <ul>
-<li><a href="#internet-as-an-example-of-network-systems">Internet as an example of network systems</a></li>
+<li><a href="#internet-as-an-example-of-network-systems">Internet as an example of network systems</a>
+<ul>
 <li><a href="#protocol">Protocol</a></li>
-<li><a href="#network-structure">Network Structure</a></li>
-<li><a href="#access-network-type">Access Network Type</a>
+</ul>
+</li>
+<li><a href="#network-structure">Network Structure</a>
+<ul>
+<li><a href="#access-network-types">Access Network Types</a>
 <ul>
 <li><a href="#digital-subscriber-line-dsl">Digital subscriber line (DSL)</a></li>
 <li><a href="#cable-network">Cable network</a></li>
-<li><a href="#difference">Difference:</a>
-<ul>
+<li><a href="#difference">Difference:</a></li>
 <li><a href="#frequency-division-multiplexing-fdm">Frequency Division Multiplexing (FDM)</a></li>
-<li><a href="#hyrid-fiber-coax-hfc">Hyrid Fiber Coax (HFC)</a></li>
+<li><a href="#access-network-your-home-network">Access network: Your home network</a></li>
 </ul>
 </li>
-<li><a href="#your-home-network">Your home network</a></li>
-<li><a href="#enterprise-network">Enterprise network</a></li>
+<li><a href="#enterprise-network-ethernet">Enterprise network (Ethernet)</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#jan-17-thursday">Jan 17, Thursday</a>
 <ul>
+<li><a href="#idle-layer">Idle Layer</a>
+<ul>
+<li><a href="#wireless-access-networks">Wireless access networks</a>
+<ul>
 <li><a href="#wireless-lans">Wireless LANs</a></li>
 <li><a href="#wide-area-wireless-access">Wide-area Wireless Access</a></li>
+</ul>
+</li>
 <li><a href="#process-of-sending-data-packets">Process of Sending Data Packets</a></li>
 <li><a href="#physical-media">Physical Media</a>
 <ul>
@@ -60,10 +260,13 @@
 <li><a href="#radio">Radio</a></li>
 </ul>
 </li>
-<li><a href="#the-network-core">The Network Core</a>
+</ul>
+</li>
+<li><a href="#network-core">Network Core</a>
 <ul>
-<li><a href="#packet-switching-store-and-forward">Packet switching: store and forward</a>
+<li><a href="#packet-switching">Packet switching:</a>
 <ul>
+<li><a href="#store-and-forward">store and forward</a></li>
 <li><a href="#routing">Routing</a></li>
 <li><a href="#forwarding">Forwarding</a></li>
 </ul>
@@ -83,18 +286,15 @@
 </ul>
 </li>
 <li><a href="#internet-structure-network-of-networks">Internet Structure: network of networks</a></li>
-<li><a href="#four-sources-of-delay">Four Sources of Delay</a>
+<li><a href="#delay-loss-and-throughput-in-networks">Delay, loss, and throughput in networks</a>
 <ul>
 <li><a href="#process-delay">Process Delay</a></li>
 <li><a href="#transmission-delay">Transmission Delay</a></li>
 <li><a href="#queueing-delay">Queueing Delay</a></li>
 <li><a href="#propogation-delay">Propogation Delay</a></li>
+<li><a href="#real-internet-delays-and-routes">Real internet delays and routes</a></li>
 <li><a href="#packet-loss">Packet Loss</a></li>
-</ul>
-</li>
-<li><a href="#throughput">Throughput</a>
-<ul>
-<li><a href="#bottleneck-link">Bottleneck link</a></li>
+<li><a href="#throughput">Throughput</a></li>
 </ul>
 </li>
 </ul>
@@ -103,53 +303,28 @@
 <ul>
 <li><a href="#protocol-layers">Protocol Layers</a>
 <ul>
-<li><a href="#internet-protocol-stack-end-to-end-protocol">Internet Protocol Stack: End to End Protocol</a>
-<ul>
-<li><a href="#application">Application</a></li>
-<li><a href="#transport">Transport</a></li>
-<li><a href="#network">Network</a></li>
-<li><a href="#link">Link</a></li>
-<li><a href="#physical">Physical</a></li>
-</ul>
-</li>
-<li><a href="#isoosi-reference-model">ISO/OSI reference model</a>
-<ul>
-<li><a href="#presentation">Presentation</a></li>
-<li><a href="#session">Session</a></li>
-</ul>
-</li>
+<li><a href="#internet-protocol-stack-end-to-end-protocol">Internet Protocol Stack: End to End Protocol</a></li>
+<li><a href="#isoosi-reference-model">ISO/OSI reference model</a></li>
 <li><a href="#process-of-data-transfer-between-end-users">Process of data transfer between end users</a></li>
 </ul>
 </li>
 <li><a href="#network-security">Network Security</a>
 <ul>
 <li><a href="#malware">Malware</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#jan-24-thursday">Jan 24, Thursday</a>
-<ul>
 <li><a href="#denial-of-service-dos">Denial of Service (DoS)</a></li>
 <li><a href="#packet-%22sniffing%22">Packet &quot;Sniffing&quot;</a></li>
+<li><a href="#ip-spoofing">IP spoofing</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#jan-24-thursday">Jan 24, Thursday</a></li>
 <li><a href="#chapter-two-application-layer">Chapter Two: Application Layer</a>
 <ul>
 <li><a href="#application-architecture">Application Architecture</a>
 <ul>
-<li><a href="#client-server-architecture">Client-Server Architecture</a>
-<ul>
-<li><a href="#server">Server</a></li>
-<li><a href="#client">Client</a></li>
-<li><a href="#communication-process">Communication process</a></li>
-</ul>
-</li>
-<li><a href="#p2p-architecture">P2P architecture</a>
-<ul>
-<li><a href="#process-of-communication">Process of communication</a></li>
-</ul>
-</li>
+<li><a href="#client-server-architecture">Client-Server Architecture</a></li>
+<li><a href="#p2p-architecture">P2P architecture</a></li>
 <li><a href="#sockets">Sockets</a></li>
 <li><a href="#addressing-processes">Addressing processes</a></li>
 <li><a href="#app-layer-protocol-defines">App-layer protocol defines</a></li>
@@ -165,11 +340,7 @@
 <li><a href="#persistant-http-connections">Persistant HTTP connections</a></li>
 </ul>
 </li>
-<li><a href="#http-request-message">HTTP request message</a>
-<ul>
-<li><a href="#general-format">General format</a></li>
-</ul>
-</li>
+<li><a href="#http-request-message">HTTP request message</a></li>
 <li><a href="#http-response-message">HTTP response message</a>
 <ul>
 <li><a href="#response-status-codes">Response status codes</a></li>
@@ -181,14 +352,8 @@
 </li>
 <li><a href="#jan-29-tuesday">Jan 29, Tuesday</a>
 <ul>
-<li><a href="#user-server-state-cookies">User-server state: cookies</a>
-<ul>
-<li><a href="#cookies-can-be-used-for">Cookies can be used for</a></li>
-</ul>
-</li>
-<li><a href="#web-caches-proxy-server">Web Caches (proxy server)</a>
-<ul>
-<li><a href="#forward-proxy-we-are-talking-about-this-one">Forward Proxy (we are talking about this one)</a></li>
+<li><a href="#user-server-state-stateful-cookies">User-server state: stateful cookies</a></li>
+<li><a href="#web-caches-proxy-server">Web Caches (proxy server)</a></li>
 <li><a href="#reverse-proxy">Reverse Proxy</a></li>
 <li><a href="#caching-example">Caching Example</a>
 <ul>
@@ -198,132 +363,312 @@
 </ul>
 </li>
 <li><a href="#conditional-get">Conditional GET</a></li>
-</ul>
-</li>
 <li><a href="#electronic-mail">Electronic Mail</a>
 <ul>
 <li><a href="#smtp-protocol">SMTP protocol</a></li>
 <li><a href="#mail-message-format">Mail message format</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="jan-15-tuesday">Jan 15, Tuesday</h1>
-<p>Refer to the syllbus available on canvas.</p>
-<h1 id="chapter-one-introduction">Chapter One: Introduction</h1>
-<h2 id="internet-as-an-example-of-network-systems">Internet as an example of network systems</h2>
+<li><a href="#message-access-protocols">Message access Protocols</a>
 <ul>
-<li>
-<p><code>Routers</code> and <code>switches</code> are pretty much the same now days.</p>
-</li>
-<li>
-<p>Devices not automatically connected. Need the <code>ISPs</code>.</p>
-</li>
-<li>
-<p>Need <code>protocol</code> (the standards) to have a formatted signals.</p>
-</li>
-<li>
-<p>Also need internet standards to define the entity</p>
+<li><a href="#pop3-protocol">POP3 protocol</a></li>
+<li><a href="#imap">IMAP</a></li>
+<li><a href="#http">HTTP</a></li>
+</ul>
 </li>
 </ul>
-<h2 id="protocol">Protocol</h2>
+</li>
+</ul>
+</li>
+<li><a href="#feb-5-tuesday">Feb 5, Tuesday</a>
+<ul>
+<li><a href="#dns-domain-name-system">DNS (Domain Name System)</a>
+<ul>
+<li><a href="#dns-services">DNS services</a></li>
+<li><a href="#dns-structure">DNS structure</a></li>
+<li><a href="#dns-distributed-hierarchical-database">DNS: distributed, hierarchical database</a>
+<ul>
+<li><a href="#tld-authoritative-servers">TLD, authoritative servers</a></li>
+<li><a href="#local-dns-name-server">Local DNS name server</a></li>
+</ul>
+</li>
+<li><a href="#dns-name-resolution-example">DNS name resolution example</a>
+<ul>
+<li><a href="#iterated-query">Iterated query</a></li>
+<li><a href="#recursive-query">Recursive query</a></li>
+</ul>
+</li>
+<li><a href="#dns-caching-updating-records">DNS: caching, updating records</a></li>
+<li><a href="#dns-records">DNS records</a></li>
+<li><a href="#dns-protocol-messages">DNS protocol, messages</a></li>
+<li><a href="#inserting-recoreds-into-dns">Inserting recoreds into DNS</a></li>
+<li><a href="#attackin-dns">Attackin DNS</a>
+<ul>
+<li><a href="#ddos-attacks">DDoS attacks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#feb-7-thursday">Feb 7, Thursday</a>
+<ul>
+<li><a href="#socket-programming">Socket programming</a>
+<ul>
+<li><a href="#socket-with-udp">Socket with UDP</a>
+<ul>
+<li><a href="#udp-communication-process">UDP communication process</a></li>
+</ul>
+</li>
+<li><a href="#socket-with-tcp">Socket with TCP</a>
+<ul>
+<li><a href="#tcp-ommunication-process">TCP ommunication process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#chapter-3-transport-layer">Chapter 3: Transport Layer</a>
+<ul>
+<li><a href="#transport-layer-services-and-protocols">Transport layer services and protocols</a>
+<ul>
+<li><a href="#transport-vs-network-layer">Transport vs. network layer</a></li>
+<li><a href="#reliable-in-order-delivery-tcp">Reliable In-order delivery (TCP)</a></li>
+<li><a href="#unreliable-unordered-delivery-udp">Unreliable unordered delivery (UDP)</a></li>
+</ul>
+</li>
+<li><a href="#multiplexing-and-demultiplexing">Multiplexing and demultiplexing</a>
+<ul>
+<li><a href="#how-demultiplexing-works">How demultiplexing works</a></li>
+<li><a href="#connectionless-demultiplexing">Connectionless demultiplexing</a></li>
+<li><a href="#connection-oriented-demultiplexing">Connection-oriented demultiplexing</a></li>
+</ul>
+</li>
+<li><a href="#udp-user-datagram-protocol">UDP: User Datagram Protocol</a>
+<ul>
+<li><a href="#udp-segment-header">UDP: segment header</a></li>
+</ul>
+</li>
+<li><a href="#principle-of-reliable-data-transfer">Principle of reliable data transfer</a>
+<ul>
+<li><a href="#rdt10-reliable-transfer-over-a-reliable-channel">rdt1.0: Reliable transfer over a reliable channel</a></li>
+<li><a href="#rdt20-channel-with-bit-errors">rdt2.0: Channel with bit errors</a>
+<ul>
+<li><a href="#fatal-flaw">Fatal Flaw</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#feb-12-tuesday">Feb 12, Tuesday</a>
+<ul>
+<li><a href="#continue-with-rdt">(Continue with rdt)</a>
+<ul>
+<li><a href="#rdt21-handles-garbled-acknaks">rdt2.1: handles garbled ACK/NAKs</a></li>
+<li><a href="#rdt22-nak-free-protocol">rdt2.2: NAK-free protocol</a></li>
+<li><a href="#rdt30-channels-with-errors-and-loss">rdt3.0: channels with errors and loss</a>
+<ul>
+<li><a href="#rdt30-in-action">rdt3.0 in action</a></li>
+<li><a href="#performance-of-rdt30">Performance of rdt3.0</a></li>
+</ul>
+</li>
+<li><a href="#pipelined-protocols">Pipelined protocols</a>
+<ul>
+<li><a href="#go-back-n">Go-back-N</a></li>
+<li><a href="#selective-repeat">Selective Repeat:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#connection-oriented-transport-tcp">Connection oriented transport: TCP</a>
+<ul>
+<li><a href="#tcp-segment-structure">TCP segment structure</a></li>
+<li><a href="#tcp-seq-numbers-acks">TCP seq. numbers, ACKs</a></li>
+<li><a href="#tcp-round-trip-time-timeout">TCP round trip time, timeout</a></li>
+<li><a href="#tcp-reliable-data-transfer">TCP reliable data transfer</a></li>
+<li><a href="#flow-control">Flow control</a></li>
+<li><a href="#connection-management">Connection management</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="jan-15-tuesday">Jan 15, Tuesday</h1>
+
+<p>Refer to the syllbus available on canvas.</p>
+<h1 class="mume-header" id="chapter-one-introduction">Chapter One: Introduction</h1>
+
+<h2 class="mume-header" id="internet-as-an-example-of-network-systems">Internet as an example of network systems</h2>
+
+<ul>
+<li><code>Routers</code> and <code>switches</code> are pretty much the same now days.</li>
+<li>Devices not automatically connected. Need the <code>ISPs</code>.</li>
+<li>Need <code>protocol</code> (the standards) to have a formatted signals.</li>
+<li>Also need internet standards to define the entity</li>
+</ul>
+<h3 class="mume-header" id="protocol">Protocol</h3>
+
 <ul>
 <li><code>Protocal</code>: define the interactions between two end systems or entities (message to be sent and received etc.)</li>
 <li><code>Internet protocol</code>: defines the standard of internetworks communication</li>
 <li>Set up connection with internet protocol request (eg: TCP) between your pc and the server. Once the connection is setup, you are allowed to get to the file corresponded to the link</li>
 <li><code>TCP request</code> checks if you are authorized to receive the file.</li>
 </ul>
-<h2 id="network-structure">Network Structure</h2>
+<hr>
+<h2 class="mume-header" id="network-structure">Network Structure</h2>
+
 <ul>
-<li>
-<p>Different network system on the edge, connected by different ISPs.</p>
-</li>
-<li>
-<p><code>Routers</code>: routers within different ISPs relay/forward traffic from your pc/desktop. Routers transmit data, provide scalability, security, etc.</p>
-</li>
-<li>
-<p><code>Network edge</code>: the end of the communication</p>
-</li>
-<li>
-<p><code>Bandwidth</code>: determines the performance(speed) of your access network</p>
-</li>
+<li>Different network system on the edge, connected by different ISPs.</li>
+<li><code>Routers</code>: routers within different ISPs relay/forward traffic from your pc/desktop. Routers transmit data, provide scalability, security, etc.</li>
+<li><code>Network edge</code>: the end of the communication</li>
+<li><code>Bandwidth</code>: determines the performance(speed) of your access network</li>
 </ul>
-<h2 id="access-network-type">Access Network Type</h2>
-<h3 id="digital-subscriber-line-dsl">Digital subscriber line (DSL)</h3>
-<p>DSL modem -- DSLAM(receive all different signals with different frequencies)</p>
-<p>telephone network -- DSLAM(receive all different signals with different frequencies)</p>
-<h3 id="cable-network">Cable network</h3>
-<p>your cable modem -- cable headend</p>
-<h3 id="difference">Difference:</h3>
+<h3 class="mume-header" id="access-network-types">Access Network Types</h3>
+
+<h4 class="mume-header" id="digital-subscriber-line-dsl">Digital subscriber line (DSL)</h4>
+
+<p><img src="Images\DSL.png" alt="DSL example"></p>
+<p><code>DSL modem</code> -CONNECT- <code>DSLAM</code>(receive all different signals with different frequencies)</p>
+<p><code>telephone network</code> -CONNECT- <code>DSLAM</code>(receive all different signals with different frequencies)</p>
 <ul>
-<li>
-<p><code>DSL</code>: dedicated link, transmission rate slow</p>
-</li>
-<li>
-<p><code>Cable</code>: link shared by multiple users; transmission rate faster</p>
-</li>
-<li>
-<p>Both DSL and Cable network carry data generated by different signals, thus need <code>frequency division multiplexing</code> to differentiate channels</p>
-</li>
+<li><code>DSLAM</code>: DSL access multiplexer</li>
 </ul>
-<h4 id="frequency-division-multiplexing-fdm">Frequency Division Multiplexing (FDM)</h4>
+<h4 class="mume-header" id="cable-network">Cable network</h4>
+
+<p><img src="Images\cable.png" alt="cable network example"><br>
+your cable modem -- cable headend</p>
+<h4 class="mume-header" id="difference">Difference:</h4>
+
+<ul>
+<li><code>DSL</code>: dedicated link, transmission <img src="Images\cable.png" alt="cable">rate slow</li>
+<li><code>Cable</code>: link shared by multiple users; transmission rate faster</li>
+<li>Both DSL and Cable network carry data generated by different signals, thus need <code>frequency division multiplexing</code> to differentiate channels</li>
+</ul>
+<h4 class="mume-header" id="frequency-division-multiplexing-fdm">Frequency Division Multiplexing (FDM)</h4>
+
 <p>Since all signals(video, data, control messages) are mixed together, need to differentiate them with FDM.</p>
-<h4 id="hyrid-fiber-coax-hfc">Hyrid Fiber Coax (HFC)</h4>
-<p>Provide asymmetric up/downstream services</p>
-<h3 id="your-home-network">Your home network</h3>
+<ul>
+<li><code>Hyrid Fiber Coax</code> (HFC): Provide asymmetric up/downstream services</li>
+</ul>
+<h4 class="mume-header" id="access-network-your-home-network">Access network: Your home network</h4>
+
+<p><img src="Images\home.png" alt="home network example"></p>
 <p>[Wired devices with ethernet interface (eg: laptop, desktop)] -- [router(transmit data, provide scalability, security, etc.)] -- [cable/DSL modem]  -- ....</p>
 <p>[Wireless devices] -- [wireless access] -- [router] -- [cable/DSL modem]  -ethernet switch- [institutional modem (-- institutional mail, web servers, etc.)] -institutional link to ISP- ...</p>
-<h3 id="enterprise-network">Enterprise network</h3>
+<h3 class="mume-header" id="enterprise-network-ethernet">Enterprise network (Ethernet)</h3>
+
+<p><img src="Images\ethernet.png" alt="ethernet example"></p>
 <p>Has institutional mail, web servers; high transmission rate</p>
-<hr>
-<h1 id="jan-17-thursday">Jan 17, Thursday</h1>
-<h3 id="wireless-lans">Wireless LANs</h3>
+<h1 class="mume-header" id="jan-17-thursday">Jan 17, Thursday</h1>
+
+<h2 class="mume-header" id="idle-layer">Idle Layer</h2>
+
+<h3 class="mume-header" id="wireless-access-networks">Wireless access networks</h3>
+
+<p>shared wireless access network connects end system to router via base station aka &quot;access point&quot;</p>
+<h4 class="mume-header" id="wireless-lans">Wireless LANs</h4>
+
 <ul>
-<li>
-<p>Cover smaller area. Has three different protocols that support different transmission rate</p>
-</li>
-<li>
-<p><code>Bandwidth</code>: limited by actual channel (wireless/wired, wired &gt; wireless), different frequencies for wireless channels, cable network determined by the material of the cable</p>
-</li>
+<li>Cover smaller area. Has three different protocols that support different transmission rate</li>
+<li><code>Bandwidth</code>: limited by actual channel (wireless/wired, wired &gt; wireless), different frequencies for wireless channels, cable network determined by the material of the cable</li>
 </ul>
-<h3 id="wide-area-wireless-access">Wide-area Wireless Access</h3>
+<h4 class="mume-header" id="wide-area-wireless-access">Wide-area Wireless Access</h4>
+
 <p>eg: your cellular data. smaller capacity, cover larger area. provided by different carriers</p>
-<h3 id="process-of-sending-data-packets">Process of Sending Data Packets</h3>
-<p>[App message] -break into smaller packets of L bits, with transmission rate R- [router]</p>
-<h2 id="physical-media">Physical Media</h2>
-<h3 id="coaxial-cable">Coaxial Cable</h3>
+<h3 class="mume-header" id="process-of-sending-data-packets">Process of Sending Data Packets</h3>
+
+<p><img src="Images\transmission.png" alt="packet transmit example"></p>
 <ul>
 <li>
-<p>Bidirectional: support bidirectional data transmission</p>
+<p>link transmission rate <code>R</code>: aka link capacity or link <code>bandwidth</code></p>
 </li>
 <li>
-<p>Broadband: support multiple channels on cable; HFC</p>
+<p><code>L</code>: length of total bits of the packet</p>
+</li>
+<li>
+<p><code>packet</code>: smaller chunks of application message</p>
+</li>
+<li>
+<p>[App message] -break into smaller packets of L bits, with transmission rate R- [router]</p>
 </li>
 </ul>
-<h3 id="fiber-optic-cable">Fiber optic cable</h3>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>a</mi><mi>c</mi><mi>k</mi><mi>e</mi><mi>t</mi><mtext>&#xA0;</mtext><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi><mi>m</mi><mi>i</mi><mi>s</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mtext>&#xA0;</mtext><mi>d</mi><mi>e</mi><mi>l</mi><mi>a</mi><mi>y</mi><mo>=</mo><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi><mtext>&#xA0;</mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>e</mi><mi>d</mi><mtext>&#xA0;</mtext><mi>t</mi><mi>o</mi><mtext>&#xA0;</mtext><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi><mi>m</mi><mi>i</mi><mi>t</mi><mtext>&#xA0;</mtext><mi>L</mi><mo>&#x2212;</mo><mi>b</mi><mi>i</mi><mi>t</mi><mtext>&#xA0;</mtext><mi>p</mi><mi>a</mi><mi>c</mi><mi>k</mi><mi>e</mi><mi>t</mi><mtext>&#xA0;</mtext><mi>i</mi><mi>n</mi><mi>t</mi><mi>o</mi><mtext>&#xA0;</mtext><mi>l</mi><mi>i</mi><mi>n</mi><mi>k</mi><mo>=</mo><mfrac><mi>L</mi><mi>R</mi></mfrac></mrow><annotation encoding="application/x-tex">packet~transmission~delay = time~needed~to~transmit~L-bit~packet~into~link = \frac{L}{R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mord mathit">e</span><span class="mord mathit">t</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">t</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">a</span><span class="mord mathit">n</span><span class="mord mathit">s</span><span class="mord mathit">m</span><span class="mord mathit">i</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mord mathit">i</span><span class="mord mathit">o</span><span class="mord mathit">n</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">d</span><span class="mord mathit">e</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathit">t</span><span class="mord mathit">i</span><span class="mord mathit">m</span><span class="mord mathit">e</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">n</span><span class="mord mathit">e</span><span class="mord mathit">e</span><span class="mord mathit">d</span><span class="mord mathit">e</span><span class="mord mathit">d</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">t</span><span class="mord mathit">o</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">t</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">a</span><span class="mord mathit">n</span><span class="mord mathit">s</span><span class="mord mathit">m</span><span class="mord mathit">i</span><span class="mord mathit">t</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">L</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathit">b</span><span class="mord mathit">i</span><span class="mord mathit">t</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mord mathit">e</span><span class="mord mathit">t</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">i</span><span class="mord mathit">n</span><span class="mord mathit">t</span><span class="mord mathit">o</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">i</span><span class="mord mathit">n</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.04633em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit">L</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h3 class="mume-header" id="physical-media">Physical Media</h3>
+
+<ul>
+<li><code>bits</code>: propogates between transmitter and receiver pairs</li>
+<li><code>physical link</code>: what lies between transmitter and receiver</li>
+<li><code>guided media</code>: signals propagate in solid media: copper, fiber, coax</li>
+<li><code>unguided media</code>: signals propagate freely, eg: radio</li>
+<li><code>twisted pair</code>: two insulated copper wires</li>
+</ul>
+<h4 class="mume-header" id="coaxial-cable">Coaxial Cable</h4>
+
+<p><img src="Images\coaxial.png" alt="coaxial cable example"></p>
+<ul>
+<li>two concentric copper conductors</li>
+<li>Bidirectional: support bidirectional data transmission</li>
+<li>Broadband: support multiple channels on cable; HFC</li>
+</ul>
+<h4 class="mume-header" id="fiber-optic-cable">Fiber optic cable</h4>
+
 <ul>
 <li>Higher speed, lower error rate</li>
 </ul>
-<h3 id="radio">Radio</h3>
+<h4 class="mume-header" id="radio">Radio</h4>
+
 <ul>
-<li>Bidirectional</li>
-<li>Propogation environment effects: easily affected by the environment. Reflection, interference, obstruction by objects</li>
+<li>signal carried in electromagntic spectrum</li>
+<li>&quot;wireless&quot;</li>
+<li>bidirectional</li>
+<li>propogation environment effects: easily affected by the environment: reflection, interference, obstruction by objects etc.</li>
 <li><code>Terrestrial microwave</code></li>
 <li><code>LAN</code></li>
 <li><code>Wide area</code></li>
 <li><code>Satellite</code></li>
 </ul>
-<h2 id="the-network-core">The Network Core</h2>
-<h3 id="packet-switching-store-and-forward">Packet switching: store and forward</h3>
+<hr>
+<h2 class="mume-header" id="network-core">Network Core</h2>
+
+<p>= The network core is a mesh of interconnected routers</p>
 <ul>
-<li><code>Packets</code>: consist of bits (basic units)</li>
-<li>Packets transmitted in the link as 0/1 signals bit by bit.</li>
-<li>Some bits arrive at the routers faster than the rest, it will wait until all the bits arrive in the router before the next transmission</li>
-<li>Transmission time: length of packet L/ transmission rate R</li>
-<li>Routers are connected to multiple end users. Packets of the end users have to be queued, which can be dropped(lost) if the memory(buffer) fills up.</li>
+<li>Ther are two network cores:
+<ul>
+<li><code>packet switching</code></li>
+<li><code>circuit switching</code></li>
 </ul>
-<h4 id="routing">Routing</h4>
+</li>
+</ul>
+<p><img src="Images\networkcore.png" alt="network core example"></p>
+<h3 class="mume-header" id="packet-switching">Packet switching:</h3>
+
+<ul>
+<li>hosts break application-layer messages into packets</li>
+<li>then forward packets from one router to the next, across links on path from source to destination</li>
+<li>each packet transmitted at full link capacity</li>
+</ul>
+<h4 class="mume-header" id="store-and-forward">store and forward</h4>
+
+<p><img src="Images\store&amp;forward.png" alt="store and forward example"></p>
+<ul>
+<li><code>packet</code>: consist of bits (basic units)</li>
+<li>packets transmitted in the link as 0/1 signals bit by bit.</li>
+<li>transmission time: length of packet / transmission rate <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo><mfrac><mi>L</mi><mi>R</mi></mfrac></mrow><annotation encoding="application/x-tex">= \frac{L}{R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">L</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li><strong>store and forward</strong>:
+<ul>
+<li>some bits arrive at the routers faster than the rest, it will wait until all the bits arrive in the router before the next transmission</li>
+</ul>
+</li>
+<li><strong>queueing delay, loss</strong>:
+<ul>
+<li>if arrival rate (in bits) to link exceeds transmission rate of link for a period of time, the packets will queue and wait to be transmitted on link</li>
+<li>if the memory(buffer) fills up, the packets can be dropped(lost)</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="routing">Routing</h4>
+
 <ul>
 <li><code>Routing</code>: determines where the packets should be heading to (making decision) by the <code>routing algorithm</code> according to a <code>local forwarding table</code></li>
 <li><code>local forwarding table</code> a mapped table contains the following
@@ -337,276 +682,501 @@
 <li>Routers do not know the buffer condition of each other.</li>
 <li>The routing process is completed by software of routers.</li>
 </ul>
-<h4 id="forwarding">Forwarding</h4>
+<p><img src="Images\routing&amp;forwarding.png" alt="routing and forwarding example"></p>
+<h4 class="mume-header" id="forwarding">Forwarding</h4>
+
 <ul>
 <li>The action the router performs according to local forwarding table</li>
 <li>The forwarding process is completed by the hardware of routers.</li>
 </ul>
-<h3 id="circuit-switching">Circuit switching</h3>
+<h3 class="mume-header" id="circuit-switching">Circuit switching</h3>
+
+<p><img src="Images\circuit_switching.png" alt="circuit switching example"></p>
 <ul>
-<li>Dedicated resource shared by users.</li>
-<li>Resources remain idle if not in use.</li>
-<li>Circuit switching is no longer in use right now. Mostly replaced by packet switching.</li>
+<li>dedicated resource for the user, there is no sharing for a particular circuit</li>
+<li>circuit segment remains idle if not in use.</li>
+<li>commonly used in traditional telephone networks</li>
+<li>circuit switching is no longer in use right now. Mostly replaced by packet switching.</li>
 </ul>
-<h4 id="fdm-frequency-devision-multiplexing">FDM (Frequency Devision Multiplexing)</h4>
+<h4 class="mume-header" id="fdm-frequency-devision-multiplexing">FDM (Frequency Devision Multiplexing)</h4>
+
 <ul>
 <li>Equally devide the bandwidth for the users so that all the users can use the channels all the time</li>
 </ul>
-<h4 id="tdm-time-devision-multiplexing">TDM (Time Devision Multiplexing)</h4>
+<h4 class="mume-header" id="tdm-time-devision-multiplexing">TDM (Time Devision Multiplexing)</h4>
+
 <ul>
 <li>Each user use the entire bandwidth exclusively for a very small amount of time periodically, so the users cannot realize that they are sharing the bandwidth with other users</li>
 <li>Widely applied in the Operating System, eg: Linux (reserve different time intervals for multiple users)</li>
 </ul>
-<h3 id="packet-switching-vs-circuit-switching">Packet Switching VS Circuit Switching</h3>
-<p>refer to the slides for an example</p>
-<h4 id="circuit-switching-1">Circuit Switching</h4>
+<h3 class="mume-header" id="packet-switching-vs-circuit-switching">Packet Switching VS Circuit Switching</h3>
+
+<p><img src="Images\packetVScircuit.png" alt="packet switching vs circuit switching example"></p>
+<h4 class="mume-header" id="circuit-switching-1">Circuit Switching</h4>
+
 <p>Only allow limited amount of users. Reserve resources for limited users.</p>
-<h4 id="packet-switching">Packet Switching</h4>
+<h4 class="mume-header" id="packet-switching-1">Packet Switching</h4>
+
 <ul>
-<li>
-<p>Allow resource to be shared. Thus could accomodate more users.</p>
-</li>
-<li>
-<p>Could have <code>congestions</code>: <code>packet lost/delay</code>, need good protocol for reliable data transfer, <code>congestion control</code>.</p>
-</li>
+<li>Allow resource to be shared. Thus could accomodate more users.</li>
+<li>Could have <code>congestions</code>: <code>packet lost/delay</code></li>
+<li>need good protocol for reliable data transfer, <code>congestion control</code>.</li>
 </ul>
-<h2 id="internet-structure-network-of-networks">Internet Structure: network of networks</h2>
+<h2 class="mume-header" id="internet-structure-network-of-networks">Internet Structure: network of networks</h2>
+
 <p>We need to connect different access networks with each other. But how?</p>
 <p>With a global ISP? NO, need the same agreement</p>
 <p>With <strong>different core ISPs interconnected to each other</strong>? YES!</p>
+<p><img src="Images\internet_structure.png" alt="internet structure example"></p>
 <ul>
-<li>
-<p>Different <code>core ISPs</code> connected by <code>peering links</code> and <code>IXP hubs</code> (internet exchanging point)</p>
-</li>
-<li>
-<p>Core ISPs connected to <code>regional ISPs</code></p>
-</li>
-<li>
-<p><code>Content providers</code> (eg: Google) with multiple <code>data centers</code> connected to IXP and connected directly to the regional ISPs</p>
-</li>
-<li>
-<p><code>POP</code>: point of presence. Frequently used by content providers to get closer to their end users</p>
-</li>
+<li><code>ISP</code>: internet service providers</li>
+<li>End systems connect to Internet via access ISPs
+<ul>
+<li>residential, company and university ISPs</li>
 </ul>
-<h2 id="four-sources-of-delay">Four Sources of Delay</h2>
+</li>
+<li>Access ISPs in turn must be interconnected.</li>
+<li>Different <code>core ISPs</code> connected by <code>peering links</code> and <code>IXP hubs</code> (internet exchanging point)</li>
+<li>Core ISPs connected to <code>regional ISPs</code></li>
+</ul>
+<p><img src="Images\internet_hierarchy.png" alt="internet hierarchy example"></p>
+<ul>
+<li>at center: small number of well-connected large networks</li>
+<li>tier-1 commercial ISPs (e.g., Level 3, Sprint, AT&amp;T, NTT), national &amp;<br>
+international coverage</li>
+<li><code>Content providers</code>: private network (eg: Google) with multiple <code>data centers</code> connecting to IXP, tier-1 and regional ISPs directly</li>
+<li><code>POP</code>: point of presence. Frequently used by content providers to get closer to their end users</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="delay-loss-and-throughput-in-networks">Delay, loss, and throughput in networks</h2>
+
+<p><img src="Images\packet_delay.png" alt="packet delay example"></p>
 <p>The sequence is: arrive at router - <code>process</code> - <code>queueing</code> - <code>transmission</code> - leave router - <code>propogation</code> - arrive at next router</p>
-<h3 id="process-delay">Process Delay</h3>
-<p>The time the router takes to process the entire packet upon arrival</p>
-<h3 id="transmission-delay">Transmission Delay</h3>
-<p>The time the router takes to process and direct the packet bits by bits in the router (The time the toll station takes to serve the entire caravan car by car)</p>
-<h3 id="queueing-delay">Queueing Delay</h3>
+<h3 class="mume-header" id="process-delay">Process Delay</h3>
+
 <ul>
-<li>Time interval between arrival and being sent again while waiting in the router. (The time one caravan waits while the former caravan is being serviced)</li>
-<li>Calculate length of queueing delay by determining the value of average queueing delay</li>
-<li>Can lead to data loss.</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>c</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{proc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathit">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">p</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mord mathit mtight">o</span><span class="mord mathit mtight">c</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>: the time the router takes to process the entire packet upon arrival</li>
+<li>also called <code>nodal processing</code></li>
+<li>check bit error</li>
+<li>determine output link</li>
+<li>typically &lt; msec</li>
 </ul>
-<h3 id="propogation-delay">Propogation Delay</h3>
+<h3 class="mume-header" id="transmission-delay">Transmission Delay</h3>
+
 <ul>
-<li>The time it takes the packets to travel in the link from one router to the next. (The time the caravan takes to travel to the next toll station)</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{trans}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">t</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mord mathit mtight">a</span><span class="mord mathit mtight">n</span><span class="mord mathit mtight">s</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: the time the router takes to process and direct the packet bits by bits in the router <em>(The time the toll station takes to serve the entire caravan car by car)</em></li>
+<li><code>L</code>: packet length (bits)</li>
+<li><code>R</code>: link bandwidth (bps)</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><mo>=</mo><mi>L</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">d_{trans} = L/R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">t</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mord mathit mtight">a</span><span class="mord mathit mtight">n</span><span class="mord mathit mtight">s</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">L</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span></li>
+</ul>
+<h3 class="mume-header" id="queueing-delay">Queueing Delay</h3>
+
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>q</mi><mi>u</mi><mi>e</mi><mi>u</mi><mi>e</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{queue}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathit">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">q</span><span class="mord mathit mtight">u</span><span class="mord mathit mtight">e</span><span class="mord mathit mtight">u</span><span class="mord mathit mtight">e</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>: time interval between arrival and being sent again while waiting at the output link for transmission. <em>(The time one caravan waits while the former caravan is being serviced)</em></li>
+<li>depends on congestion level of router</li>
+<li>calculate length of queueing delay by determining the value of average queueing delay</li>
+<li>can lead to data loss</li>
+</ul>
+<p><img src="Images\queueing_delay.png" alt="queueing delay example"></p>
+<ul>
+<li><code>R</code>: link bandwidth (bps)</li>
+<li><code>L</code>: packet length (bits)</li>
+<li><code>a</code>: average packet arrival rate</li>
+<li>traffic intensity <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo><mi>L</mi><mi>a</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">= La/R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">L</span><span class="mord mathit">a</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>a</mi><mi mathvariant="normal">/</mi><mi>R</mi><mo>&#x2248;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">La/R \approx 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">L</span><span class="mord mathit">a</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2248;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>: average queueing delay small</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>a</mi><mi mathvariant="normal">/</mi><mi>R</mi><mo>&#x2192;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">La/R \to 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">L</span><span class="mord mathit">a</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2192;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>: average queueing delay large</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>a</mi><mi mathvariant="normal">/</mi><mi>R</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">La/R &gt; 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">L</span><span class="mord mathit">a</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>: more packets arriving than can be serviced, average delay infinite</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="propogation-delay">Propogation Delay</h3>
+
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{prop}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathit">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">p</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mord mathit mtight">o</span><span class="mord mathit mtight">p</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>: the time it takes the packets to travel in the link from one router to the next. <em>(The time the caravan takes to travel to the next toll station)</em></li>
 <li>Usually very fast</li>
+<li><code>d</code>: length of physical link</li>
+<li><code>s</code>: propagation speed (~<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>&#xD7;</mo><mn>1</mn><msup><mn>0</mn><mn>8</mn></msup><mtext>&#xA0;</mtext><mi>m</mi><mi mathvariant="normal">/</mi><mi>s</mi><mi>e</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">2\times 10^8~m/sec</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">m</span><span class="mord">/</span><span class="mord mathit">s</span><span class="mord mathit">e</span><span class="mord mathit">c</span></span></span></span>)</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi></mrow></msub><mo>=</mo><mi>d</mi><mi mathvariant="normal">/</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">d_{prop} = d/s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathit">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">p</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mord mathit mtight">o</span><span class="mord mathit mtight">p</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">d</span><span class="mord">/</span><span class="mord mathit">s</span></span></span></span></li>
 </ul>
-<h3 id="packet-loss">Packet Loss</h3>
+<h3 class="mume-header" id="real-internet-delays-and-routes">Real internet delays and routes</h3>
+
+<p><img src="Images\traceroute.png" alt="traceroute example"></p>
+<ul>
+<li><code>traceroute</code> program: provides delay measurement from source to router along end-to-end internet path towards destination
+<ul>
+<li>for all i:
+<ul>
+<li>sends three packets that will reach router i on path towards destination</li>
+<li>router i will return packets to sender</li>
+<li>sender records the time interval between sending and receiving of the packet</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="packet-loss">Packet Loss</h3>
+
 <ul>
 <li><code>Packet loss</code>: packets can be dropped due to insufficient <code>buffer size</code></li>
 <li><code>Buffer size</code>: the storage size of packets that could be stored in the router</li>
 </ul>
-<h2 id="throughput">Throughput</h2>
-<p>Rate (bits/time unit) at which bits transferred between sender/receiver</p>
-<h3 id="bottleneck-link">Bottleneck link</h3>
-<p>Link on end to end path that has smaller transmission rate</p>
+<h3 class="mume-header" id="throughput">Throughput</h3>
+
+<p><img src="Images\throughput.png" alt="throughput example"></p>
+<ul>
+<li><code>throughput</code>: rate (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mi>i</mi><mi>t</mi><mi>s</mi><mi mathvariant="normal">/</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi><mtext>&#xA0;</mtext><mi>u</mi><mi>n</mi><mi>i</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">bits/time~unit</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">b</span><span class="mord mathit">i</span><span class="mord mathit">t</span><span class="mord mathit">s</span><span class="mord">/</span><span class="mord mathit">t</span><span class="mord mathit">i</span><span class="mord mathit">m</span><span class="mord mathit">e</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">u</span><span class="mord mathit">n</span><span class="mord mathit">i</span><span class="mord mathit">t</span></span></span></span>) at which bits transferred between sender and receiver</li>
+<li><code>instantaneous</code>: rate at given point in time</li>
+<li><code>average</code>: rate over longer period of time</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub><mo>&lt;</mo><msub><mi>R</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">R_s &lt; R_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">s</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">c</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: average end to end throughput <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo><msub><mi>R</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">= R_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">s</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><br>
+<img src="Images\Rs_smaller_Rc.png" alt="Rs smaller than Rc example"></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub><mo>&gt;</mo><msub><mi>R</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">R_s &gt; R_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">s</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">c</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: average end to end throughput <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo><msub><mi>R</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">= R_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">c</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><br>
+<img src="Images\Rs_larger_Rc.png" alt="Rs larger than Rc example"></li>
+<li><code>bottleneck link</code>: link on end to end path that has <strong>smaller</strong> transmission rate</li>
+<li><strong>internet scenario:</strong><br>
+<img src="Images\throughput_scenario.png" alt="throughput internet scenario example">
+<ul>
+<li>per-connection end to end throughput: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mo>(</mo><msub><mi>R</mi><mi>c</mi></msub><mo separator="true">,</mo><msub><mi>R</mi><mi>s</mi></msub><mo separator="true">,</mo><mi>R</mi><mi mathvariant="normal">/</mi><mn>10</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">min(R_c, R_s, R/10)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">m</span><span class="mord mathit">i</span><span class="mord mathit">n</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">c</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">s</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord">/</span><span class="mord">1</span><span class="mord">0</span><span class="mclose">)</span></span></span></span></li>
+<li>in practice, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">R_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">c</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> or <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">R_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">s</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> is often bottleneck</li>
+</ul>
+</li>
+</ul>
 <hr>
-<h1 id="january-22-tuesday">January 22, Tuesday</h1>
-<p>Revisiting slides on last Thursday</p>
-<h2 id="protocol-layers">Protocol Layers</h2>
+<h1 class="mume-header" id="january-22-tuesday">January 22, Tuesday</h1>
+
+<h2 class="mume-header" id="protocol-layers">Protocol Layers</h2>
+
 <ul>
 <li>Used to organize all the pieces of <code>network structure</code>: host, routers, etc.</li>
 <li><code>Moduralization</code> ensures that <code>individual layers</code> would not affect the functions of other layers</li>
 <li>The layers can work completely independently by themselves, but also able to communicate information</li>
 <li>But we may not always divide all the functions into independant layers.</li>
 </ul>
-<h3 id="internet-protocol-stack-end-to-end-protocol">Internet Protocol Stack: End to End Protocol</h3>
-<h4 id="application">Application</h4>
+<h3 class="mume-header" id="internet-protocol-stack-end-to-end-protocol">Internet Protocol Stack: End to End Protocol</h3>
+
+<p><img src="Images\internet_layer_stack.png" alt="internet layer stack example"></p>
+<ul>
+<li>
+<p><strong>application layer</strong></p>
 <ul>
 <li>Supporting the network applications.</li>
 <li>eg: FTP, HTTP, SMTP</li>
 <li>HTTP is developed based on TCP</li>
 </ul>
-<h4 id="transport">Transport</h4>
+</li>
+<li>
+<p><strong>transport layer</strong></p>
 <ul>
 <li>Interprocess data transfer</li>
 <li>Only happens between two end systems to let two processes communicate with each other</li>
-<li>eg: TCP (guarantee reliability of data transfer, contains congestion control), UDP</li>
-<li>TCP is slower than UDP. Most game/game streaming applications use UDP rather than TCP. But TCP contains reliability, whereas UDP does not guarantee</li>
+<li>eg: TCP (guarantee reliability of data transfer, contains congestion control), UDP (unreliable data transfer)</li>
+<li>TCP is slower than UDP. Most game or streaming applications use UDP rather than TCP. But TCP contains reliability, whereas UDP does not guarantee</li>
 <li>Not necessary for the routers/switches to support the transport layer protocols, although most devices now days can also support such layer.</li>
 </ul>
-<h4 id="network">Network</h4>
+</li>
+<li>
+<p><strong>network layer</strong></p>
 <ul>
 <li>Both routing and forwarding are in this layer.</li>
 <li>Routing of datagrams from source to destination.</li>
 <li>Only IP protocol</li>
-<li>IP protocol: consists of different routing protocols</li>
+<li><code>IP protocol</code>: consists of different routing protocols</li>
 </ul>
-<h4 id="link">Link</h4>
+</li>
+<li>
+<p><strong>link layer</strong></p>
 <ul>
 <li>Only used to transfer data within two neighbouring network elements (router to router, switches to switches, etc.)</li>
 <li>Do not connect two end users</li>
 <li>eg: Ethernet (wired connection), 802.11 (WiFi, wireless connection), PPP</li>
 </ul>
-<h4 id="physical">Physical</h4>
+</li>
+<li>
+<p><strong>physical layer</strong></p>
 <ul>
 <li>Basically are just bits on the wire</li>
 </ul>
-<h3 id="isoosi-reference-model">ISO/OSI reference model</h3>
-<ul>
-<li>Includes two extra layers</li>
-<li>Just below the application layer</li>
-<li>Not necessary for all applications, thus can be combined with application layer</li>
+</li>
 </ul>
-<h4 id="presentation">Presentation</h4>
+<h3 class="mume-header" id="isoosi-reference-model">ISO/OSI reference model</h3>
+
+<p><img src="Images\ISOmodel.png" alt="ISO reference model exmaple"></p>
 <ul>
-<li>Allows application to describe/interpret the meaning of data: encryption, compression etc.</li>
+<li>
+<p>Includes two extra layers that internet stack does not share</p>
+</li>
+<li>
+<p>These services must be implemented in application if needed</p>
+</li>
+<li>
+<p>Not necessary for all applications, thus can be combined with application layer</p>
+</li>
+<li>
+<p><strong>presentation layer</strong></p>
+<ul>
+<li>allows application to describe/interpret the meaning of data: encryption, compression, machine-specific conventions etc.</li>
 </ul>
-<h4 id="session">Session</h4>
+</li>
+<li>
+<p><strong>session layer</strong></p>
 <ul>
-<li>Synchronization, checkpointing, recovery of data exchange</li>
+<li>synchronization, checkpointing, recovery of data exchange</li>
 </ul>
-<h3 id="process-of-data-transfer-between-end-users">Process of data transfer between end users</h3>
+</li>
+</ul>
+<h3 class="mume-header" id="process-of-data-transfer-between-end-users">Process of data transfer between end users</h3>
+
 <ul>
-<li>Data are transferred with encapsulation</li>
-<li>Each layer generates a specific type of header and attach it to the message being tranferred. The header contains layer specific information (eg: ip address by the network layer), and only corresponding layers can decrypt it.</li>
+<li>Data are transferred with <code>encapsulation</code></li>
+<li>Each layer generates a specific type of <code>header</code> and attach it to the <code>message</code> being tranferred.</li>
+<li>The header contains <em>layer specific information</em> (eg: ip address by the network layer), and <strong>only corresponding layers</strong> can decrypt it.</li>
 <li>While the headers are being transferred between different layers, some of the headers might be changed, such as the data link layer, and the network layer for specific applications</li>
 <li>Tranport layer information (header) will never be changed</li>
+</ul>
+<p><img src="Images\encapsulation.png" alt="encapsulation exmaple"></p>
+<ul>
 <li>The process: [application layer] - message -&gt; [transport layer] - segment -&gt; [network layer] - datagram -&gt; [link layer] - frame -&gt; [physical layer]</li>
 <li>Each layer can only see the correct corresponded header</li>
-<li>The layers try to interpret/decapsulate the packets even though they might not understand??</li>
+<li>The layers try to interpret/decapsulate the packets even though they might not understand</li>
 <li>[source] - encapsulated packets -&gt; [router]</li>
 <li>Router drop the network header and check how to head the packet to the next link</li>
+<li>A new network layer header is attached to the packet</li>
 <li>[router] - encapsulated packets -&gt; [destination]</li>
 <li>The destination end user decrpt the packet encapsulated with layers of headers</li>
 </ul>
-<h2 id="network-security">Network Security</h2>
-<h3 id="malware">Malware</h3>
-<p>Hide behind your system/application.</p>
-<ul>
-<li>Virus: need to be exectued to infect your devices</li>
-<li>Worm: if your pc is infected, your mobile device can also get infected</li>
-<li>Spywre: record yoru keystrokes</li>
-<li>Once infected, the host can be enrolled in botnet, used by the hacker to attack servers illegally.</li>
-<li>By hacking other machines, the hackers utilize others' devices and hide their identities.</li>
-</ul>
 <hr>
-<h1 id="jan-24-thursday">Jan 24, Thursday</h1>
-<h3 id="denial-of-service-dos">Denial of Service (DoS)</h3>
-<h3 id="packet-%22sniffing%22">Packet &quot;Sniffing&quot;</h3>
-<h1 id="chapter-two-application-layer">Chapter Two: Application Layer</h1>
-<h2 id="application-architecture">Application Architecture</h2>
-<h3 id="client-server-architecture">Client-Server Architecture</h3>
-<h4 id="server">Server</h4>
+<h2 class="mume-header" id="network-security">Network Security</h2>
+
+<h3 class="mume-header" id="malware">Malware</h3>
+
+<ul>
+<li>Hide behind your system/application.</li>
+<li>can get in host from:
+<ul>
+<li><code>virus</code>: need to be exectued to infect your devices</li>
+<li><code>worm</code>: if your pc is infected, your mobile device can also get infected</li>
+</ul>
+</li>
+<li><code>spywre malware</code>: record your keystrokes. Once infected, the host can be enrolled in <code>botnet</code>, used by the hacker to attack servers illegally, such as spam and DDoS attacks.</li>
+<li>By hacking other machines, the hackers utilize others&apos; devices and hide their identities.</li>
+</ul>
+<h3 class="mume-header" id="denial-of-service-dos">Denial of Service (DoS)</h3>
+
+<p><img src="Images\DoS.png" alt="Dos example"></p>
+<p>Attackers make resources (server, bandwidth) unavailable to legitimate traffic by overwhelming resource with bogus traffic</p>
+<ol>
+<li>select target</li>
+<li>break into hosts around the network (see botnet)</li>
+<li>send packets to target from compromised hosts</li>
+</ol>
+<h3 class="mume-header" id="packet-sniffing">Packet &quot;Sniffing&quot;</h3>
+
+<p><img src="Images\packet_sniffing.png" alt="packet sniffing example"></p>
+<ul>
+<li>broadcast media (shared Ethernet, wireless)</li>
+<li>promiscuous network interface reads/records all packets (eg: including passwords) passing by</li>
+<li>wireshark software used for end-of-chapter labs is a (free) packet-sniffer</li>
+</ul>
+<h3 class="mume-header" id="ip-spoofing">IP spoofing</h3>
+
+<p><img src="Images\IP_spoofing.png" alt="IP spoofing example"></p>
+<p>send packet with false source address</p>
+<hr>
+<h1 class="mume-header" id="jan-24-thursday">Jan 24, Thursday</h1>
+
+<h1 class="mume-header" id="chapter-two-application-layer">Chapter Two: Application Layer</h1>
+
+<h2 class="mume-header" id="application-architecture">Application Architecture</h2>
+
+<h3 class="mume-header" id="client-server-architecture">Client-Server Architecture</h3>
+
+<ul>
+<li>
+<p><strong>server</strong></p>
 <ul>
 <li>Always-on host</li>
 <li>Have a permanent public IP address in most cases</li>
 <li>Have more servers to cater more requests: have data centers</li>
-<li>Data center: a building stores only servers, routers, switches etc.  An approach for server providers to scale up?</li>
+<li>data center: a building stores only servers, routers, switches etc.  An approach for server providers to scale up?</li>
 </ul>
-<h4 id="client">Client</h4>
+</li>
+<li>
+<p><strong>client</strong></p>
 <ul>
+<li>communicate with the server</li>
+<li>may be intermittently connected</li>
 <li>Dynamic IP adress depanding on server</li>
 <li>Does not communicate directly with each other.</li>
 <li>[Client] - message -&gt; [Server] - message -&gt; [Client]</li>
 </ul>
-<h4 id="communication-process">Communication process</h4>
+</li>
+<li>
+<p><strong>communication process</strong></p>
 <ul>
-<li>Clients initiate connections</li>
-<li>Server waits to be contracted by clients</li>
+<li><code>process</code>: program running within a host</li>
+<li>client process: initiate communication</li>
+<li>server process: waits to be contracted by clients</li>
 </ul>
-<h3 id="p2p-architecture">P2P architecture</h3>
+</li>
+</ul>
+<h3 class="mume-header" id="p2p-architecture">P2P architecture</h3>
+
 <ul>
-<li>No need to always deploy the servers for the client to share contents</li>
-<li>End systems can directly communicate with each other</li>
-<li>Peers request and provide serivce to each other, which pertains self scalability: both new capacity and demands are brought to the architecture when new peers show up</li>
-</ul>
-<h4 id="process-of-communication">Process of communication</h4>
+<li>
+<p>no always-on server</p>
+</li>
+<li>
+<p>end systems can directly communicate with each other</p>
+</li>
+<li>
+<p>peers request and provide serivce to each other, which pertains <strong>self scalability</strong>:</p>
 <ul>
-<li>Start inter-process communication defiend by OS</li>
-<li>Process: program running within a host</li>
-<li>Processes in different host communicate by exchanging messages</li>
+<li>both new capacity and demands are brought to the architecture when new peers show up</li>
 </ul>
-<h3 id="sockets">Sockets</h3>
-<h3 id="addressing-processes">Addressing processes</h3>
+</li>
+<li>
+<p>peers are intermittently connected and change IP addreesses</p>
+<ul>
+<li>more complexed management</li>
+</ul>
+</li>
+<li>
+<p><strong>communication process</strong>:</p>
+<ul>
+<li>within same host, two processes communicate using inter-process communication defined by OS</li>
+<li>processes in different host communicate by exchanging messages</li>
+<li>aside: applications with P2P architectures have client processes &amp; server processes</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="sockets">Sockets</h3>
+
+<h3 class="mume-header" id="addressing-processes">Addressing processes</h3>
+
 <ul>
 <li>Processes need identifier to receive messages</li>
 <li>Identifier: containing IP address and prot number associated with the process on host</li>
 <li>Port number eg: HTTP (80)</li>
 </ul>
-<h3 id="app-layer-protocol-defines">App-layer protocol defines</h3>
+<h3 class="mume-header" id="app-layer-protocol-defines">App-layer protocol defines</h3>
+
 <ul>
 <li>REFER TO THE SLIDES DUDE</li>
 </ul>
-<h3 id="what-transport-services-the-app-required">What transport services the app required</h3>
+<h3 class="mume-header" id="what-transport-services-the-app-required">What transport services the app required</h3>
+
 <ul>
 <li>Interlayer requirements that should be done by layer collaboration</li>
 <li>Also see the slides</li>
 </ul>
-<h3 id="internet-transport-protocols-services">Internet transport protocols services</h3>
+<h3 class="mume-header" id="internet-transport-protocols-services">Internet transport protocols services</h3>
+
 <ul>
 <li>Reliable transport: between sending and receiving sides</li>
 <li>Flow control: by receiving side(?) to make sure receivers do not get overwhelmed by sender messages</li>
 <li>Congestion control: by sending side to make sure internet resources are also shared by other end systems</li>
 </ul>
-<h2 id="web-and-http">Web and HTTP</h2>
+<hr>
+<h2 class="mume-header" id="web-and-http">Web and HTTP</h2>
+
 <ul>
 <li>Internet objects are addressable by URL which consists of a host name + a path name</li>
-</ul>
-<h3 id="http-connections">HTTP connections</h3>
+<li><code>HTTP</code>: hypertext transfer protocol
 <ul>
-<li>HTTP is using TCP protocal</li>
-<li>Client initiates TCP connection to server using port 80</li>
+<li>web&apos;s application layer protocol</li>
+<li>applies the <strong>client/server model</strong>
+<ul>
+<li><strong>client</strong>: browser that requests, receives (with HTTP protocol), and displays web objects</li>
+<li><strong>server</strong>: web server sends objects (with HTTP protocol) in response to requests</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="http-connections">HTTP connections</h3>
+
+<ul>
+<li>HTTP is using <code>TCP</code> protocal</li>
+<li><strong>Client initiates TCP connection to server</strong> using <code>port 80</code></li>
 <li>Server accpets the TCP connection from client</li>
 <li>HTTP messages (application layer protocol messages) exchanged between browser (HTTP client) and Web server</li>
 <li>The server closes the TCP connection (sometimes the client can also close the connetion by accident, in which case the server might not konw, and the server will close the connection after a certain amount of time -- connection timeout)</li>
 <li>HTTP is stateless, servers do not need to maintain a certain state of past client requests</li>
 <li>SSL: provides secured library for TCP. TCP does not use SSL by default</li>
 <li>HTTPs is TCP using SSL?</li>
+<li><code>RTT</code>: <strong>run trip time</strong>, the time it takes the small packet to travel from the client to the server and then back from the server to the packet. Cannot avoid this time no matter what.</li>
 </ul>
-<h4 id="non-persistant-http-connections">Non persistant HTTP connections</h4>
+<h4 class="mume-header" id="non-persistant-http-connections">Non persistant HTTP connections</h4>
+
 <ul>
-<li>At most one object can be sent over TCP connection, which will be closed by the server after one request message and resoponse</li>
+<li><strong>At most one object</strong> can be sent over TCP connection, which will be closed by the server after one request message and resoponse</li>
 <li>To download multiple objects, the HTTP client should build up multiple connections</li>
 <li>After downloading the first object receiving from the server, in order to download a second object, the HTTP client should establish the TCP connection with the server again, and repeat sending out requests etc.</li>
-<li>RTT (Run Trip Time): the time it takes the small packet to tranvel from the client to the server and then back from the server to the packet. Cannot avoid this time no matter what.</li>
+<li><strong>response time</strong>:<br>
+<img src="Images\np_HTTP_response.png" alt="non-persistent HTTP response time example">
+<ul>
 <li>Initiate TCP connection: 1 RTT (must happen before sending HTTP request)</li>
 <li>Send HTTP request and receive file back from server: 1 RTT + some time to transmit the file</li>
-<li>Cost 2 RTT to request and receive in total</li>
+<li>Cost <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>R</mi><mi>T</mi><mi>T</mi><mo>+</mo><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mtext>&#xA0;</mtext><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi><mi>m</mi><mi>i</mi><mi>s</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mtext>&#xA0;</mtext><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">2 RTT + file~transmission~time</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mord mathit">i</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">e</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">t</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">a</span><span class="mord mathit">n</span><span class="mord mathit">s</span><span class="mord mathit">m</span><span class="mord mathit">i</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mord mathit">i</span><span class="mord mathit">o</span><span class="mord mathit">n</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">t</span><span class="mord mathit">i</span><span class="mord mathit">m</span><span class="mord mathit">e</span></span></span></span> to request and receive in total</li>
 </ul>
-<h4 id="persistant-http-connections">Persistant HTTP connections</h4>
+</li>
+<li>issues:
 <ul>
-<li>Only need to set up the TCP connection once, all later on request and response can be communicated within the connection established</li>
-<li>Cost only 1 RTT roughly</li>
+<li>requeires <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>R</mi><mi>T</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">2RTT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">T</span></span></span></span> per object</li>
+<li>OS overhead for each TCP connection</li>
+<li>browsers often open parallel TCP connections to featch referenced objects</li>
 </ul>
-<h3 id="http-request-message">HTTP request message</h3>
+</li>
+</ul>
+<h4 class="mume-header" id="persistant-http-connections">Persistant HTTP connections</h4>
+
+<ul>
+<li>only need to set up the TCP connection once</li>
+<li>server leaves connection open after sending response</li>
+<li>all later on HTTPmessages between same client/server sent over open connection</li>
+<li>client sends requests as soon as it encounters a referenced object</li>
+<li>Cost only <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi>R</mi><mi>T</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">1 RTT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">T</span></span></span></span> roughly</li>
+</ul>
+<h3 class="mume-header" id="http-request-message">HTTP request message</h3>
+
+<p><img src="Images\HTTP_request_msg.png" alt="HTTP request message example"></p>
 <ul>
 <li>Two types: request and response</li>
 <li>Applying the ASCII format, which is a human readable format</li>
+<li><strong>general format</strong></li>
 </ul>
-<h4 id="general-format">General format</h4>
+<p><img src="Images\HTTP_request_msg_format.png" alt="HTTP request message format example"></p>
 <ul>
 <li>Reuest line</li>
 <li>Header lines</li>
 <li>Body: contains the user input if the user is using post method
 <ul>
 <li>eg: user input typed in the search box</li>
-<li>POST method</li>
-<li>URL method</li>
+<li><code>POST</code> method
+<ul>
+<li>web page often includes form input</li>
+<li>input is uploaded to server in entity body</li>
+</ul>
+</li>
+<li><code>URL</code> method
+<ul>
+<li>use GET method</li>
+<li>input is uploaded in URL field of request line</li>
 </ul>
 </li>
 </ul>
-<h3 id="http-response-message">HTTP response message</h3>
+</li>
+</ul>
+<h3 class="mume-header" id="http-response-message">HTTP response message</h3>
+
+<p><img src="Images\HTTP_response_msg.png" alt="HTTP response message example"></p>
 <ul>
 <li>Status line: versions of HTTP protocol the server is running</li>
 <li>Header lines:</li>
 <li>Data objects requested by the client</li>
 </ul>
-<h4 id="response-status-codes">Response status codes</h4>
+<h4 class="mume-header" id="response-status-codes">Response status codes</h4>
+
 <ul>
 <li>200: ok</li>
 <li>301: requested object moved permanently, new location will be specified in this message</li>
@@ -615,40 +1185,52 @@
 <li>The API exists, but you called the wrong API request</li>
 </ul>
 </li>
-<li>404: requested file not provided by the server side :(((((((
+<li>404: requested file not provided by the server side &#x1F626;((((((
 <ul>
 <li>Also means API error. The API does not even exist</li>
 </ul>
 </li>
-<li>505: some internal errors in the server :(</li>
+<li>505: some internal errors in the server &#x1F626;</li>
 </ul>
 <hr>
-<h1 id="jan-29-tuesday">Jan 29, Tuesday</h1>
-<h2 id="user-server-state-cookies">User-server state: cookies</h2>
+<h1 class="mume-header" id="jan-29-tuesday">Jan 29, Tuesday</h1>
+
+<h3 class="mume-header" id="user-server-state-stateful-cookies">User-server state: stateful cookies</h3>
+
 <ul>
 <li>Servers do not maintain information for clients</li>
 <li>Not so convenient, we want to keep track of the user data and let the server identify specific user</li>
 <li>eg: unique user ID on a website
 <ul>
-<li>your browser will use that ID upon the HTTP request and the server would know who you are</li>
+<li>your browser will use that ID upon the HTTP request and the server would know who you are<br>
+<img src="Images\cookies.png" alt="cookies example"></li>
 </ul>
 </li>
-<li>Refer to slides on the process of HTTP request with cookies and cookies specific information sent by server (kept in backend database)</li>
-</ul>
-<h3 id="cookies-can-be-used-for">Cookies can be used for</h3>
+<li>For HTTP cookies, stored in the browser instead of devices</li>
+<li><strong>cookies can be used for</strong>
 <ul>
 <li>authorization</li>
 <li>shopping carts</li>
+<li>recommendations</li>
 <li>can also violate privacy, can be shut down</li>
 </ul>
-<h2 id="web-caches-proxy-server">Web Caches (proxy server)</h2>
+</li>
+<li>how to keep state:
+<ul>
+<li>protocol endpoints: maintain state at sender/receiver over multiple transactions</li>
+<li>cookies: http messages carry state</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="web-caches-proxy-server">Web Caches (proxy server)</h3>
+
 <ul>
 <li>Satisfying user request without involving origin server</li>
-</ul>
-<h3 id="forward-proxy-we-are-talking-about-this-one">Forward Proxy (we are talking about this one)</h3>
+<li><strong>Forward Proxy</strong> (we are talking about this one):<br>
+<img src="Images\web_cache.png" alt="web cache example">
 <ul>
 <li>Closer to the client side</li>
-<li>Client first go through cache for information
+<li>Client first sends all HTTP request to cache for information
 <ul>
 <li>Client send HTTP request to proxy server</li>
 <li>Proxy server process data
@@ -659,24 +1241,39 @@
 </li>
 </ul>
 </li>
+<li>cache acts as both client and server</li>
+<li>typically, cache is installed by ISP</li>
 <li>Reduces traffic through the public internet, saves client time</li>
 <li>Through HTTP protocol and origin server, the proxy server would know what to keep and how long to keep</li>
 </ul>
-<h3 id="reverse-proxy">Reverse Proxy</h3>
+</li>
+</ul>
+<h3 class="mume-header" id="reverse-proxy">Reverse Proxy</h3>
+
 <ul>
 <li>Closer to the server side</li>
 </ul>
-<h3 id="caching-example">Caching Example</h3>
-<h4 id="without-web-cache-mechanism">Without web cache mechanism</h4>
+<h3 class="mume-header" id="caching-example">Caching Example</h3>
+
+<ul>
+<li>original without proxy:<br>
+<img src="Images\caching.png" alt="caching problem example"></li>
+<li>install local cache:<br>
+<img src="Images\caching_solution.png" alt="caching problem solution example"></li>
+</ul>
+<h4 class="mume-header" id="without-web-cache-mechanism">Without web cache mechanism</h4>
+
 <ul>
 <li>Without using caching, access link becomes most utilized by the browsers to go directly to the origin server</li>
 <li>Total delay = internet delay + access delay + LAN delay</li>
 </ul>
-<h4 id="increase-access-link-capacity-without-web-cache">Increase access link capacity without web cache</h4>
+<h4 class="mume-header" id="increase-access-link-capacity-without-web-cache">Increase access link capacity without web cache</h4>
+
 <ul>
 <li>Time it takes to go through access link decreased to 10%!</li>
 </ul>
-<h4 id="install-local-web-cache-server">Install local web cache server</h4>
+<h4 class="mume-header" id="install-local-web-cache-server">Install local web cache server</h4>
+
 <ul>
 <li>Attach a cache server to the local institutional server</li>
 <li>How to calculate total delay
@@ -686,16 +1283,18 @@
 </ul>
 </li>
 </ul>
-<h3 id="conditional-get">Conditional GET</h3>
+<h3 class="mume-header" id="conditional-get">Conditional GET</h3>
+
+<p><img src="Images\conditional_GET.png" alt="conditional GET example"></p>
 <ul>
-<li>Goal: he server won't send object if cache has up-to-date cached version in the web cache server
+<li>Goal: the server won&apos;t send object if cache has up-to-date cached version in the web cache server
 <ul>
 <li>No object transmission delay</li>
 <li>Lower link utilization</li>
 </ul>
 </li>
-<li>Proxy request the date of data last modified from server</li>
-<li>Server send back the date of data last modified
+<li>Proxy (cache server) request if the data has been modified since a specific time from the origin server</li>
+<li>Server send back a message indicating if the data has been modified
 <ul>
 <li>If the object has not been modified since the date specified
 <ul>
@@ -712,54 +1311,66 @@
 </ul>
 </li>
 </ul>
-<h2 id="electronic-mail">Electronic Mail</h2>
+<hr>
+<h2 class="mume-header" id="electronic-mail">Electronic Mail</h2>
+
 <ul>
 <li>Three major components
 <ul>
-<li>user agents
+<li><code>user agents</code>
 <ul>
 <li>the mail readers</li>
 <li>composing, editing, reading mail messages</li>
 <li>eg: Outlook, iPhone mail client</li>
 </ul>
 </li>
-<li>mail server
+<li><code>mail server</code>
 <ul>
 <li>mailbox contains incoming messages for user</li>
 <li>message queue of outgoing messages to be sent</li>
 </ul>
 </li>
-<li>SMTP (simple mail transfer protocol)
+<li><code>SMTP</code> (simple mail transfer protocol)
 <ul>
 <li>protocol between mail servers for exchanging mail messages</li>
-<li>client side of the mail server send message to server side of the mail server with SMTP protocol</li>
+<li><strong>client side</strong> of the mail server <em>send</em> message to <strong>server side</strong> of the mail server with <code>SMTP protocol</code></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Steps of sending emails
+<li><strong>Steps of sending emails</strong><br>
+<img src="Images\sending_email.png" alt="sending email process example">
 <ol>
 <li>User sender compose email on UA</li>
-<li>UA use SMTP protocol to transfer message to mail server of user sender</li>
-<li>Client side of sender's mail server connect with server side of recepient's mail server with SMTP protocol (the handshaking process)</li>
-<li>Sender's mail server transfers the mail message to recepeint's mail server with TCP connection</li>
+<li>UA transfer message to mail server of user sender with protocol depending on the specific user agent application</li>
+<li>Client side of SMTP (the sender) set up <code>TCP connection</code> with the receiver&apos;s mail server to <strong>allow</strong> SMTP connection between two end servers (the hand shaking process with SMTP)</li>
+<li>SMTP client transfers the mail message to recepeint&apos;s mail server with <code>SMTP protocol</code> over TCP connection</li>
 <li>Closure of the connection</li>
-<li>Recepient's mail server send the message to recepient's UA</li>
+<li>Recepient&apos;s UA retrieve the message from mail server using <code>mail retrieving protocols</code> (IMAP, POP3)</li>
 </ol>
 </li>
 </ul>
-<h3 id="smtp-protocol">SMTP protocol</h3>
+<h3 class="mume-header" id="smtp-protocol">SMTP protocol</h3>
+
 <ul>
-<li>SMTP uses persistent connections</li>
+<li>SMTP uses <strong>persistent</strong> connections</li>
+<li>SMTP requires message (header and body) to be in 7-bit ASCII</li>
+<li>uses CRLF.CRLF to determine end of message</li>
 <li>SMTP client side <code>push</code> information to other mail server
 <ul>
-<li>unlike HTTP which pull information</li>
+<li>unlike HTTP which <code>pull</code> information</li>
 </ul>
 </li>
-<li>multiple objects sent in multipart message</li>
-</ul>
-<h3 id="mail-message-format">Mail message format</h3>
+<li><strong>multiple</strong> objects sent in <strong>multipart</strong> message
 <ul>
+<li>unlike HTTP: each object encapsulatd in its own response message</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="mail-message-format">Mail message format</h3>
+
+<ul>
+<li>SMTP: protocol for exchanging email messages</li>
 <li>RFC 822: standard for text message format
 <ul>
 <li>header lines: To, From, Subject
@@ -771,7 +1382,893 @@
 </ul>
 </li>
 </ul>
-<hr>
+<h3 class="mume-header" id="message-access-protocols">Message access Protocols</h3>
 
-    </body>
-    </html>
+<h4 class="mume-header" id="pop3-protocol">POP3 protocol</h4>
+
+<ul>
+<li><code>POP</code>: post office protocol</li>
+<li>authorization, download
+<ul>
+<li><strong>authorization phase</strong>:
+<ul>
+<li><code>user:</code> decaler user name</li>
+<li><code>pass:</code> password</li>
+</ul>
+</li>
+<li><strong>transaction phase</strong>:
+<ul>
+<li><code>list:</code> list message numbers</li>
+<li><code>retr:</code> retrieve message by number</li>
+<li><code>dele:</code> delete</li>
+<li><code>quit</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Two different modes
+<ul>
+<li>Download and delete</li>
+<li>Download and keep</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="imap">IMAP</h4>
+
+<ul>
+<li><code>IMAP</code>: internet mail access protocol</li>
+<li>more features, including manipulation of stored messages on server</li>
+<li>Keep all messages at server</li>
+<li>Allow user toorganize meesgae in folders</li>
+<li>keeps user state across sessions
+<ul>
+<li>names of folders and mappings between message IDs and folder name</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="http">HTTP</h4>
+
+<ul>
+<li>used by gmail, hotmail, yahoo! mail, etc.</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="feb-5-tuesday">Feb 5, Tuesday</h1>
+
+<h2 class="mume-header" id="dns-domain-name-system">DNS (Domain Name System)</h2>
+
+<ul>
+<li>Indentifier for internet hosts, routers:
+<ul>
+<li>IP address (32 bit): used for addessing datagrams</li>
+</ul>
+</li>
+<li>Distributed database</li>
+<li>application-layer protocol</li>
+<li>Used to interprete host name to IP addresses</li>
+</ul>
+<h3 class="mume-header" id="dns-services">DNS services</h3>
+
+<ul>
+<li>Translate hostname to IP address</li>
+<li>Host aliasing: canonical, alias names
+<ul>
+<li><code>Canonical name</code>: Used to point one main domain to multiple subdomians
+<ul>
+<li>makes sure you don&apos;t need to change multiple records if you want to change your IP address</li>
+<li>Structure: Alias name - IP address - canonoical name - subdomains?</li>
+</ul>
+</li>
+<li>Mail server aliasing: you simply use @case.edu instead of the full domian name</li>
+<li>Load distribution: linking many IP addresses corresponding to one name</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="dns-structure">DNS structure</h3>
+
+<ul>
+<li>Do not centralize DNS for the sake of scalability</li>
+<li>Centralized service cannot support all the flow?</li>
+</ul>
+<h3 class="mume-header" id="dns-distributed-hierarchical-database">DNS: distributed, hierarchical database</h3>
+
+<p>Take Amazon as an example?</p>
+<ul>
+<li>root servers: multiple root servers accross the globe managed by 13 organizations</li>
+</ul>
+<h4 class="mume-header" id="tld-authoritative-servers">TLD, authoritative servers</h4>
+
+<ul>
+<li>top-level domain (TLD) servers:
+<ul>
+<li>eg: .edu, com, etc.</li>
+<li>Responsible for com, org, net, edu, etc. and all top-level country domains</li>
+</ul>
+</li>
+<li>authorative DNS servers:
+<ul>
+<li>organizations own DNS server, providing authorative hostnames to IP mappings for organizations named hosts</li>
+<li>maintained by organization or service provider</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="local-dns-name-server">Local DNS name server</h4>
+
+<ul>
+<li>Does not striclty belong to hierarchy</li>
+<li>each residential ISP, company, university, has one &quot;default name server&quot;
+<ul>
+<li>also called default name server</li>
+</ul>
+</li>
+<li>when host makes DNS query, query is sent to local DNS server
+<ul>
+<li>has local cache of recent name-to-address translation pairs (but may be out of date!)</li>
+<li>acts as proxy, forwards query into hierarchy</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="dns-name-resolution-example">DNS name resolution example</h3>
+
+<h4 class="mume-header" id="iterated-query">Iterated query</h4>
+
+<ul>
+<li>Local DNS server is majorly in charge of generating all the requests to different servers</li>
+<li>Requesting host sending request to the local DNS server</li>
+<li>Local DNS server keeps querying other level of servers to search for the IP address if it does not have the cache of the IP address of a certain layer following the sequence below
+<ul>
+<li>root DNS server</li>
+<li>TLD DNS server</li>
+<li>authorative DNS server</li>
+</ul>
+</li>
+<li>eg: the local DNS server queries the TLD DNS server directly if it has cached the TLD address, so it skips the root DNS server</li>
+<li>more secured because when attacked by hacker, only one way of information is hacked, and the user will be able to tell soemthing is wrong, unlike in the recursive query, where the amplification effect will work</li>
+</ul>
+<h4 class="mume-header" id="recursive-query">Recursive query</h4>
+
+<ul>
+<li>The contacted name servers are in charge of looking for the IP address and sending queries to each other</li>
+<li>Heavy load at upper level layers: root server, TLD DNS server, etc.</li>
+</ul>
+<h3 class="mume-header" id="dns-caching-updating-records">DNS: caching, updating records</h3>
+
+<ul>
+<li>once (any) name server learns mapping, it caches mapping
+<ul>
+<li>cache entries timeout (disappear) after some time (TTL)</li>
+<li>TLD servers typically cached in local name servers
+<ul>
+<li>thus root name server not often visited</li>
+</ul>
+</li>
+<li>cached entries may be out-of-date (best effort name-to-address translation!)</li>
+<li>update/notify mechanisms proposed IETF standard</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="dns-records">DNS records</h3>
+
+<ul>
+<li>DNS: distributed database storing resource records (RR)</li>
+<li>RR format: (name, value, type, ttl)
+<ul>
+<li><code>type=A</code>
+<ul>
+<li>name is hostname</li>
+<li>value is IP address</li>
+</ul>
+</li>
+<li><code>tpe=NS</code>
+<ul>
+<li>name is domain</li>
+<li>value is hostname of the authorative name server for this domain</li>
+</ul>
+</li>
+<li><code>type=CNAME</code>
+<ul>
+<li>name is alias name for some &quot;canonical&quot; name</li>
+<li>value is canonical name</li>
+<li>eg: <a href="http://www.ibm.com">www.ibm.com</a> = <a href="http://servereast.backup2.ibm.com">servereast.backup2.ibm.com</a></li>
+</ul>
+</li>
+<li><code>type=MX</code>
+<ul>
+<li>value is name of mailserver associated with name</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="dns-protocol-messages">DNS protocol, messages</h3>
+
+<p>both query and reply messages have the sae message format</p>
+<ul>
+<li>message header
+<ul>
+<li>identification: 16 bit # for query, reply to query uses same #</li>
+<li>flags:
+<ul>
+<li>query or reply</li>
+<li>recursion desired</li>
+<li>recursion available</li>
+<li>reply is authoritative</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="inserting-recoreds-into-dns">Inserting recoreds into DNS</h3>
+
+<ul>
+<li>register name <a href="http://gentsk.com">gentsk.com</a> at DNS registrar lmao
+<ul>
+<li>provide names, IP addresses of the authoritative name server (primary and secondary)</li>
+<li>registrar inserts two RRs into .com TLS server</li>
+</ul>
+</li>
+<li>Create authoritative server type A record for <a href="http://www.gentsk.com">www.gentsk.com</a>, type MX record for <a href="http://gentsk.com">gentsk.com</a></li>
+</ul>
+<h3 class="mume-header" id="attackin-dns">Attackin DNS</h3>
+
+<ul>
+<li>root servers are relatively safe</li>
+<li>domain level servers are more dangerous since more user information goes thru this level</li>
+<li>DNS applies no encryption machanism for the sake of efficiency, all messages are plain text</li>
+</ul>
+<h4 class="mume-header" id="ddos-attacks">DDoS attacks</h4>
+
+<p>see slides for more details</p>
+<h1 class="mume-header" id="feb-7-thursday">Feb 7, Thursday</h1>
+
+<h2 class="mume-header" id="socket-programming">Socket programming</h2>
+
+<ul>
+<li>goal: build client-server</li>
+<li><code>socket</code>: door between application process and end- end-transport protocol
+<ul>
+<li>two socket types:
+<ul>
+<li><code>UDP</code></li>
+<li><code>TCP</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="socket-with-udp">Socket with UDP</h3>
+
+<ul>
+<li>no &quot;connection&quot; between client and server</li>
+<li>no handshaking before sending data</li>
+<li>sender explicitly attaches IP address and port number to each packet</li>
+<li>receiver extract sender <code>IP address</code> and <code>port number</code> from the packet</li>
+<li>transmitted data may be lost or received out-of-order</li>
+<li>provides unreliable transfer of groups of bytes (&#x10FC01;datagrams&#x10FC00;) between client and server</li>
+</ul>
+<h4 class="mume-header" id="udp-communication-process">UDP communication process</h4>
+
+<ul>
+<li>server run on serverIP</li>
+<li>server creates socket, port = x</li>
+<li>client create socket</li>
+<li>client create datagram with server IP and port=x, send datagram via clientSocket</li>
+<li>server read datagram from serverSocket</li>
+<li>server write reply to server socket specifying client address and port number</li>
+<li>client read datagra from client socket</li>
+<li>client close client socket</li>
+</ul>
+<h3 class="mume-header" id="socket-with-tcp">Socket with TCP</h3>
+
+<ul>
+<li>server process must run first</li>
+<li>server must create socket that welcomes client&apos;s contact</li>
+<li>client must contact server</li>
+<li>client contacts server by creating TCP socket, specifying IP address, port number of server process</li>
+<li>when client creates socket, client TCP establishes connectiont to server TCP</li>
+<li>when server contacted by client, server TCP creates new socket for server process to communicate with client</li>
+<li>reliable communication between server and client</li>
+</ul>
+<h4 class="mume-header" id="tcp-ommunication-process">TCP ommunication process</h4>
+
+<ul>
+<li>server create socket, port=x, for incoming request</li>
+<li>server wait for incoming connection request</li>
+<li>client create socket, connect to hostid, port= x</li>
+<li>client send request using clientSocket</li>
+<li>server read request from connectionSocket</li>
+<li>server write reply to connetionSocket</li>
+<li>client read request from client socket</li>
+<li>server closes connectionSocket</li>
+<li>client closes client socket</li>
+</ul>
+<h1 class="mume-header" id="chapter-3-transport-layer">Chapter 3: Transport Layer</h1>
+
+<h2 class="mume-header" id="transport-layer-services-and-protocols">Transport layer services and protocols</h2>
+
+<ul>
+<li>provide logical communication between app processes running on different hosts</li>
+<li>end to end system protocols</li>
+<li>Data units transferred within the unit: segments</li>
+</ul>
+<h3 class="mume-header" id="transport-vs-network-layer">Transport vs. network layer</h3>
+
+<ul>
+<li>network layer: logical communication between hosts</li>
+<li>transport layer: logical communication between two end processes, relies on and enhances network layer</li>
+<li>processes communicate based on the communication between hosts</li>
+</ul>
+<h3 class="mume-header" id="reliable-in-order-delivery-tcp">Reliable In-order delivery (TCP)</h3>
+
+<h3 class="mume-header" id="unreliable-unordered-delivery-udp">Unreliable unordered delivery (UDP)</h3>
+
+<h2 class="mume-header" id="multiplexing-and-demultiplexing">Multiplexing and demultiplexing</h2>
+
+<ul>
+<li><code>multiplexing</code>: happens on sender end. Handles data from multiple sockets and transport header (later used for demultiplexing)</li>
+<li><code>demultiplexing</code>: on receiver end. Use header info to deliver received segments to correct socket.</li>
+</ul>
+<h3 class="mume-header" id="how-demultiplexing-works">How demultiplexing works</h3>
+
+<p>host uses IP addresses &amp; port numbers to direct segment to appropriate socket<br>
+32 bits</p>
+<h3 class="mume-header" id="connectionless-demultiplexing">Connectionless demultiplexing</h3>
+
+<p>see slides, wait for review :x<br>
+used by UDP</p>
+<h3 class="mume-header" id="connection-oriented-demultiplexing">Connection-oriented demultiplexing</h3>
+
+<ul>
+<li>used by TCP, identified by 4-tuple
+<ul>
+<li>source IP address</li>
+<li>source port number &#x2022; dest IP address</li>
+<li>dest port number</li>
+</ul>
+</li>
+<li>demux: receiver uses all four values to direct segment to appropriate socket</li>
+<li>server host may support many simultaneous TCP sockets, each socket identified by its own 4-tuple</li>
+<li>web servers have different sockets for each connecting client</li>
+</ul>
+<h2 class="mume-header" id="udp-user-datagram-protocol">UDP: User Datagram Protocol</h2>
+
+<ul>
+<li>Connectionless: no handshaking between UDP sender, receiver</li>
+<li>reliable transfer over UDP</li>
+</ul>
+<h3 class="mume-header" id="udp-segment-header">UDP: segment header</h3>
+
+<ul>
+<li>source port number</li>
+<li>destination portnumber</li>
+<li>IP address</li>
+<li><code>checksum</code>: a signature computing the data you transmit. Used to detect if there are errors in the header.
+<ul>
+<li>the receiver compute the checksum of the received message and compares that with the checksum included in the header to see if there is an error
+<ul>
+<li>if doesnt match, there is an error</li>
+<li>else we still dont know if its correct</li>
+</ul>
+</li>
+<li>checksum cannot be all zero since receiver will consider it as checksum not computed. we use all ones instead</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="principle-of-reliable-data-transfer">Principle of reliable data transfer</h2>
+
+<ul>
+<li>important in application, transport, link layers</li>
+<li>Most important API:
+<ul>
+<li><code>rdt_send()</code>: called from above (by the app). Passed data to deliver to receiver upper layer</li>
+<li><code>rdt_rcv()</code>: called when packet arrives on rcv-side of channel</li>
+</ul>
+</li>
+<li>use finite state machines (FSM) to specify sender, receiver</li>
+</ul>
+<h3 class="mume-header" id="rdt10-reliable-transfer-over-a-reliable-channel">rdt1.0: Reliable transfer over a reliable channel</h3>
+
+<ul>
+<li>underlying chennel perfectly reliable</li>
+<li>separate FSMs for sender, receiver:
+<ul>
+<li>sender sends data into underlying channel</li>
+<li>receiver reads data from underlying channel</li>
+</ul>
+</li>
+<li>very simple behaviors for both sender and receiver since both underlying layers are completely reliable</li>
+<li>Both sender and receiver have only one state. There are still state transitions, but always end up with the original state</li>
+<li><strong>Sender</strong>:
+<ul>
+<li>wait for call from above</li>
+<li>rdt_send(data)</li>
+<li>packet = make_pkt(data)</li>
+<li>udt_send(packet)</li>
+</ul>
+</li>
+<li><strong>Receiver</strong>:
+<ul>
+<li>Wait call from below</li>
+<li>rdt_rcv(packet)</li>
+<li>extract (packet,data)</li>
+<li>deliver_data(data)</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="rdt20-channel-with-bit-errors">rdt2.0: Channel with bit errors</h3>
+
+<ul>
+<li>underlying channels may flip bits in the packet</li>
+<li>still no packet loss</li>
+<li><code>acknowledgements (ACKs)</code>: receiver explicitly tells sender that packet received OK</li>
+<li><code>negative acknowledgements</code>: receiver explicitly tells sender that pkt had errors
+<ul>
+<li>sender retransmits pkt on receipt of NAK</li>
+</ul>
+</li>
+<li><strong>Sender</strong> has two states:
+<ol>
+<li>Wait for call from above</li>
+</ol>
+<ul>
+<li>rdt_send(data)</li>
+<li>sndpkt = make_pkt(data, checksum)</li>
+<li>udt_send(sndpkt)</li>
+<li>transitions to state <code>2</code></li>
+</ul>
+<ol start="2">
+<li>Wait for ACK or NAK</li>
+</ol>
+<ul>
+<li>rdt_rcv(rcvpkt) &amp;&amp; isNAK(rcvpkt)
+<ul>
+<li>udt_send(sndpkt)</li>
+<li>transitions to state <code>2</code></li>
+</ul>
+</li>
+<li>rdt_rcv(rcvpkt) &amp;&amp; isACK(rcvpkt)
+<ul>
+<li>transitons to state <code>1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Receiver</strong> has one state with two transitions:
+<ol>
+<li>Wait for call from below</li>
+</ol>
+<ul>
+<li>rdt_rcv(rcvpkt) &amp;&amp; notcorrupt(rcvpkt)
+<ul>
+<li>extract(rcvpkt,data)</li>
+<li>deliver_data(data)</li>
+<li>udt_send(ACK)</li>
+</ul>
+</li>
+<li>rdt_rcv(rcvpkt) &amp;&amp; corrupt(rcvpkt)
+<ul>
+<li>udt_send(NAK)</li>
+</ul>
+</li>
+<li>Go back to state <code>1</code></li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="fatal-flaw">Fatal Flaw</h4>
+
+<ul>
+<li>The acknowledgement message can also be corrupted</li>
+<li>sender doesn&apos;t know what happened at receiver</li>
+<li>can&apos;t just retransmit: possible duplicate at receiver end</li>
+<li><strong>Solutions</strong>:
+<ul>
+<li>sender retransmits current pkt if ACK/NAK corrupted</li>
+<li>sender adds sequence number to each pkt</li>
+<li>receiver discards duplicate pkt</li>
+</ul>
+</li>
+<li>Sender use the stop and wait model
+<ul>
+<li>it will not send another packet if it does not receive any feedback message from the receiver</li>
+<li>This guarantees the sender always sends only one packet at a time</li>
+<li>Receiver gets to differentiate the duplicate packet</li>
+</ul>
+</li>
+</ul>
+<h1 class="mume-header" id="feb-12-tuesday">Feb 12, Tuesday</h1>
+
+<h2 class="mume-header" id="continue-with-rdt">(Continue with rdt)</h2>
+
+<h3 class="mume-header" id="rdt21-handles-garbled-acknaks">rdt2.1: handles garbled ACK/NAKs</h3>
+
+<ul>
+<li>Upgrade the rdt2.0 model</li>
+<li>Doubles the number of states<br>
+<em>Refer to the slides, need revision</em></li>
+<li><strong>Sender</strong>:
+<ul>
+<li>seq number added to pkt</li>
+<li>two seq. #s (0,1) will suffice</li>
+<li>must check if received ACK/NAK corrupted</li>
+<li>state must remember whether expected pkt should have seq # of 0 or 1</li>
+</ul>
+<ol>
+<li>wait for call 0 from above
+<ul>
+<li>rdt_send(data))</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>Receiver</strong>:
+<ul>
+<li>must check if received packet is duplicate</li>
+<li>state indicates whether 0 or 1 is expected pkt seq #</li>
+</ul>
+<ol>
+<li>Wait for 0 from below<br>
+[Attach images here later]</li>
+</ol>
+</li>
+</ul>
+<h3 class="mume-header" id="rdt22-nak-free-protocol">rdt2.2: NAK-free protocol</h3>
+
+<p>Alter from the rdt2.1 by dropping NAK message and have one more check message function<br>
+[Attach images here later]</p>
+<h3 class="mume-header" id="rdt30-channels-with-errors-and-loss">rdt3.0: channels with errors and loss</h3>
+
+<ul>
+<li>new assumption: underlying channel can also lose packets (data, ACKs)</li>
+<li>approach: sender waits reasonable amount of time for ACK</li>
+<li>retransmits if no ACK received in this time</li>
+<li>if pkt (or ACK) just delayed (not lost):
+<ul>
+<li>retransmission will be duplicate, but seq. #&apos;s already handles this</li>
+<li>receiver must specify seq # of pkt being ACKed</li>
+</ul>
+</li>
+<li>requires countdown timer</li>
+</ul>
+<p>[Attach images here later]</p>
+<h4 class="mume-header" id="rdt30-in-action">rdt3.0 in action</h4>
+
+<p>[Attach images here later]</p>
+<h4 class="mume-header" id="performance-of-rdt30">Performance of rdt3.0</h4>
+
+<ul>
+<li>rdt3.0 is correct, but with low performance</li>
+<li>[See slides for datails on the example]</li>
+<li>want to calculate utilization of the sender
+<ul>
+<li>ratio between transmission time and total amount of time: <span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>U</mi><mrow><mi>s</mi><mi>e</mi><mi>n</mi><mi>d</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>L</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow><mrow><mi>R</mi><mi>T</mi><mi>T</mi><mo>+</mo><mi>L</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">U_{sender} = \frac{L/R}{RTT+L/R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">s</span><span class="mord mathit mtight">e</span><span class="mord mathit mtight">n</span><span class="mord mathit mtight">d</span><span class="mord mathit mtight">e</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">L</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit">L</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></li>
+</ul>
+</li>
+<li>network protocol limits use of physical resources</li>
+</ul>
+<h3 class="mume-header" id="pipelined-protocols">Pipelined protocols</h3>
+
+<ul>
+<li><code>pipelining</code>: sender allows multiple, in-flight, yet- to-be-acknowledged pkts</li>
+<li>two generic forms of pipelined protocols:
+<ul>
+<li><code>go-Back-N</code></li>
+<li><code>selective repeat</code></li>
+</ul>
+</li>
+<li>increase utilization by sending multiple pkts together:
+<ul>
+<li>eg: three packets, then utilization of sender becomes three times as large: <span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>U</mi><mrow><mi>s</mi><mi>e</mi><mi>n</mi><mi>d</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mfrac><mrow><mn>3</mn><mi>L</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow><mrow><mi>R</mi><mi>T</mi><mi>T</mi><mo>+</mo><mi>L</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">U_{sender} = \frac{3L/R}{RTT+L/R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">s</span><span class="mord mathit mtight">e</span><span class="mord mathit mtight">n</span><span class="mord mathit mtight">d</span><span class="mord mathit mtight">e</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">L</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span><span class="mord mathit">L</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="go-back-n">Go-back-N</h4>
+
+<ul>
+<li><code>sender</code>: can have up to N unacked packetes in pipeline</li>
+<li><code>receiver</code>: only sends cumulative ack
+<ul>
+<li>does not ack packet if there&apos;s a gap</li>
+</ul>
+</li>
+<li>Sender has timer for <em>oldest unacked packet</em>
+<ul>
+<li>when timer expires, retransimit all unacked packets</li>
+<li>original design: only one timer. but now can have multiple timers?</li>
+</ul>
+</li>
+</ul>
+<p><strong>The logic is:</strong></p>
+<ul>
+<li><strong>Sender</strong>:
+<ul>
+<li>k-bit seq number in pkt header</li>
+<li>window of up to N, consecutive unack&apos;ed pkts allowed</li>
+<li>[Attach images here later]</li>
+<li>two <code>pointers</code> in the window to point to the <code>sender base</code> and the <code>nextseqnum</code></li>
+<li>ACK(n): ACKs all pkts up to and including seq # n: cumulative ACK
+<ul>
+<li>may receive duplicate ACKs (see receiver)</li>
+</ul>
+</li>
+<li>there is only one timer, and it is for oldest in-flight pkt</li>
+<li>timeout(n): retransmit packet n and all higher seq # pkts in window</li>
+<li>[Attach images here later for sender FSM]</li>
+</ul>
+</li>
+<li><strong>Receiver</strong>:
+<ul>
+<li>applies cumulative acknowledgement</li>
+<li>drop all successive packets if one intermediate packet was loss</li>
+<li>resend ack for the last packet received in correct order until the loss packet was received</li>
+<li>ACK-only: always send ACK for correctly-received pkt with highest in-order seq #
+<ul>
+<li>may generate duplicate ACKs</li>
+<li>need only remember <code>expectedseqnum</code></li>
+</ul>
+</li>
+<li>the receiver does not buffer out-of-order pkt, instead, the receiver discards all packets untill receiving the packet in the correct order</li>
+<li>re-ACK pkt with highest in-order seq #</li>
+<li>[Attach images here later for receiver FSM]</li>
+</ul>
+</li>
+<li>[Attach images here later for GBN in action]</li>
+</ul>
+<h1>Feb 14, Thursday</h1>
+<ul>
+<li><strong>GBN window size and sequence number</strong>
+<ul>
+<li>[Attach images here later for GBN erroneous example]
+<ul>
+<li><code>window size</code> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo><msup><mn>2</mn><mi>k</mi></msup><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">= 2^k = 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span></li>
+<li><code>k</code>: length of sequence number</li>
+<li>would not work because of the oversize window size</li>
+</ul>
+</li>
+<li>[attach image for correct example]
+<ul>
+<li><code>window size</code> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo><msup><mn>2</mn><mi>k</mi></msup><mo>&#x2212;</mo><mn>1</mn><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">= 2^k - 1 = 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.932438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span></li>
+</ul>
+</li>
+<li>Correct window size should be at least 1 less than the 2&apos;s exponential of sequence number</li>
+</ul>
+</li>
+<li><strong>real life case in TCP</strong>
+<ul>
+<li>the size of increment in receiver&apos;s ACK value is related to the lenght of the data sent to the receiver</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="selective-repeat">Selective Repeat:</h4>
+
+<ul>
+<li>sender can have up to N unack&apos;ed packets in pipeline
+<ul>
+<li>sender only resends pkts for which ACK not received</li>
+</ul>
+</li>
+<li>receiver sends individual ack for each packet
+<ul>
+<li>receiver buffers pkts, as needed, for eventual in-order delivery to upper layer</li>
+</ul>
+</li>
+<li>sender maintains different timers for each unacked packets
+<ul>
+<li>when timer expires, retransmit only that unacked packet</li>
+</ul>
+</li>
+</ul>
+<p><strong>The logic is:</strong></p>
+<ul>
+<li>
+<p><strong>sender</strong>:</p>
+<ul>
+<li>data from above:
+<ul>
+<li>if next available seq number in window, send pkt</li>
+</ul>
+</li>
+<li>timeout(n):
+<ul>
+<li>resend pkt n, restart timer</li>
+</ul>
+</li>
+<li>ACK(n) in <code>[sendbase, sendbase+N]</code>:
+<ul>
+<li>mark pkt n as received</li>
+<li>if n smallest unACked pkt, advance window base to next unACKed seq number</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>receiver</strong></p>
+<ul>
+<li>pkt n in <code>[rcvbase,rcvbase+N-1]</code>:
+<ul>
+<li>send ACK(n)</li>
+<li>buffer out of order pkt</li>
+<li>deliver buffered in order pkts, advance window to next not yet received pkt</li>
+</ul>
+</li>
+<li>pkt n in <code>[rcvbase,rcvbase-1]</code>:
+<ul>
+<li>ACK(n)</li>
+</ul>
+</li>
+<li>else:
+<ul>
+<li>ignore</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Selective repeat dilemma:</strong></p>
+<ul>
+<li>see slides, attach image here</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="connection-oriented-transport-tcp">Connection oriented transport: TCP</h2>
+
+<h3 class="mume-header" id="tcp-segment-structure">TCP segment structure</h3>
+
+<ul>
+<li>acknowledgement number: used by receiver to indicate what seq number receiving and what seq number expecting</li>
+<li>sequence number: counting by bytes of data instead of segments
+<ul>
+<li>so is acknowledgement number</li>
+</ul>
+</li>
+<li>URG: urgent data</li>
+<li>ACK: ACK # valid</li>
+<li>receive window: how many more bytes of data the receiver is willing to accept</li>
+</ul>
+<h3 class="mume-header" id="tcp-seq-numbers-acks">TCP seq. numbers, ACKs</h3>
+
+<ul>
+<li>TCP protocol is very similar to GBN</li>
+<li>[attach image of segement sample]</li>
+<li><code>sequence number</code>: first byte of sent segment data</li>
+<li><code>acknowledgements</code>:
+<ul>
+<li>next byte expected by the receiver</li>
+<li>cumulative ACK</li>
+</ul>
+</li>
+<li>both numbers incremented according to the length of data segments</li>
+<li>TCP doesn&apos;t specify how to handle out of order segments, addressed by implementor</li>
+<li>[attach example]
+<ul>
+<li>two hosts tranferring data, both sender and receiver</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="tcp-round-trip-time-timeout">TCP round trip time, timeout</h3>
+
+<p>wait for reviewing....</p>
+<h3 class="mume-header" id="tcp-reliable-data-transfer">TCP reliable data transfer</h3>
+
+<ul>
+<li>
+<p>TCP creates rdt service on top of IP&apos;s unreliable service</p>
+<ul>
+<li>pipelined segments</li>
+<li>cumulative acks</li>
+<li>single retransmission timer</li>
+<li>allows out of order packets</li>
+</ul>
+</li>
+<li>
+<p>retransmission is triggered by two factors:</p>
+<ul>
+<li>timeout events</li>
+<li>duplicate acks</li>
+</ul>
+</li>
+<li>
+<p><strong>sender events</strong>:</p>
+<ul>
+<li>data rcvd fomapp:
+<ul>
+<li>create segment with seq #</li>
+<li>seq # is first byte of sent segment data</li>
+<li>start timer if not already running
+<ul>
+<li>think of timer as for oldest unacked segment</li>
+<li>expiration interval: <code>TimeOutInterval</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>time out:
+<ul>
+<li>only retransmit segment that caused timeout
+<ul>
+<li>unlike GBN which transmitted all successive packets</li>
+</ul>
+</li>
+<li>restart timer</li>
+</ul>
+</li>
+<li>ack rcvd:
+<ul>
+<li>if ack acknowledges previously unacked segments
+<ul>
+<li>update what is known to be ACKed</li>
+<li>start timer if there are still unacked segments</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[attach simplified FSM for TCP sender here]</li>
+</ul>
+</li>
+<li>
+<p><strong>receiver events</strong></p>
+<ul>
+<li>event at receiver
+<ul>
+<li>[image]</li>
+</ul>
+</li>
+<li>TCP receiver action
+<ul>
+<li>[image]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>TCP retransmission scenarios</strong></p>
+<ul>
+<li>[attach image]</li>
+</ul>
+</li>
+<li>
+<p>TCP fast retransmit</p>
+<ul>
+<li>time-outperiod often relatively long: long delay before resending lost packet</li>
+<li>detect lost segments via duplicate ACKs.
+<ul>
+<li>sender often sends many segments back- to-back</li>
+<li>if segment is lost, there will likely be many duplicate ACKs.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="flow-control">Flow control</h3>
+
+<ul>
+<li>receiver controls sender, so sender won&apos;t overflow receiver&apos;s buffer by transmitting too much, too fast</li>
+<li>receiver advertises free buffer space by including rwnd value in TCP header of receiver-to-sender segments</li>
+</ul>
+<h3 class="mume-header" id="connection-management">Connection management</h3>
+
+<ul>
+<li>sender and receiver handshakes before exchanging data
+<ul>
+<li>agree to establish connection (each knowing the other willing<br>
+to establish connection)
+<ul>
+<li><code>req_conn(x)</code> + <code>acc_conn(x)</code></li>
+</ul>
+</li>
+<li>agree on connection parameters</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
