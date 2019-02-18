@@ -41,8 +41,8 @@
   - [Internet Structure: network of networks](#internet-structure-network-of-networks)
   - [Delay, loss, and throughput in networks](#delay-loss-and-throughput-in-networks)
     - [Process Delay](#process-delay)
-    - [Transmission Delay](#transmission-delay)
     - [Queueing Delay](#queueing-delay)
+    - [Transmission Delay](#transmission-delay)
     - [Propogation Delay](#propogation-delay)
     - [Real internet delays and routes](#real-internet-delays-and-routes)
     - [Packet Loss](#packet-loss)
@@ -398,16 +398,10 @@ The sequence is: arrive at router - `process` - `queueing` - `transmission` - le
 - determine output link
 - typically < msec
 
-### Transmission Delay
-
-- $d_{trans}$: the time the router takes to process and direct the packet bits by bits in the router *(The time the toll station takes to serve the entire caravan car by car)*
-- `L`: packet length (bits)
-- `R`: link bandwidth (bps)
-- $d_{trans} = L/R$
-
 ### Queueing Delay
 
-- $d_{queue}$: time interval between arrival and being sent again while waiting at the output link for transmission. *(The time one caravan waits while the former caravan is being serviced)*
+- $d_{queue}$: time interval between packet arrival and being sent again while waiting at the output link for transmission. *(The time one caravan waits while the former caravan is being serviced)*
+- if no former packet arrived before, then queueing delay is zero
 - depends on congestion level of router
 - calculate length of queueing delay by determining the value of average queueing delay
 - can lead to data loss
@@ -421,6 +415,13 @@ The sequence is: arrive at router - `process` - `queueing` - `transmission` - le
   - $La/R \approx 0$: average queueing delay small
   - $La/R \to 1$: average queueing delay large
   - $La/R > 1$: more packets arriving than can be serviced, average delay infinite
+
+### Transmission Delay
+
+- $d_{trans}$:the time the router takes to push all of the packet's bits into the link. *(The time the toll station takes to serve the entire caravan car by car)*
+- `L`: packet length (bits)
+- `R`: link bandwidth (bps)
+- $d_{trans} = L/R$
 
 ### Propogation Delay
 
