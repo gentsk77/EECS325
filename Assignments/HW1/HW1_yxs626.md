@@ -49,7 +49,7 @@ There are four major delay components in one single nodal delay, which are proce
 
 **transmision delay**: 
 - the time the router takes to push all of the packet's bits into the link 
-- $d_{trans} = L/R$, where $L$ is the packet length in bits, and $R$ is the link bandwidth
+- $d_{trans} = L/R$, where $L$ is the packet length in bits, and $R$ is the link transmission rate
 - will be affected by the length of the packet
 
 **propogation delay**:
@@ -65,15 +65,15 @@ There are four major delay components in one single nodal delay, which are proce
 
 **1. Considering the queueing delay in the access router, the access delay could be calculated with the equation $D_{access} = \frac{R_{trans}}{(1-traffic~intensity)}$. $R_{trans}$ represents the transmission delay at the access link. Without web cache, what is the total average response time?**
 
-$$ 100k bits = 100,000 bits,~1Mb = 1,000kbits$$
+$$ 1Mb = 1,000kbits $$
 The transmission delay of one request at the access link can be calculated as below:
 $$R_{trans} = L/R_{access} = 100kbits/1.5Mbps = 100kbits / 1500kbps \approx 0.0667sec$$
 And the traffic intensity can be expressed as: 
 $$traffic~intensity = La/R_{access} = \frac{100kbits/request \times 15~request/sec}{1500kbits/sec} = 1 $$
 Thus the access delay for each request would be: 
-$$D_{access} = \frac{R_{trans}}{(1-traffic~intensity)} = \frac{0.0667sec}{1 - 1} \to +\infty $$
+$$D_{access} = \frac{R_{trans}}{(1-traffic~intensity)} = \frac{0.0667sec}{1 - 1} \to hours $$
 And the total average response time for each request would be:
-$$T_{response} = internet~delay + access~delay = 1RTT + D_{access} = 2sec + \infty \to +\infty$$
+$$T_{response} = internet~delay + access~delay = 1RTT + D_{access} = 2sec + hours \to hours$$
 Which means we might need to wait for very long since the access link utilization is always 100%!
 
 **2. Compare this result with the situation where $𝑅_{access}= 100 Mbps$.**
@@ -96,8 +96,6 @@ When it comes to the calculation of end-to-end delay, we may apply the formula b
 $$d_{end-end} = (N + 1)(d_{trans} + d_{prop})$$
 where $N$ denotes the total number of routers between two end hosts. Since A and B are directly connected, we may conclude that $N = 0$, and thus the total length of time to send a file of 20,000 bits from A to B can be calculated as below: 
 $$d_{end-end} = d_{trans} + d_{prop} = L/R + d/s = \frac{20000bits}{1Mbps} + \frac{10000km}{2.5 × 10^8 m/s}$$
-$$1 Mbps = 1,000,000 bits/sec$$
-$$10000km = 10^7 m$$
 $$d_{end-end} = 0.02sec + 0.04sec = 0.06sec$$
 
 **2. Suppose now the file is broken up into 5 packets with each packet containing 4,000 bits. Suppose that each packet is acknowledged by the receiver and the transmission time of an acknowledgment packet is negligible. Finally, assume that the sender cannot send a packet until the preceding one is acknowledged. How long does it take to send the file?**
