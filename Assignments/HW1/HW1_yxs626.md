@@ -3,6 +3,8 @@ EECS325 Spring 2019
 Yue Shu
 Due: Tuesday, Feb 19, 2019
 
+---
+
 ### 1. What are the advantages and disadvantages of circuit-switched network and packet-switched network?
 
 **packet-switching**:
@@ -22,6 +24,8 @@ Due: Tuesday, Feb 19, 2019
    -  fewer users can be accomodated
    -  circuit segements remain idle if not in use, kind of a waste 
 
+---
+
 ### 2. Consider sending a packet from a source host to a destination host over a fixed route. List the delay components in the end-to-end delay. Which of these delays are constant and which are variable?
 
 There are four major delay components in one single nodal delay, which are processing delay, queueing delay, transmission delay, and propogation delay. Therefore, the end-to-end delay also consists of the four delays above, while the total length of delay would be accumulated according to the number of routers between the source host and the destination host. 
@@ -29,7 +33,8 @@ There are four major delay components in one single nodal delay, which are proce
 **constant delays**: 
 - processing delay
   - very small amount of time, mostly less than microseconds, to examine the packet's header and check for bit errors
-  - neglectable comparing to other sources of delays, thus I would classify it as a constant delay 
+  - determined by the programs or processes running in the network devices, thus won't vary according to the change in the packet 
+  - therefore processing delay is a constant delay
 - propogation delay
   - $d_{prop} = d/s$, where $d$ is length of physical link and $s$ is propogation speed
   - since the packet follows a fixed route, $d$ remains constant
@@ -45,6 +50,8 @@ There are four major delay components in one single nodal delay, which are proce
   - depends on the total length of the packet in bits, which can be varied
   - thus is a variable delay 
 
+---
+
 ### 3. What is the difference between transmission delay and propagation delay? Will the length of the packet affect the propagation delay and why?
 
 **transmision delay**: 
@@ -57,36 +64,40 @@ There are four major delay components in one single nodal delay, which are proce
 - $d_{prop} = d/s$, where $d$ is length of physical link and $s$ is propogation speed
 - thus will not be affected by the length of the packet
 
+---
+
 ### 4. Consider the following institutional network system. Suppose the average object size is 100k bits and the average rate from browsers to origin servers is 15 requests/sec. (ignore the LAN delay in the following questions)
 
 ![problem 4 image](/Image/p4.png)
 
 **Assume that $𝑅_{access} = 1.5 Mbps$ and the $RTT$ on the Internet side of the access link is $2 sec$.**
 
-**1. Considering the queueing delay in the access router, the access delay could be calculated with the equation $D_{access} = \frac{R_{trans}}{(1-traffic~intensity)}$. $R_{trans}$ represents the transmission delay at the access link. Without web cache, what is the total average response time?**
+**1. Considering the queueing delay in the access router, the access delay could be calculated with the equation $D_{access} = \frac{D_{trans}}{(1-traffic~intensity)}$. $D_{trans}$ represents the transmission delay at the access link. Without web cache, what is the total average response time?**
 
 $$ 1Mb = 1,000kbits $$
 The transmission delay of one request at the access link can be calculated as below:
-$$R_{trans} = L/R_{access} = 100kbits/1.5Mbps = 100kbits / 1500kbps \approx 0.0667sec$$
+$$D_{trans} = L/R_{access} = 100kbits/1.5Mbps = 100kbits / 1500kbps \approx 0.0667sec$$
 And the traffic intensity can be expressed as: 
 $$traffic~intensity = La/R_{access} = \frac{100kbits/request \times 15~request/sec}{1500kbits/sec} = 1 $$
 Thus the access delay for each request would be: 
-$$D_{access} = \frac{R_{trans}}{(1-traffic~intensity)} = \frac{0.0667sec}{1 - 1} \to hours $$
+$$D_{access} = \frac{D_{trans}}{(1-traffic~intensity)} = \frac{0.0667sec}{1 - 1} \to hours $$
 And the total average response time for each request would be:
-$$T_{response} = internet~delay + access~delay = 1RTT + D_{access} = 2sec + hours \to hours$$
+$$T_{response} = D_{internet} + D_{access} = 1RTT + D_{access} = 2sec + hours \to hours$$
 Which means we might need to wait for very long since the access link utilization is always 100%!
 
 **2. Compare this result with the situation where $𝑅_{access}= 100 Mbps$.**
 
 The new transmission delay of one request at the access link can be calculated as below:
-$$R_{trans} = L/R_{access} = 100kbits/100Mbps = 0.001sec$$
+$$D_{trans} = L/R_{access} = 100kbits/100Mbps = 0.001sec$$
 And the new traffic intensity can be expressed as: 
 $$traffic~intensity = La/R_{access} = \frac{100kbits/request \times 15~request/sec}{100Mbps} = 0.015 $$
 Thus the new access delay for each request would be: 
-$$D_{access} = \frac{R_{trans}}{(1-traffic~intensity)} = \frac{0.001sec}{1 - 0.015} \approx 1.02\times10^{-3} sec$$
+$$D_{access} = \frac{D_{trans}}{(1-traffic~intensity)} = \frac{0.001sec}{1 - 0.015} \approx 1.02\times10^{-3} sec$$
 And the total average response time for each request would be:
-$$T_{response} = internet~delay + access~delay = 1RTT + D_{access} = 2sec + 1.02\times10^{-3} sec \approx 2.00sec$$
+$$T_{response} = D_{internet} + D_{access} = 1RTT + D_{access} = 2sec + 1.02\times10^{-3} sec \approx 2.00sec$$
 which is so much shorter than the time it takes in part 1. 
+
+---
 
 ### 5. Two hosts, A and B, are directly connected via a link 𝑅 = 1 Mbps. The distance between A and B is 10,000 kilometers and the propagation speed over the link is $2.5 × 10^8 m/s$.
 
@@ -113,12 +124,15 @@ $$throughput = min\{R_1, R_2\} = R_1 = 500kbps$$
 $$d_{end-end} = d_{trans} + d_{prop} = L/R_1 + d/s = \frac{20000bits}{500kbps} + \frac{10000km}{2.5 × 10^8 m/s} = 0.04 + 0.04 = 0.08 sec$$
 So it takes $0.08$ seconds to send the same file. 
 
-### 6. Referring to problem 4, suppose the local web cache satisfy 60% of the requests, the remaining 40% requests will be satisfied by the origin web servers. What is the total response time in this case?
+---
 
-The total response time is the sum of total delay that could be processed by the local web cache and total delay that could only be satisfied by the origin server. And since the time it takes the local cache to response is very small, mostly in milliseconds, the total response time would moslty consist of the original server response time: 
+### 6. Referring to problem 4, suppose the local web cache satisfy 60% of the requests, the remaining 40% requests will be satisfied by the origin web servers. What is the total response time in this case? (bandwidth of LAN is 100Mbps)
+
+The total response time is the sum of total delay that could be processed by the local web cache and total delay that could only be satisfied by the origin server. We already know $D_{trans}$ from problem4, and the rest can be formulated as below:
 
 $$traffic~intensity = La/R_{access} = \frac{100kbits/request \times 15~request/sec \times 0.4}{1.5Mbps} = 0.4 $$
-$$D_{access} = \frac{R_{trans}}{(1-traffic~intensity)} = \frac{0.0667sec}{1 - 0.4} \approx 0.111sec $$
-$$T_{total} = 0.4 \times (1RTT + D_{access}) + 0.6 \times (\sim msec) \approx 0.4 \times 2.111sec = 0.8444 sec$$
+$$D_{access} = \frac{D_{trans}}{(1-traffic~intensity)} = \frac{0.0667sec}{1 - 0.4} \approx 0.111sec $$
+$$D_{LAN} = L/R_{LAN} = \frac{100kbits}{100Mbps} = 1 \times 10^{-3}sec$$
+$$T_{total} = 0.4 \times (D_{internet} + D_{access} + D_{LAN}) + 0.6 \times D_{LAN} = 0.4 \times (2 + 0.111 + 0.001) + 0.6 \times 0.001 = 0.8454 sec$$
 
-So the total response time in this case is $0.8444$ seconds
+So the total response time in this case is $0.8454$ seconds
