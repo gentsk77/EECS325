@@ -144,6 +144,15 @@
     - [TCP reliable data transfer](#tcp-reliable-data-transfer)
     - [Flow control](#flow-control)
     - [Connection management](#connection-management)
+  - [Principles of congestion control](#principles-of-congestion-control)
+  - [TCP congestion control](#tcp-congestion-control)
+    - [TCP throughput](#tcp-throughput)
+    - [TCP fairness](#tcp-fairness)
+- [Chapter 4](#chapter-4)
+  - [Overview of Network Layer](#overview-of-network-layer)
+  - [Network Layer](#network-layer)
+    - [key network-layer functions](#key-network-layer-functions)
+    - [Data plane, control plane](#data-plane-control-plane)
 
 -----
 # Jan 15, Tuesday
@@ -1351,3 +1360,71 @@ wait for reviewing....
     - `req_conn(x)` + `acc_conn(x)`
   - agree on connection parameters
  
+ # Feb 19, Tuesday
+
+## Principles of congestion control 
+a mechanism to benefit all the network systems 
+
+
+## TCP congestion control 
+
+
+
+ # Feb 21, Thursday 
+
+### TCP throughput
+
+- `W`: window size where loss occurs (measured in bytes)
+- avg TCP thruput = 3/4 W/RTT bytes/sec
+- `MSS`: max segment size
+- TCP thruput = 1.22 * MSS / (RTT * $\sqrt{L}$)
+- `L`: segment loss probability 
+  
+### TCP fairness
+
+- two competing sessions 
+- fairness goal: if K TCP sessions share same bottleneck link of bandwidth R, each should have average rate of R/K
+- [attach 3-107 image]
+
+taikunle kanppt zhenglibiji
+
+# Chapter 4
+
+## Overview of Network Layer 
+
+## Network Layer
+
+- network layer protocols in every host, router
+- router examines header fields in all IP datagrams passing through it
+- on sending side encapsulates segments into datagrams
+- on receiving side, delivers segments to transport layer
+
+### key network-layer functions
+
+- forwarding:
+  - move packets from router's input to appropriate router output
+  - process of getting through single interchange
+- routing:
+  - determine route taken by packets from source to destination according to routing alg
+  - process of planning trip from source to destination
+
+### Data plane, control plane
+
+- Data plane
+  - local per-router function
+  - local forwarding table is in data plane
+     - header
+     - output
+  - deterines how datagram arriving on router input port is forwarded to router output port
+  - forwarding function
+- control plane 
+  - network-wide logic 
+  - locally centralized control plane
+  - Individual routing algorithm components in each and every router interact in the control plane
+ 
+ ### Network service model 
+
+
+ ### Router architecture
+ - routing processor: routing algo
+ - [4-12 image]
