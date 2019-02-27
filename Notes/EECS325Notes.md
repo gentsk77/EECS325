@@ -153,6 +153,11 @@
   - [Network Layer](#network-layer)
     - [key network-layer functions](#key-network-layer-functions)
     - [Data plane, control plane](#data-plane-control-plane)
+- [Feb 26, Tuesday](#feb-26-tuesday)
+  - [IP addressing: introduction](#ip-addressing-introduction)
+    - [Subnets](#subnets)
+    - [IP address: how to get one?](#ip-address-how-to-get-one)
+    - [NAT: network address translation](#nat-network-address-translation)
 
 -----
 # Jan 15, Tuesday
@@ -1428,3 +1433,56 @@ taikunle kanppt zhenglibiji
  ### Router architecture
  - routing processor: routing algo
  - [4-12 image]
+
+
+
+# Feb 26, Tuesday 
+
+## IP addressing: introduction
+
+- IP address: 32 bit identifier for host, router interface
+- interface: connection between host/router and physical lihnk
+  - router's typically have multiple interfaces
+  - host typically has one or two interfaces 
+  - each interface has a corresponding IP address 
+
+### Subnets
+- IP address: 
+  - subnet part: high order bits
+  - host part: low order bits
+- subnet: 
+  - the device interfaces will share the same subnet part of IP address
+  - can physically reach each other without intervening router 
+  - determined by the IP address, not the physicall network environment
+- recipe
+  - determine the subnets, detach each interface from its host or router, creating islands of isolated networks 
+  - each isolated network is called a subnet
+  - eg: 223.1.3.0/24
+    - /24: subnet mask
+    - 24: number of bits in subnet portion of IP address
+- the example has 6 subnets 
+
+### IP address: how to get one?
+- directly configure files in your OS 
+  - need to ask for admission from admin
+- DHCP: 
+  - Dynamic Host Configuration Protocol
+  - dynamically get address from a server 
+  - "plug and play"
+  - goal: 
+    - allow host to dynamically obtain its IP addrss from network server when it joins a network
+    - can renew its lease on address in use 
+    - allow reuse of addresses (only hold address while connected/"on")
+    - support for mobile users who want to join network (more shortly)
+  - host broad casts DHCP discover msg
+  - DHCP server responds with DHCP offer
+  - host requests IP address: DHCP request msg
+  - DHCP server sends address: "DHCP ack" msg
+  - DHCP client server scenario
+    - [attach image]
+- subenet part:
+  - hierarchical addressing: route aggregation 
+
+### NAT: network address translation
+
+
