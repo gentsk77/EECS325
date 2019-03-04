@@ -1003,7 +1003,7 @@ Take Amazon as an example?
 
 ### DNS protocol, messages  
 
-both query and reply messages have the sae message format
+both query and reply messages have the same message format
 - message header
   - identification: 16 bit # for query, reply to query uses same #
   - flags:
@@ -1053,12 +1053,12 @@ see slides for more details
 - client close client socket
 
 ### Socket with TCP
-- server process must run first
+- **server process must run first**
 - server must create socket that welcomes client's contact
-- client must contact server
-- client contacts server by creating TCP socket, specifying IP address, port number of server process
-- when client creates socket, client TCP establishes connectiont to server TCP
-- when server contacted by client, server TCP creates new socket for server process to communicate with client 
+- **client must contact server**
+- **client contacts server by creating TCP socket**, specifying IP address, port number of server process
+- when client creates socket, **client TCP establishes connectiont to server TCP**
+- when server contacted by client, **server TCP creates new socket for server process to communicate with client**
 - reliable communication between server and client
 
 #### TCP ommunication process
@@ -1105,7 +1105,8 @@ used by UDP
 ### Connection-oriented demultiplexing
 - used by TCP, identified by 4-tuple
   - source IP address
-  - source port number • dest IP address
+  - source port number 
+  - dest IP address
   - dest port number
 - demux: receiver uses all four values to direct segment to appropriate socket
 - server host may support many simultaneous TCP sockets, each socket identified by its own 4-tuple
