@@ -637,24 +637,60 @@ send packet with false source address
 
 ### Sockets
 
+- process sends/receives messages to/from its socket
+- sending process shoves message out socket
+- sending process relies on transport infrastructure on other side of door to deliver message to socket at receiving process
+
 ### Addressing processes
-- Processes need identifier to receive messages
-- Identifier: containing IP address and prot number associated with the process on host 
-- Port number eg: HTTP (80) 
+- Processes need **identifier** to receive messages
+- host device has unique 32-bit IP address
+- IP address of host on which process runs does not suffice for identifying the process
+  - many processes can be running on the same host
+- Identifier: containing both IP address and prot number associated with the process on host 
+- Port number eg: HTTP (80), mail server (25)
 
 ### App-layer protocol defines
 
-- REFER TO THE SLIDES DUDE
+- types of messages exchanged
+  - request
+  - response
+- message syntax: what fields in messages and how fields are delineated 
+- message semantics: meaning of info in fields 
+- rules for when and how processes send and response to messages
+- open protocols: 
+  - defined in RFCs
+  - allow for interoperability
+  - eg: HTTP, SMTP
+- proprietary protocols:
+  - eg: Skype
 
 ### What transport services the app required
 
 - Interlayer requirements that should be done by layer collaboration
-- Also see the slides
+- data integrity 
+- timing
+- throughput
+- security
 
 ### Internet transport protocols services
-- Reliable transport: between sending and receiving sides 
-- Flow control: by receiving side(?) to make sure receivers do not get overwhelmed by sender messages
-- Congestion control: by sending side to make sure internet resources are also shared by other end systems 
+- TCP service: 
+  - Reliable transport: between sending and receiving sides 
+  - Flow control: by receiving side(?) to make sure receivers do not get overwhelmed by sender messages
+  - Congestion control: by sending side to make sure internet resources are also shared by other end systems 
+  - connection-oriented: setup required between client and server processes
+  - does not provide: timing, minimum thruput guarantee, security
+  - no encryption
+- UDP service:
+  - unreliable data transfer between sending and receiving process
+  - does not provide: reliability, flow control, congestion control, timing, thruput guarantee, security, or connection 
+  - no encryption 
+- SSL: 
+  - provides encrypted TCP connection
+  - data integrity 
+  - endpoint authentication
+  - is at app layer:
+    - apps use SSL libraries that "talk" to TCP
+  
 
 ---
 
@@ -926,7 +962,7 @@ Take Amazon as an example?
 
 #### Local DNS name server
 - Does not striclty belong to hierarchy
-- each residential ISP, company, university, has one "default name server"
+- each residential ISP, company, university, has one
   - also called default name server
 - when host makes DNS query, query is sent to local DNS server
   - has local cache of recent name-to-address translation pairs (but may be out of date!)
@@ -974,7 +1010,7 @@ Take Amazon as an example?
 
 ### DNS protocol, messages  
 
-both query and reply messages have the sae message format
+both query and reply messages have the same message format
 - message header
   - identification: 16 bit # for query, reply to query uses same #
   - flags:
@@ -1024,12 +1060,12 @@ see slides for more details
 - client close client socket
 
 ### Socket with TCP
-- server process must run first
+- **server process must run first**
 - server must create socket that welcomes client's contact
-- client must contact server
-- client contacts server by creating TCP socket, specifying IP address, port number of server process
-- when client creates socket, client TCP establishes connectiont to server TCP
-- when server contacted by client, server TCP creates new socket for server process to communicate with client 
+- **client must contact server**
+- **client contacts server by creating TCP socket**, specifying IP address, port number of server process
+- when client creates socket, **client TCP establishes connectiont to server TCP**
+- when server contacted by client, **server TCP creates new socket for server process to communicate with client**
 - reliable communication between server and client
 
 #### TCP ommunication process
@@ -1076,7 +1112,8 @@ used by UDP
 ### Connection-oriented demultiplexing
 - used by TCP, identified by 4-tuple
   - source IP address
-  - source port number • dest IP address
+  - source port number 
+  - dest IP address
   - dest port number
 - demux: receiver uses all four values to direct segment to appropriate socket
 - server host may support many simultaneous TCP sockets, each socket identified by its own 4-tuple

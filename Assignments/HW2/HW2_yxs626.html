@@ -1,0 +1,339 @@
+<!DOCTYPE html><html><head>
+      <title>HW2_yxs626</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\GenTsuki\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.11\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="assignment-2">Assignment 2</h1>
+
+<p>EECS325 Spring 2019<br>
+Yue Shu<br>
+Due: Tuesday, March 5, 2019</p>
+<hr>
+<h3 class="mume-header" id="1-under-what-circumstances-can-the-http-response-have-empty-body">1. Under what circumstances can the HTTP response have empty body?</h3>
+
+<p>The HTTP response can have an empty body when there is no content to be sent in the response payload body.<br>
+For example, HTTP response with <code>HTTP status 204</code> could have an empty body.</p>
+<hr>
+<h3 class="mume-header" id="2-suppose-alice-with-a-web-based-e-mail-account-such-as-hotmail-or-gmail-sends-a-message-to-bob-who-accesses-his-mail-from-his-mail-server-using-pop3-discuss-how-the-message-gets-from-alices-host-to-bobs-host-list-the-series-of-application-layer-protocols-that-are-used-to-move-the-message-between-the-two-hosts">2. Suppose Alice, with a Web-based e-mail account (such as Hotmail or Gmail), sends a message to Bob, who accesses his mail from his mail server using POP3. Discuss how the message gets from Alice&#x2019;s host to Bob&#x2019;s host. List the series of application-layer protocols that are used to move the message between the two hosts.</h3>
+
+<p>Only application-layer protocols are metioned in this problem, so the setup of TCP connection is not included in my answer.</p>
+<ul>
+<li>Alice&apos;s web-based email user agent uses HTTP to transfer the mail message from her user agent to her mail server</li>
+<li>The SMTP client side (Alice&apos;s mail server) transfers the mail message to the SMTP server side (Bob&apos;s mail server) with <code>SMTP protocol</code> over TCP connection</li>
+<li>Bob&apos;s user agent retrieves the message from his mail server using POP3</li>
+</ul>
+<hr>
+<h3 class="mume-header" id="3-list-and-explain-the-two-different-approaches-for-dns-resolving">3. List and explain the two different approaches for DNS resolving.</h3>
+
+<ul>
+<li>
+<p><strong>iterated query</strong>:</p>
+<ul>
+<li>Local DNS server is majorly in charge of generating all the requests to different servers</li>
+<li>Requesting host sends request to the local DNS server</li>
+<li>Local DNS server keeps querying other level of servers to search for the IP address if it does not have the cache of the IP address of a certain layer following the sequence below:
+<ul>
+<li>root DNS server</li>
+<li>TLD DNS server</li>
+<li>authorative DNS server</li>
+</ul>
+</li>
+<li>more secured because when attacked by hacker, only one way of information is hacked</li>
+</ul>
+</li>
+<li>
+<p><strong>recursive query</strong>:</p>
+<ul>
+<li>The contacted name servers are in charge of looking for the IP address and sending queries to each other</li>
+<li>Heavy load at upper level layers: root server, TLD DNS server</li>
+<li>Not secure since when attacked by hacker, amplification effect will  work</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="mume-header" id="4-is-it-possible-for-an-organizations-web-server-and-mail-server-to-have-exactly-the-same-alias-for-a-host-name-eg-foocom-what-would-be-the-types-for-the-rrs-that-contain-the-hostnames-of-the-web-and-the-mail-servers">4. Is it possible for an organization&#x2019;s Web server and mail server to have exactly the same alias for a host name (e.g., <a href="http://foo.com">foo.com</a>)? What would be the types for the RRs that contain the hostnames of the web and the mail servers?</h3>
+
+<p>Yes, it is possible for organization&#x2019;s Web server and mail server to have exactly the same alias for a host name.</p>
+<ul>
+<li>type for RR that contains the host name of the <strong>web server</strong>:
+<ul>
+<li><code>type=A</code></li>
+</ul>
+</li>
+<li>type for RR that contains the host name of the <strong>mail server</strong>:
+<ul>
+<li><code>type=MX</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="mume-header" id="5-suppose-tcp-operates-over-a-1-gbps-link">5. Suppose TCP operates over a 1 Gbps link.</h3>
+
+<p><strong>a. Assume TCP could utilize the full bandwidth continuously and the average packet size is 60 bytes, how long does it take for the TCP sequence numbers to wrap around completely?</strong></p>
+<p>The sequence number field in the TCP header is 32 bits long, so we can have at most <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">2^{32}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> packets in total. And the total wraparound time <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.13889em;">T</span></span></span></span> should be calculated as below:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><msup><mn>2</mn><mn>32</mn></msup><mtext>&#xA0;</mtext><mi>p</mi><mi>a</mi><mi>c</mi><mi>k</mi><mi>e</mi><mi>t</mi><mi>s</mi><mo>&#x2217;</mo><mn>60</mn><mtext>&#xA0;</mtext><mi>b</mi><mi>y</mi><mi>t</mi><mi>e</mi><mi mathvariant="normal">/</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>k</mi><mi>e</mi><mi>t</mi></mrow><mrow><mn>1</mn><mo>&#xD7;</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup><mtext>&#xA0;</mtext><mi>b</mi><mi>i</mi><mi>t</mi><mi mathvariant="normal">/</mi><mi>s</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><msup><mn>2</mn><mn>32</mn></msup><mo>&#x2217;</mo><mn>60</mn><mo>&#x2217;</mo><mn>8</mn></mrow><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow></mfrac><mo>&#x2248;</mo><mn>2062</mn><mtext>&#xA0;</mtext><mi>s</mi><mi>e</mi><mi>c</mi><mo>&#x2248;</mo><mn>34</mn><mtext>&#xA0;</mtext><mi>m</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">T = \frac{2^{32}~packets * 60~byte/packet}{1\times 10^9 ~bit/s} = \frac{2^{32} * 60 * 8}{10^9} \approx 2062 ~sec \approx 34 ~min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.427108em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">b</span><span class="mord mathit">i</span><span class="mord mathit">t</span><span class="mord">/</span><span class="mord mathit">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mord mathit">e</span><span class="mord mathit">t</span><span class="mord mathit">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2217;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">6</span><span class="mord">0</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">b</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">t</span><span class="mord mathit">e</span><span class="mord">/</span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mord mathit">e</span><span class="mord mathit">t</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.177108em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2217;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">6</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2217;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">8</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2248;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">6</span><span class="mord">2</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">s</span><span class="mord mathit">e</span><span class="mord mathit">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2248;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">4</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">m</span><span class="mord mathit">i</span><span class="mord mathit">n</span></span></span></span></span></p>
+<p><strong>b. Suppose an added 32-bit timestamp field increments 1000 times during the wraparound time you found above. How long would it take for the timestamp to wrap around?</strong></p>
+<p>Since the timestamp field incremetns 1000 times during the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2062</mn></mrow><annotation encoding="application/x-tex">2062</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">6</span><span class="mord">2</span></span></span></span>-second wraparound time, the average time would be<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2062</mn><mi mathvariant="normal">/</mi><mn>1000</mn><mo>=</mo><mn>2.062</mn><mtext>&#xA0;</mtext><mi>s</mi><mi>e</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">2062 / 1000 = 2.062 ~sec</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">6</span><span class="mord">2</span><span class="mord">/</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">.</span><span class="mord">0</span><span class="mord">6</span><span class="mord">2</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">s</span><span class="mord mathit">e</span><span class="mord mathit">c</span></span></span></span></span></p>
+<p>And to wrap around the timestamp field completely, we may have the expression as below:<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup><mo>&#x2217;</mo><mn>2.062</mn><mo>&#x2248;</mo><mn>8856222564</mn><mtext>&#xA0;</mtext><mi>s</mi><mi>e</mi><mi>c</mi><mo>&#x2248;</mo><mn>281</mn><mtext>&#xA0;</mtext><mi>y</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">2^{32} * 2.062 \approx 8856222564 ~sec \approx 281 ~yr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2217;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">.</span><span class="mord">0</span><span class="mord">6</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2248;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mord">8</span><span class="mord">5</span><span class="mord">6</span><span class="mord">2</span><span class="mord">2</span><span class="mord">2</span><span class="mord">5</span><span class="mord">6</span><span class="mord">4</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit">s</span><span class="mord mathit">e</span><span class="mord mathit">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2248;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">2</span><span class="mord">8</span><span class="mord">1</span><span class="mspace nobreak">&#xA0;</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit" style="margin-right:0.02778em;">r</span></span></span></span></span></p>
+<p>Therefore, it will take around 281 years in total.</p>
+<hr>
+<h3 class="mume-header" id="6-suppose-you-have-the-following-8-bit-bytes-01010011-01100110-01110100">6. Suppose you have the following 8-bit bytes: 01010011 01100110 01110100.</h3>
+
+<p><strong>a. What is the 1s complement of the sum of these 8-bit bytes? (Although TCP and UDP use 16-bit words in computing the checksum, you only need to consider 8-bit based checksum for this problem)</strong></p>
+<p>First of all we shall have the sum as below:<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>01010011</mn><mo>+</mo><mn>01100110</mn><mo>+</mo><mn>01110100</mn><mo>=</mo><mn>100101101</mn></mrow><annotation encoding="application/x-tex">01010011 + 01100110 + 01110100 = 100101101</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span></span></span></span></span><br>
+And to wrap around, we have:<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>100101101</mn><mo>=</mo><mn>00101110</mn></mrow><annotation encoding="application/x-tex">100101101 = 00101110</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span></span></span></span></span><br>
+And finally, we flip all the bits to have the 1s complement of the sum:<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>00101110</mn><mo>&#x2192;</mo><mn>11010001</mn></mrow><annotation encoding="application/x-tex">00101110 \rightarrow 11010001</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2192;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span></span></span></span></span></p>
+<p><strong>b. Why use 1s complement of the sum instead of the sum itself as the checksum?</strong></p>
+<p>It saves time for the receiver to validate the checksum. By using 1s complement of the sum to get the checksum, the receiver can simply add up all the 16-bit words in the header along with the checksum together and then get the 1s complement of it and use it for validation. Given that there is no bit error in the packet, the final result should just be a chunk of zero. So as long as the result is not zero, there must be an error.<br>
+By using the method described above, the receiver does not have to compare the sums bit by bit to find the error. Instead, it can compare two chunks of numbers all in one, which saves more time in nature.</p>
+<hr>
+<h3 class="mume-header" id="7-finite-state-machine-problem">7. Finite state machine problem</h3>
+
+<p><strong>Consider two network entities, A and B, which are connected by a perfect bidirectional channel (i.e., any message sent will be received correctly; the channel will not corrupt, lose, or reorder packets). A and B are to deliver data messages to each other in an alternating manner: First, A must deliver a message to B, then B must deliver a message to A, then A must deliver a message to B and so on. If an entity is in a state where it should not attempt to deliver a message to the other side, and there is an event like <code>rdt_send(data)</code> call from above that attempts to pass data down for transmission to the other side, this call from above can simply be ignored with a call to <code>rdt_unable_to_send(data)</code>, which informs the higher layer that it is currently not able to send data. [Note: This simplifying assumption is made so you don&#x2019;t have to worry about buffering data.]</strong></p>
+<p><strong>Draw a FSM specification for this protocol (one FSM for A, and one FSM for B). Note that you do not have to worry about a reliability mechanism here; the main point of this question is to create a FSM specification that reflects the synchronized behavior of the two entities. You should use the following events and actions that have the same meaning as protocol rdt1.0 in Figure 3.9: <code>rdt_send(data)</code>, <code>packet = make_pkt(data)</code>, <code>udt_send(packet)</code>, <code>rdt_rcv(packet)</code>, <code>extract(packet,data)</code>, <code>deliver_data(data)</code>. Make sure your protocol reflects the strict alternation of sending between A and B. Also, make sure to indicate the initial states for A and B in your FSM descriptions.</strong></p>
+<ul>
+<li>
+<p><strong>FSM for A</strong>:<br>
+<img src="FSM_A.jpg" alt="FSM image for A"></p>
+</li>
+<li>
+<p><strong>FSM for B</strong>:<br>
+<img src="FSM_B.jpg" alt="FSM image for B"></p>
+</li>
+<li>
+<p>What worth our attention is that the initial state for A is the &quot;wait for call from above&quot; state since A should always deliver a message B first.</p>
+</li>
+<li>
+<p>For the same reason as above, the initial state for B is the &quot;wait for packet from A&quot; state.</p>
+</li>
+<li>
+<p>Also, we don&apos;t need to worry about the idle state transition of the &quot;wait for call from above&quot; state since the mechanism of the transition between A and B guarantees that A will never receive a message from B when it shouldn&apos;t, and vice versa.</p>
+</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
