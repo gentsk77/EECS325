@@ -1330,6 +1330,7 @@ Alter from the rdt2.1 by dropping NAK message and have one more check message fu
 
 - **Selective repeat dilemma:**
   - see slides, attach image here
+  - window size needs to be at most half of the seq number size 
 
 ## Connection oriented transport: TCP
 
@@ -1356,7 +1357,7 @@ Alter from the rdt2.1 by dropping NAK message and have one more check message fu
   - two hosts tranferring data, both sender and receiver
 
 ### TCP round trip time, timeout
-wait for reviewing....
+timer is dynamic, change as the transmissions go
 
 ### TCP reliable data transfer 
 - TCP creates rdt service on top of IP's unreliable service 
@@ -1416,8 +1417,13 @@ a mechanism to benefit all the network systems
 
 
 ## TCP congestion control 
-
-
+- goodput: packets useful for the receiver, ratio between data that is not retransmission and the total transmitted data 
+- tcp reno also cares about the distinction between dup acks and timeout: instead of cutting down to 1, it cuts to half
+  - time out: more severe indication on the congestion since the receiver is probably not receiving any data at all
+  - 3 dup ack: we have a stable communication, just that a few gaps in between, the congestion is not that bad
+- tcp tahoe doesnt care
+- for time out, tcp tahoe and reno act similarly 
+- MSS: maximum segment size, basically the size of a window slot
 
  # Feb 21, Thursday 
 
