@@ -158,6 +158,13 @@
     - [Subnets](#subnets)
     - [IP address: how to get one?](#ip-address-how-to-get-one)
     - [NAT: network address translation](#nat-network-address-translation)
+- [Feb 28, Thursday](#feb-28-thursday)
+    - [Open flow abstraction](#open-flow-abstraction)
+- [Chapter 5: network layer control plane](#chapter-5-network-layer-control-plane)
+  - [network-layer functions](#network-layer-functions)
+    - [routing protocols](#routing-protocols)
+    - [routing alg classification:](#routing-alg-classification)
+    - [link-state routing alg](#link-state-routing-alg)
 
 -----
 # Jan 15, Tuesday
@@ -1323,6 +1330,7 @@ Alter from the rdt2.1 by dropping NAK message and have one more check message fu
 
 - **Selective repeat dilemma:**
   - see slides, attach image here
+  - window size needs to be at most half of the seq number size 
 
 ## Connection oriented transport: TCP
 
@@ -1349,7 +1357,7 @@ Alter from the rdt2.1 by dropping NAK message and have one more check message fu
   - two hosts tranferring data, both sender and receiver
 
 ### TCP round trip time, timeout
-wait for reviewing....
+timer is dynamic, change as the transmissions go
 
 ### TCP reliable data transfer 
 - TCP creates rdt service on top of IP's unreliable service 
@@ -1409,8 +1417,13 @@ a mechanism to benefit all the network systems
 
 
 ## TCP congestion control 
-
-
+- goodput: packets useful for the receiver, ratio between data that is not retransmission and the total transmitted data 
+- tcp reno also cares about the distinction between dup acks and timeout: instead of cutting down to 1, it cuts to half
+  - time out: more severe indication on the congestion since the receiver is probably not receiving any data at all
+  - 3 dup ack: we have a stable communication, just that a few gaps in between, the congestion is not that bad
+- tcp tahoe doesnt care
+- for time out, tcp tahoe and reno act similarly 
+- MSS: maximum segment size, basically the size of a window slot
 
  # Feb 21, Thursday 
 
@@ -1523,3 +1536,63 @@ taikunle kanppt zhenglibiji
 ### NAT: network address translation
 
 
+# Feb 28, Thursday
+
+... missing ...
+
+
+### Open flow abstraction
+
+- switch: only the later two layers?
+- match: eg: longest perfix
+- example: 
+  - see slides
+
+
+# Chapter 5: network layer control plane
+
+## network-layer functions
+- forwarding
+- routing: determine a path, done by algorithm in the control plane of os
+  - per-router control plane
+    - routers share info with each other to determine
+  - logically cnetralized way
+    - a distinct remote controller interacts with local control agents 
+
+### routing protocols
+- goal: determine good paths from sending hosts to recv hosts thru network of routers
+  - path: sequence of routers packets shud travel thru
+  - good: least cost
+
+
+### routing alg classification:
+Global or decentralized?
+- global: 
+  - routers have complete topology and link cost info 
+  - "link state" alg 
+- decentralized:
+  - router knows physically connected neighbors, link costs to neighbors etc. 
+  - dp alg
+  - iterative process of computation, exchange of info with neighbors 
+  - distance vector alg
+
+static or dynamic?
+- static 
+- dynamic
+
+### link-state routing alg
+- Dijkstra alg
+  - net topology, link costs known to all nodes
+  - greeedy
+  - accomplished via link state broadcast
+  - compute least cost pahts from one node to all other nodes
+    - GIVES forwarding table for that node
+  - iterative: after k iteraions, know least cost path to k dests
+  - notations: see slides
+  - [attach image for alg]
+  - has to start with a source node 
+
+- Distance vector alg: bellman-ford equation (DP)
+  - contains all the distance vectors of the node and its neighbours
+    - rows: yourself and your neighbour
+    - colums: neighbours of yours and neighbours of your neighbors
