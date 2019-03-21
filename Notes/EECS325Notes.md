@@ -1568,7 +1568,7 @@ taikunle kanppt zhenglibiji
 ### routing alg classification:
 Global or decentralized?
 - global: 
-  - routers have complete topology and link cost info 
+  - routers have the same complete topology and link cost info 
   - "link state" alg 
 - decentralized:
   - router knows physically connected neighbors, link costs to neighbors etc. 
@@ -1588,11 +1588,42 @@ static or dynamic?
   - compute least cost pahts from one node to all other nodes
     - GIVES forwarding table for that node
   - iterative: after k iteraions, know least cost path to k dests
-  - notations: see slides
-  - [attach image for alg]
+  - notations: 
+   ![dijkstra notation image](/Images/dijkstra_notation.png)
+  - algorithm: 
+   ![dijkstra algorithm image](/Images/dijkstra_alg.png)
+  - dijkstra in practice:
+  ![dijkstra example image](/Images/dijkstra_example.png)
   - has to start with a source node 
+  - problem: high complexity
+    - use priority queue to reduce time complexity 
+    - when using heap, $T(n) = Elog(V)$
+  - update the cost (run the alg) as long as router has changed traffic (in the case the cost is determined by traffic)
+  - can have oscillations if all routers updating in the same time
 
-- Distance vector alg: bellman-ford equation (DP)
+- Distance vector alg used by the routing alg: **bellman-ford equation** (DP)
   - contains all the distance vectors of the node and its neighbours
     - rows: yourself and your neighbour
     - colums: neighbours of yours and neighbours of your neighbors
+  - [later equation here]
+  - iterative, asynchronous:
+    - **each local iteration caused by local link cost change or DV upate message from the neighbour**
+  - distributed:
+    - each node notifies neighbor sonly when its DV chagnes
+      - neighbor inform their neighbours if necessary
+  - potential problem: not centralized, only share information about your neighbours. Further communication inconvenient 
+  - BF alg in practice:
+  ![bf algorithm example](/Images/BF_example.png)
+  - link cost chagnes:
+    - node detects local link cost change
+    - updates routing info, recalc distance vector (DV)
+    - if DV changes, notify neighbors 
+    - `count to infinity` problem: 
+      - when there is a sudden increase in one edge, say x-y, the nodes will never know until going thru a trunk of iterations
+      - this is because x-y is always first calculated by x-z + z-y since this is the smaller cost
+      - each time only updated by the value of y-z to increase the "virtual" value of x-y
+      - the alg won't take the increase in x-y, which is the "real" value of x-y until x-z + z-y finally exceeds the value of true x-y
+      - then the alg will take the change and update the stabalized version
+      - PROBLEM: count to infinity
+        - algorithm tends to choose the lower "virtual" edges since it doesn't necessary knows the path
+        - leads to step-to-step update of the node table given a sudden increment in one edge
