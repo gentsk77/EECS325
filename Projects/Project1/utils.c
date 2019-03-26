@@ -29,7 +29,7 @@ void error(const char *msg) {
 int startserver() {
 
   int     sd;        /* socket */
-  char *  serverhost;  /* hostname */
+  char    serverhost[128];  /* hostname */
   ushort  serverport;  /* server port */ 
   
   /*
@@ -45,12 +45,12 @@ int startserver() {
     TODO:
     bind the socket to some random port, chosen by the system 
   */
-  struct sockaddr_in server_addr;
-  bzero(&server_addr, sizeof(server_addr));
-  server_addr.sin_family = AF_INET;
-  server_addr.sin_addr.s_addr = INADDR_ANY;
-  server_addr.sin_port = htons(0);
-  if (bind(sd, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
+  struct sockaddr_in serveraddr;
+  bzero(&serveraddr, sizeof(serveraddr));
+  serveraddr.sin_family = AF_INET;
+  serveraddr.sin_addr.s_addr = INADDR_ANY;
+  serveraddr.sin_port = htons(0);
+  if (bind(sd, (struct sockaddr *) &serveraddr, sizeof(serveraddr)) < 0)
     error("ERROR on binding");
   
   /* ready to receive connections */
@@ -99,6 +99,10 @@ int connecttoserver(char *serverhost, ushort serverport) {
     TODO:
     create a TCP socket 
   */
+  sd = socket(PF_INET, SOCK_STREAM, 0);
+  if (sd < 0) 
+    error("ERROR opening socket.");
+
 
   /*
     TODO:

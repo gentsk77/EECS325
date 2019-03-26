@@ -18,7 +18,6 @@
 
 extern char *  recvdata(int sd);
 extern int     senddata(int sd, char *msg);
-
 extern int     startserver();
 /*--------------------------------------------------------------------*/
 
