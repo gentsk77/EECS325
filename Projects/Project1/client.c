@@ -25,7 +25,7 @@ extern int     connecttoserver(char *servhost, ushort servport);
 
 /*--------------------------------------------------------------------*/
 main(int argc, char *argv[]) {
-  int  sock;
+  int sock;
 
   /* check usage */
   if (argc != 3) {

@@ -21,22 +21,38 @@
 
 
 /*----------------------------------------------------------------*/
+void error(const char *msg) {
+    perror(msg);
+    exit(1);
+}
+
 int startserver() {
 
   int     sd;        /* socket */
   char *  serverhost;  /* hostname */
-  ushort  serverport;  /* server port */
-
+  ushort  serverport;  /* server port */ 
+  
   /*
     TODO:
     create a TCP socket 
   */
 
+  sd = socket(PF_INET, SOCK_STREAM, 0);
+  if (sd < 0) 
+    error("ERROR opening socket.");
+
   /*
     TODO:
     bind the socket to some random port, chosen by the system 
   */
-
+  struct sockaddr_in server_addr;
+  bzero(&server_addr, sizeof(server_addr));
+  server_addr.sin_family = AF_INET;
+  server_addr.sin_addr.s_addr = INADDR_ANY;
+  server_addr.sin_port = htons(0);
+  if (bind(sd, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
+    error("ERROR on binding");
+  
   /* ready to receive connections */
   listen(sd, 5);
 
@@ -45,18 +61,28 @@ int startserver() {
     obtain the full local host name (serverhost)
     use gethostname() and gethostbyname()
   */
+  gethostname(serverhost, sizeof(serverhost));
+  struct hostent *server;
+  server = gethostbyname(serverhost);
 
   /*
     TODO:
     get the port assigned to this server (serverport)
     use getsockname()
   */
+  struct sockaddr_in my_addr;
+  bzero(&my_addr, sizeof(my_addr));
+  int len = sizeof(my_addr);
+  getsockname(sd, (struct sockaddr *) &my_addr, &len);
+  serverport = ntohs(my_addr.sin_port);
+
 
   /* ready to accept requests */
   printf("admin: started server on '%s' at '%hu'\n",
 	 serverhost, serverport);
   return(sd);
 }
+
 /*----------------------------------------------------------------*/
 
 /*----------------------------------------------------------------*/
@@ -161,4 +187,5 @@ int senddata(int sd, char *msg) {
     write(sd, msg, len);
   return(1);
 }
+
 /*----------------------------------------------------------------*/
