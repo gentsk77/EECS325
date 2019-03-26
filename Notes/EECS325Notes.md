@@ -1627,3 +1627,15 @@ static or dynamic?
       - PROBLEM: count to infinity
         - algorithm tends to choose the lower "virtual" edges since it doesn't necessary knows the path
         - leads to step-to-step update of the node table given a sudden increment in one edge
+
+
+
+BGP: application layer protocol 
+- select a path to reach external destinations
+- don't have to be the best path, driven by policies (relationship between ISPs, eg: AT&T vs Verizon), more application than network 
+rest of the routing protocols: network layer
+
+southbound API: OpenFlow
+OpenFlow forwarding????????? (controller and one single switch)
+
+network control apps: application layer 
