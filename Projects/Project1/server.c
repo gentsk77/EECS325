@@ -159,21 +159,20 @@ main(int argc, char *argv[]) {
 					get client's host name and port using gethostbyaddr() 
 				*/
 			  clientport = ntohs(clientaddr.sin_port);
-				/*
+				
 			  struct hostent *client;
 				client = gethostbyaddr(&clientaddr, clilen, AF_INET);
-				clienthost = client->h_name;
-				*/
-				printf("admin: connect from  at '%hu'\n", clientport);
+				//clienthost = client->h_name;
+				
+				printf("admin: connect at '%hu'\n", clientport);
 
 				/*
 					TODO:
 					add this client to 'liveskset'
 				*/
 			  FD_SET(newsockfd, &liveskset);
-				clienthost = &client->h_name;
-				
-				printf("admin: connect from  at '%hu'\n", clientport);
+				if (newsockfd > liveskmax)
+				  liveskmax = newsockfd;
 			} 
 			else {
 				perror("accept");
