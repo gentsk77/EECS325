@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------
   EECS 325, Spring 2019
   Yue Shu, yxs626
-  Project 1
+  Project 2
   functions to connect clients and server
 	--------------------------------------------------------------------*/
 #include <stdio.h>
