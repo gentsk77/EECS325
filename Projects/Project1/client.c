@@ -26,6 +26,8 @@ extern int     connecttoserver(char *servhost, ushort servport);
 /*--------------------------------------------------------------------*/
 main(int argc, char *argv[]) {
   int sock;
+  fd_set master, tempset;  /* file descriptor set including server socket and input */
+  int setmax;
 
   /* check usage */
   if (argc != 3) {
@@ -38,14 +40,29 @@ main(int argc, char *argv[]) {
   if (sock == -1)
     exit(1);
 
+  /* init the fd set */
+  FD_ZERO(&master);
+  FD_ZERO(&tempset);
+  FD_SET(sock, &master);
+  setmax = sock;
+  FD_SET(fileno(stdin), &master);
+  if (fileno(stdin) > setmax)
+    setmax = fileno(stdin);
+  
   while (1) {
     
     /*
       TODO: 
       use select() to watch for user inputs and messages from the server
     */
+    tempset = master;
+    if (select(setmax + 1, &tempset, NULL, NULL, NULL) == -1) {
+      error("ERROR on select");
+      exit(4);
+    }
 
-    if (/* TODO: message from server */) {
+    /* TODO: message from server */
+    if (FD_ISSET(sock, &tempset)) {
       char *msg = recvdata(sock);
 
       if (!msg) {
@@ -59,10 +76,9 @@ main(int argc, char *argv[]) {
       free(msg);
     }
 
-    if (/* TODO: input from keyboard */) {
+    if (FD_ISSET(fileno(stdin), &tempset)) {
       char msg[MAXMSGLEN];
       
-      /* let client exit by entering blank line */
       if (!fgets(msg, MAXMSGLEN, stdin))
 	      exit(0);
       senddata(sock, msg);

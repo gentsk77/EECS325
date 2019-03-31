@@ -30,8 +30,6 @@ main(int argc, char *argv[]) {
 
   fd_set liveskset, tempset;   /* set of live client sockets */
   int liveskmax;   /* maximum socket */
-	int maxclient = 5;  /* we allow at most 5 clients */
-	int clients[maxclient];  /* the clients */
 
   /* check usage */
   if (argc != 1) {
@@ -50,6 +48,7 @@ main(int argc, char *argv[]) {
     init the live client set 
   */
   FD_ZERO(&liveskset);
+	FD_ZERO(&tempset);
 	FD_SET(serversock, &liveskset);  /* add server socket to the live socket set */
 	liveskmax = serversock;
 
@@ -110,7 +109,7 @@ main(int argc, char *argv[]) {
 						remove this client from 'liveskset'  
 					*/
 				  FD_CLR(itsock, &liveskset);
-
+					free(msg);
 					close(itsock);
 				}
 

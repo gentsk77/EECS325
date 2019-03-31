@@ -21,6 +21,8 @@
 
 
 /*----------------------------------------------------------------*/
+
+/* wrapper method for error msg */
 void error(const char *msg) {
     perror(msg);
     exit(1);

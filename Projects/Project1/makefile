@@ -2,11 +2,11 @@
 	gcc -g -c $?
 
 # compile client and server
-all: server
+all: client server
 
 # compile client 
-# client: client.o utils.o
-#	gcc -g -o client client.o  utils.o
+client: client.o utils.o
+	gcc -g -o client client.o  utils.o
 
 # compile server 
 server: server.o utils.o
