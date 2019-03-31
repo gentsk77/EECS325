@@ -15,6 +15,7 @@
 #include <netdb.h>
 #include <time.h> 
 #include <errno.h>
+#include <stdlib.h>
 
 extern char *  recvdata(int sd);
 extern int     senddata(int sd, char *msg);
@@ -51,21 +52,6 @@ main(int argc, char *argv[]) {
   FD_ZERO(&liveskset);
 	FD_SET(serversock, &liveskset);  /* add server socket to the live socket set */
 	liveskmax = serversock;
-	int i;
-	for (i = 0; i < maxclient; i++) {
-		struct sockaddr_in cli_addr;
-		bzero(&cli_addr, sizeof(cli_addr));
-    socklen_t clilen = sizeof(cli_addr);
-    int newsockfd = accept(serversock, (struct sockaddr *) &cli_addr, &clilen);
-    if (newsockfd < 0)
-		  error("ERROR on accept");
-		else {
-			FD_SET(newsockfd, &liveskset);
-		  if (newsockfd > liveskmax)
-			  liveskmax = newsockfd;
-		}
-	}
-
 
   /* receive and process requests */
   while (1) {
@@ -99,14 +85,17 @@ main(int argc, char *argv[]) {
 			  struct sockaddr_in clientaddr;
 				bzero(&clientaddr, sizeof(clientaddr));
 				int client_len = sizeof(clientaddr);
-				if (getpeername(itsock, &clientaddr, &client_len) == -1) {
+				if (getpeername(itsock, (struct sockaddr*)&clientaddr, (socklen_t*)&client_len) == -1) {
 					error("getpeername() failed");
 					return -1;
 				}
 				clientport = ntohs(clientaddr.sin_port);
+				printf("admin: msg from  at '%hu'\n", clientport);
+				/*
 				struct hostent *client;
 				client = gethostbyaddr(&clientaddr, client_len, AF_INET);
 				clienthost = client->h_name;
+				/*
 				
 				/* read the message */
 				char * msg = recvdata(itsock);
@@ -114,7 +103,7 @@ main(int argc, char *argv[]) {
 				/* if client has exited */
 				if (!msg) {
 					/* disconnect from client */
-					printf("admin: disconnect from '%s(%hu)'\n", clienthost, clientport);
+					printf("admin: disconnect from '%hu'\n", clientport);
 
 					/*
 						TODO:
@@ -131,6 +120,7 @@ main(int argc, char *argv[]) {
 						TODO:
 						send the message to other clients
 					*/
+				  int j;
 				  for (j = 3; j <= liveskmax; j++) {
 						if (FD_ISSET(j, &liveskset)) {
 							if (j != serversock && j != itsock) 
@@ -139,7 +129,7 @@ main(int argc, char *argv[]) {
 					}
 	  
 					/* print the message on the server site*/
-					printf("%s(%hu): %s", clienthost, clientport, msg);
+					printf("%hu: %s", clientport, msg);
 					free(msg);
 				}
       }
@@ -169,16 +159,20 @@ main(int argc, char *argv[]) {
 					get client's host name and port using gethostbyaddr() 
 				*/
 			  clientport = ntohs(clientaddr.sin_port);
+				/*
 			  struct hostent *client;
 				client = gethostbyaddr(&clientaddr, clilen, AF_INET);
-				clienthost = client.h_name;
-				printf("admin: connect from '%s' at '%hu'\n", clienthost, clientport);
+				clienthost = client->h_name;
+				*/
+				printf("admin: connect from  at '%hu'\n", clientport);
 
 				/*
 					TODO:
 					add this client to 'liveskset'
 				*/
 			  FD_SET(newsockfd, &liveskset);
+				if (newsockfd > liveskmax)
+				  liveskmax = newsockfd;
 			} 
 			else {
 				perror("accept");
