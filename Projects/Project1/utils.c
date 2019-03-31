@@ -19,7 +19,6 @@
 #define MAXNAMELEN 256
 /*--------------------------------------------------------------------*/
 
-
 /*----------------------------------------------------------------*/
 
 /* wrapper method for error msg */
@@ -28,28 +27,22 @@ void error(const char *msg) {
     exit(1);
 }
 
+/* initialize the server */
 int startserver() {
   int     sd;        /* socket */
   char    serverhost[128];  /* hostname */
   ushort  serverport;  /* server port */ 
   
-  /*
-    TODO:
-    create a TCP socket 
-  */
+  /* create a TCP socket */
   sd = socket(PF_INET, SOCK_STREAM, 0);
   if (sd < 0) 
     error("ERROR opening socket.");
 
-  /*
-    TODO:
-    bind the socket to some random port, chosen by the system 
-  */
+  /* bind the socket to some random port, chosen by the system */
   struct sockaddr_in serveraddr;
   bzero(&serveraddr, sizeof(serveraddr));
   serveraddr.sin_family = AF_INET;
   serveraddr.sin_addr.s_addr = INADDR_ANY;
-
   /* input 0 indicates that the system will randomly assign an available port */
   serveraddr.sin_port = htons(0);
   if (bind(sd, (struct sockaddr *) &serveraddr, sizeof(serveraddr)) < 0)
@@ -58,26 +51,17 @@ int startserver() {
   /* ready to receive connections */
   listen(sd, 5);
 
-  /*
-    TODO:
-    obtain the full local host name (serverhost)
-    use gethostname() and gethostbyname()
-  */
+  /* obtain the full local host name (serverhost) with gethostname() and gethostbyname() */
   gethostname(serverhost, sizeof(serverhost));
   struct hostent *server;
   server = gethostbyname(serverhost);
 
-  /*
-    TODO:
-    get the port assigned to this server (serverport)
-    use getsockname()
-  */
-  struct sockaddr_in my_addr;
-  bzero(&my_addr, sizeof(my_addr));
-  int len = sizeof(my_addr);
-  getsockname(sd, (struct sockaddr *) &my_addr, &len);
-  serverport = ntohs(my_addr.sin_port);
-
+  /* get the port assigned to this server (serverport) with getsockname() */
+  struct sockaddr_in myaddr;
+  bzero(&myaddr, sizeof(myaddr));
+  int mylen = sizeof(myaddr);
+  getsockname(sd, (struct sockaddr *) &myaddr, &mylen);
+  serverport = ntohs(myaddr.sin_port);
 
   /* ready to accept requests */
   printf("admin: started server on '%s' at '%hu'\n",
@@ -89,26 +73,17 @@ int startserver() {
 
 /*----------------------------------------------------------------*/
 
-/*
-  establishes connection with the server
-*/
+/* establishes connection with the server */
 int connecttoserver(char *serverhost, ushort serverport) {
   int     sd;          /* socket */
   ushort  clientport;  /* port assigned to this client */
 
-  /*
-    TODO:
-    create a TCP socket 
-  */
+  /* create a TCP socket */
   sd = socket(PF_INET, SOCK_STREAM, 0);
   if (sd < 0) 
     error("ERROR opening socket.");
 
-  /*
-    TODO:
-    connect to the server on 'serverhost' at 'serverport'
-    use gethostbyname() and connect()
-  */
+  /* connect to the server on 'serverhost' at 'serverport' with gethostbyname() and connect() */
   struct hostent *server;
   server = gethostbyname(serverhost);
   if (server == NULL) {
@@ -116,26 +91,21 @@ int connecttoserver(char *serverhost, ushort serverport) {
     exit(0);
   }
 
-  /* initialize serveraddr */
+  /* init and assign serveraddr */
   struct sockaddr_in serveraddr;
   bzero((char *) &serveraddr, sizeof(serveraddr));
   serveraddr.sin_family = AF_INET;
   bcopy((char *)server->h_addr, (char *)&serveraddr.sin_addr.s_addr, server->h_length);
   serveraddr.sin_port = htons(serverport);
-  
   if (connect(sd, (struct sockaddr *) &serveraddr, sizeof(serveraddr)) < 0)
     error("ERROR connecting");
   
-  /*
-    TODO:
-    get the port assigned to this client
-    use getsockname()
-  */
-  struct sockaddr_in my_addr;
-  bzero(&my_addr, sizeof(my_addr));
-  int len = sizeof(my_addr);
-  getsockname(sd, (struct sockaddr *) &my_addr, &len);
-  clientport = ntohs(my_addr.sin_port);
+  /* get the port assigned to this client with getsockname() */
+  struct sockaddr_in myaddr;
+  bzero(&myaddr, sizeof(myaddr));
+  int mylen = sizeof(myaddr);
+  getsockname(sd, (struct sockaddr *) &myaddr, &mylen);
+  clientport = ntohs(myaddr.sin_port);
 
   /* succesful. return socket */
   printf("admin: connected to server on '%s' at '%hu' thru '%hu'\n",

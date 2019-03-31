@@ -23,12 +23,10 @@ extern int     startserver();
 /*--------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------*/
-
-/* main function*/
 main(int argc, char *argv[]) {
-  int serversock;    /* server socket*/
-  fd_set liveskset, tempset;   /* set of live client sockets */
-  int liveskmax;   /* maximum socket */
+  int serversock;    						/* server socket*/
+  fd_set liveskset, tempset;   	/* set of live client sockets */
+  int liveskmax;   							/* maximum socket */
 
   /* check usage */
   if (argc != 1) {
@@ -51,8 +49,8 @@ main(int argc, char *argv[]) {
 
   /* receive and process requests */
   while (1) {
-		tempset = liveskset; /* copy the master set */
-    int itsock;      /* loop variable */
+		tempset = liveskset; 							/* copy the master set */
+    int itsock;          							/* loop variable */
 
     /* using select() to serve both live and new clients */
 	  if (select(liveskmax + 1, &tempset, NULL, NULL, NULL) == -1) {
@@ -66,8 +64,8 @@ main(int argc, char *argv[]) {
       if (itsock == serversock) continue;
       /* if receive message from client */
       if (FD_ISSET(itsock, &tempset)) {
-				char *  clienthost;  /* host name of the client */
-				ushort  clientport;  /* port number of the client */
+				char *  clienthost;  						/* host name of the client */
+				ushort  clientport;  						/* port number of the client */
 	
 				/* obtain client's host name and port	using getpeername() and gethostbyaddr() */
 			  struct sockaddr_in clientaddr;  /* init client address */
@@ -126,7 +124,7 @@ main(int argc, char *argv[]) {
 
 		/* if new client has connected */
     if (FD_ISSET(serversock, &tempset)) {
-      /*	accept the new connection request */
+      /* accept the new connection request */
 		  struct sockaddr_in clientaddr;
 		  bzero(&clientaddr, sizeof(clientaddr));
       socklen_t clilen = sizeof(clientaddr);

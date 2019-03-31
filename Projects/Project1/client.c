@@ -41,8 +41,8 @@ main(int argc, char *argv[]) {
     exit(1);
 
   /* init the fd set by adding the sock fd and stdin*/
-  FD_ZERO(&master);   /* the master fd set */
-  FD_ZERO(&tempset);  /* tempset to call select() on */
+  FD_ZERO(&master);        /* the master fd set */
+  FD_ZERO(&tempset);       /* tempset to call select() on */
   FD_SET(sock, &master);
   setmax = sock;
   FD_SET(fileno(stdin), &master);
@@ -62,9 +62,8 @@ main(int argc, char *argv[]) {
     if (FD_ISSET(sock, &tempset)) {
       char *msg = recvdata(sock);
 
-      /* if server died */
+      /* if server died, exit */
       if (!msg) {
-	      /* server died, exit */
 	      fprintf(stderr, "error: server died\n");
 	      exit(1);
       }
@@ -77,9 +76,10 @@ main(int argc, char *argv[]) {
     /* if receive input from keyboard */
     if (FD_ISSET(fileno(stdin), &tempset)) {
       char msg[MAXMSGLEN];
-      
+      /* allow the user to exit */
       if (!fgets(msg, MAXMSGLEN, stdin))
 	      exit(0);
+      /* send the msg to the socket */
       senddata(sock, msg);
     }
   }
