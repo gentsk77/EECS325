@@ -27,7 +27,6 @@ extern int     startserver();
 /* main function*/
 main(int argc, char *argv[]) {
   int serversock;    /* server socket*/
-
   fd_set liveskset, tempset;   /* set of live client sockets */
   int liveskmax;   /* maximum socket */
 
@@ -43,13 +42,11 @@ main(int argc, char *argv[]) {
     exit(1);
   }
   
-  /*
-    TODO:
-    init the live client set 
-  */
+  /* init the live client set and its temp set to call select() on */
   FD_ZERO(&liveskset);
 	FD_ZERO(&tempset);
-	FD_SET(serversock, &liveskset);  /* add server socket to the live socket set */
+	/* add server socket to the live socket set */
+	FD_SET(serversock, &liveskset);  
 	liveskmax = serversock;
 
   /* receive and process requests */
@@ -57,10 +54,7 @@ main(int argc, char *argv[]) {
 		tempset = liveskset; /* copy the master set */
     int itsock;      /* loop variable */
 
-    /*
-      TODO:
-      using select() to serve both live and new clients
-    */
+    /* using select() to serve both live and new clients */
 	  if (select(liveskmax + 1, &tempset, NULL, NULL, NULL) == -1) {
 		  error("ERROR on select");
 			exit(4);
@@ -70,31 +64,32 @@ main(int argc, char *argv[]) {
     for (itsock = 3; itsock <= liveskmax; itsock++) {
       /* skip the listen socket */
       if (itsock == serversock) continue;
-      /* TODO: message from client */
+      /* if receive message from client */
       if (FD_ISSET(itsock, &tempset)) {
-
 				char *  clienthost;  /* host name of the client */
 				ushort  clientport;  /* port number of the client */
 	
-				/*
-					TODO:
-					obtain client's host name and port
-					using getpeername() and gethostbyaddr()
-				*/
-			  struct sockaddr_in clientaddr;
+				/* obtain client's host name and port	using getpeername() and gethostbyaddr() */
+			  struct sockaddr_in clientaddr;  /* init client address */
 				bzero(&clientaddr, sizeof(clientaddr));
 				int client_len = sizeof(clientaddr);
+
+		    /* get client's address */
 				if (getpeername(itsock, (struct sockaddr*)&clientaddr, (socklen_t*)&client_len) == -1) {
 					error("getpeername() failed");
 					return -1;
 				}
+
+				/* get client's port number */
 				clientport = ntohs(clientaddr.sin_port);
-				printf("admin: msg from  at '%hu'\n", clientport);
+
 				/*
 				struct hostent *client;
 				client = gethostbyaddr(&clientaddr, client_len, AF_INET);
 				clienthost = client->h_name;
-				/*
+				*/
+
+				printf("admin: msg from  at '%hu'\n", clientport);
 				
 				/* read the message */
 				char * msg = recvdata(itsock);
@@ -104,21 +99,16 @@ main(int argc, char *argv[]) {
 					/* disconnect from client */
 					printf("admin: disconnect from '%hu'\n", clientport);
 
-					/*
-						TODO:
-						remove this client from 'liveskset'  
-					*/
+					/* remove this client from 'liveskset', close the socket */
 				  FD_CLR(itsock, &liveskset);
-					free(msg);
 					close(itsock);
+
+					free(msg);
 				}
 
 				/* if received message from live client */
 				else {
-					/*
-						TODO:
-						send the message to other clients
-					*/
+					/* send the message to other clients through a loop */
 				  int j;
 				  for (j = 3; j <= liveskmax; j++) {
 						if (FD_ISSET(j, &liveskset)) {
@@ -127,7 +117,7 @@ main(int argc, char *argv[]) {
 						}
 					}
 	  
-					/* print the message on the server site*/
+					/* print the message on the server site */
 					printf("%hu: %s", clientport, msg);
 					free(msg);
 				}
@@ -135,28 +125,19 @@ main(int argc, char *argv[]) {
     }
 
 		/* if new client has connected */
-		/* TODO: connect request from a new client */
     if (FD_ISSET(serversock, &tempset)) {
-
-      /*
-				TODO:
-				accept a new connection request
-      */
+      /*	accept the new connection request */
 		  struct sockaddr_in clientaddr;
 		  bzero(&clientaddr, sizeof(clientaddr));
       socklen_t clilen = sizeof(clientaddr);
       int newsockfd = accept(serversock, (struct sockaddr *) &clientaddr, &clilen);
 
 		 	/* if connection successfully established */
-			/* TODO: if accept is fine */
       if (newsockfd >= 0) {
 				char *  clienthost;  /* host name of the client */
 				ushort  clientport;  /* port number of the client */
 
-				/*
-					TODO:
-					get client's host name and port using gethostbyaddr() 
-				*/
+				/* get client's host name and port using gethostbyaddr() */
 			  clientport = ntohs(clientaddr.sin_port);
 				
 			  struct hostent *client;
@@ -165,10 +146,7 @@ main(int argc, char *argv[]) {
 				
 				printf("admin: connect at '%hu'\n", clientport);
 
-				/*
-					TODO:
-					add this client to 'liveskset'
-				*/
+				/* add the new client to the 'liveskset' */
 			  FD_SET(newsockfd, &liveskset);
 				if (newsockfd > liveskmax)
 				  liveskmax = newsockfd;

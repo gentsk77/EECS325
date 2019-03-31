@@ -40,9 +40,9 @@ main(int argc, char *argv[]) {
   if (sock == -1)
     exit(1);
 
-  /* init the fd set */
-  FD_ZERO(&master);
-  FD_ZERO(&tempset);
+  /* init the fd set by adding the sock fd and stdin*/
+  FD_ZERO(&master);   /* the master fd set */
+  FD_ZERO(&tempset);  /* tempset to call select() on */
   FD_SET(sock, &master);
   setmax = sock;
   FD_SET(fileno(stdin), &master);
@@ -51,31 +51,30 @@ main(int argc, char *argv[]) {
   
   while (1) {
     
-    /*
-      TODO: 
-      use select() to watch for user inputs and messages from the server
-    */
+    /* use select() to watch for user inputs and messages from the server */
     tempset = master;
     if (select(setmax + 1, &tempset, NULL, NULL, NULL) == -1) {
       error("ERROR on select");
       exit(4);
     }
 
-    /* TODO: message from server */
+    /* if receive message from server */
     if (FD_ISSET(sock, &tempset)) {
       char *msg = recvdata(sock);
 
+      /* if server died */
       if (!msg) {
 	      /* server died, exit */
 	      fprintf(stderr, "error: server died\n");
 	      exit(1);
       }
 
-      /* print the message */
+      /* server not dead, print the message */
       printf(">>> %s", msg);
       free(msg);
     }
 
+    /* if receive input from keyboard */
     if (FD_ISSET(fileno(stdin), &tempset)) {
       char msg[MAXMSGLEN];
       
