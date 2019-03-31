@@ -62,13 +62,14 @@ main(int argc, char *argv[]) {
     for (itsock = 3; itsock <= liveskmax; itsock++) {
       /* skip the listen socket */
       if (itsock == serversock) continue;
+
       /* if receive message from client */
       if (FD_ISSET(itsock, &tempset)) {
 				char *  clienthost;  						/* host name of the client */
 				ushort  clientport;  						/* port number of the client */
 	
 				/* obtain client's host name and port	using getpeername() and gethostbyaddr() */
-			  struct sockaddr_in clientaddr;  /* init client address */
+			  struct sockaddr_in clientaddr; 
 				bzero(&clientaddr, sizeof(clientaddr));
 				int client_len = sizeof(clientaddr);
 
@@ -80,14 +81,12 @@ main(int argc, char *argv[]) {
 
 				/* get client's port number */
 				clientport = ntohs(clientaddr.sin_port);
-
-				/*
 				struct hostent *client;
-				client = gethostbyaddr(&clientaddr, client_len, AF_INET);
+				client = gethostbyaddr((const char*)&clientaddr.sin_addr, 
+																sizeof(clientaddr.sin_addr), AF_INET);
+				
+				/* get client's host name */
 				clienthost = client->h_name;
-				*/
-
-				printf("admin: msg from  at '%hu'\n", clientport);
 				
 				/* read the message */
 				char * msg = recvdata(itsock);
@@ -95,12 +94,11 @@ main(int argc, char *argv[]) {
 				/* if client has exited */
 				if (!msg) {
 					/* disconnect from client */
-					printf("admin: disconnect from '%hu'\n", clientport);
+					printf("admin: disconnect from '%s(%hu)'\n", clienthost, clientport);
 
 					/* remove this client from 'liveskset', close the socket */
 				  FD_CLR(itsock, &liveskset);
 					close(itsock);
-
 					free(msg);
 				}
 
@@ -116,7 +114,7 @@ main(int argc, char *argv[]) {
 					}
 	  
 					/* print the message on the server site */
-					printf("%hu: %s", clientport, msg);
+					printf("%s(%hu): %s", clienthost, clientport, msg);
 					free(msg);
 				}
       }
@@ -137,12 +135,12 @@ main(int argc, char *argv[]) {
 
 				/* get client's host name and port using gethostbyaddr() */
 			  clientport = ntohs(clientaddr.sin_port);
-				
 			  struct hostent *client;
-				client = gethostbyaddr(&clientaddr, clilen, AF_INET);
-				//clienthost = client->h_name;
-				
-				printf("admin: connect at '%hu'\n", clientport);
+				client = gethostbyaddr((const char*)&clientaddr.sin_addr, 
+																sizeof(clientaddr.sin_addr), AF_INET);
+				/* get client's host name */
+				clienthost = client->h_name;
+				printf("admin: connect from '%s' at '%hu'\n", clienthost, clientport);
 
 				/* add the new client to the 'liveskset' */
 			  FD_SET(newsockfd, &liveskset);
