@@ -171,8 +171,9 @@ main(int argc, char *argv[]) {
 					add this client to 'liveskset'
 				*/
 			  FD_SET(newsockfd, &liveskset);
-				if (newsockfd > liveskmax)
-				  liveskmax = newsockfd;
+				clienthost = &client->h_name;
+				
+				printf("admin: connect from  at '%hu'\n", clientport);
 			} 
 			else {
 				perror("accept");
