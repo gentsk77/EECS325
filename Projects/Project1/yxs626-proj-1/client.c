@@ -15,6 +15,7 @@
 #include <netdb.h>
 #include <time.h> 
 #include <errno.h>
+#include <stdlib.h>
 
 #define MAXMSGLEN  1024
 

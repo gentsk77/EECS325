@@ -15,6 +15,7 @@
 #include <netdb.h>
 #include <time.h> 
 #include <errno.h>
+#include <stdlib.h>
 
 #define MAXNAMELEN 256
 /*--------------------------------------------------------------------*/
@@ -30,7 +31,7 @@ void error(const char *msg) {
 /* initialize the server */
 int startserver() {
   int     sd;        /* socket */
-  char    serverhost[128];  /* hostname */
+  char*   serverhost;  /* hostname */
   ushort  serverport;  /* server port */ 
   
   /* create a TCP socket */
@@ -52,9 +53,11 @@ int startserver() {
   listen(sd, 5);
 
   /* obtain the full local host name (serverhost) with gethostname() and gethostbyname() */
-  gethostname(serverhost, sizeof(serverhost));
+  char serverpartial[128];
+  gethostname(serverpartial, sizeof(serverpartial));
   struct hostent *server;
-  server = gethostbyname(serverhost);
+  server = gethostbyname(serverpartial);
+  serverhost = server -> h_name;
 
   /* get the port assigned to this server (serverport) with getsockname() */
   struct sockaddr_in myaddr;
