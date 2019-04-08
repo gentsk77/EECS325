@@ -111,12 +111,20 @@ To double check our final result, from the 4 datagrams above, we have a total of
 
 ####a. Assign addresses to all interfaces in the home network
 
-
+Router interface address: `192.168.1.4`
+Home addresses: `192.168.1.1`, `192.168.1.2`, `192.168.1.3` 
 
 ####b. Suppose each host has two ongoing TCP connections, all to port 80 at host 128.119.41.85. Provide the six corresponding entries in the NAT translation table.
 
 
-
+|       WAN side addr |     LAN side addr |
+| ------------------: | ----------------: |
+| 24.34.112.236, 5001 | 192.168.1.1, 3345 |
+| 24.34.112.236, 5002 | 192.168.1.1, 3346 |  
+| 24.34.112.236, 5003 | 192.168.1.2, 3345 |
+| 24.34.112.236, 5004 | 192.168.1.2, 3346 | 
+| 24.34.112.236, 5005 | 192.168.1.3, 3345 |
+| 24.34.112.236, 5006 | 192.168.1.3, 3346 | 
 
 
 ###10. What is the difference between a forward table in the destination-based forwarding routers and OpenFlow’s flow table that we discussed in Section 4.4?
