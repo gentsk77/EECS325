@@ -8,22 +8,28 @@ Due: Thursday, April 11, 2019
 
 - **switching via memory**
   - traditional computers with switching under direct control of CPU
-  - packets are copied to system's memory
+  - datagrams are copied to system's memory
   - switching rate is limited by memory bandwidth (2 bus crossings per datagram)
 - **switching via a bus**
   - switch datagram from input port memory to output port memory via a shared bus
+  - all output ports will receive the datagram, but nly the correct one will keep it
   - switching speed is limited by bus bandwidth
-- **switching via interconnection network**
+- **switching via interconnection network (crossbar)**
+  - switch datagrams via 2N buses that connect N input ports to N output ports
+  - each verticle bus intersects with each horizontal bus at an intersection that is controlled by the fabric controller
   - fragment datagram into cells of fixed length and switch these cells through the fabric 
+  - datagrams to be forwarded will not be blocked by datagrams being forwarded to the other ports 
   - overcome bus bandwidth limitations 
+- only **switching via interconnction network** can send multiple datagrams across the fabric in parallel
 
 ###2. What is HOL blocking? Does it occur in input ports or output ports?
 
-HOL (Head of the Line) blocking: queued datagram at front of queue prevents others in queue from moving forward. 
+HOL (Head of the Line) blocking: queued datagram at front of the queue prevents the following ones in the queue from moving forward. 
 HOL occurs in input ports. 
 
 ###3. What fields in the IP header can be used to ensure that a packet is forwarded through no more than N routers?
 
+The `time to live` field. It keeps track of the maximum number remaining hops and decrements the value at each router.  
 
 ###4. When a large datagram is fragmented into multiple smaller datagrams, where are these smaller datagrams reassembled into a single larger datagram?
 
