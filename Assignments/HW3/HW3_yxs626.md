@@ -29,12 +29,11 @@ HOL occurs in input ports.
 
 ###3. What fields in the IP header can be used to ensure that a packet is forwarded through no more than N routers?
 
-The `time to live` field. It keeps track of the maximum number remaining hops and decrements the value at each router.  
+The `time to live` field. It keeps track of the maximum number of remaining hops and decrements the value at each router.  
 
 ###4. When a large datagram is fragmented into multiple smaller datagrams, where are these smaller datagrams reassembled into a single larger datagram?
 
-
-
+These smaller datagrams are only reassembled into a single larger datagram at their **final destination**, before it is passed to and processed by the transport layer.
 
 ###5. Consider the network below:
 
