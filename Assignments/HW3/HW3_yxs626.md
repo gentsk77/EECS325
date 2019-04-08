@@ -73,8 +73,24 @@ No, it's not possible. Since a forwarding table is only determined by the destin
 
 ###7. Consider a router that interconnects three subnets: Subnet 1, Subnet 2, and Subnet 3. Suppose all of the interfaces in each of these three subnets are required to have the prefix 223.1.17/24. Also suppose that Subnet 1 is required to support at least 60 interfaces, Subnet 2 is required to support at least 90 interfaces, and Subnet 3 is to support at least 12 interfaces. Provide three network addresses (of the form a.b.c.d/x) that satisfy these constraints.
 
+According to the problem, it should be sufficient to provide 64 addresses for Subnet 1, 128 addresses for Subnet 2, and 16 addresses for Subnet 3. Since all of the interfaces in each of these three subnets are required to have the prefix `223.1.17/24`, the addresses should be ranging from `223.1.17.0` to `223.1.17.255`. 
 
+To make our life easier, we shall start with the subnet that requires the most addresses, so as to have addresses with longest prefix accordingly for each subnet. 
 
+- **Subnet 2**: 
+  - we need 128 addresses, least significant number of which ranging from 0 to 127
+  - the range is satisfied by `223.1.17.0` (`223.1.17.00000000`) to `223.1.17.127` (`223.1.17.01111111`) 
+  - the address can be represented as `223.1.17.0/25`
+- **Subenet 1**: 
+  - we need 64 addresses, least significant number of which ranging from 0 to 63
+  - the range is satisfied by `223.1.17.128` (`223.1.17.10000000`) to `223.1.17.191` (`223.1.17.10111111`)
+  - the address can be represented as `223.1.17.128/26`
+- **Subnet 3**
+  - we need 16 addresses, least significant number of which ranging from 0 to 15
+  - the range is satisfied by `223.1.17.192` (`223.1.17.11000000`) to `223.1.17.207` (`223.1.17.11001111`)
+  - the address can be represented as `223.1.17.192/28`
+
+In conclusion, we have network address `223.1.17.128/26` for Subnet 1, `223.1.17.0/25` for Subnet 2, and `223.1.17.192/28` for Subnet 3. 
 
 ###8. Consider sending a 2100-byte datagram into a link that has an MTU of 700 bytes. Suppose the original datagram is stamped with the identification number 422. How many fragments are generated? What are the values in the various fields in the IP datagram(s) generated related to fragmentation?
 
