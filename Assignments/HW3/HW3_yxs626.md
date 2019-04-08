@@ -6,11 +6,21 @@ Due: Thursday, April 11, 2019
 
 ###1. Three types of switching fabric are discussed in Section 4.2. List and briefly describe each type. Which, if any, can send multiple packets across the fabric in parallel?
 
-
+- **switching via memory**
+  - traditional computers with switching under direct control of CPU
+  - packets are copied to system's memory
+  - switching rate is limited by memory bandwidth (2 bus crossings per datagram)
+- **switching via a bus**
+  - switch datagram from input port memory to output port memory via a shared bus
+  - switching speed is limited by bus bandwidth
+- **switching via interconnection network**
+  - fragment datagram into cells of fixed length and switch these cells through the fabric 
+  - overcome bus bandwidth limitations 
 
 ###2. What is HOL blocking? Does it occur in input ports or output ports?
 
-
+HOL (Head of the Line) blocking: queued datagram at front of queue prevents others in queue from moving forward. 
+HOL occurs in input ports. 
 
 ###3. What fields in the IP header can be used to ensure that a packet is forwarded through no more than N routers?
 
