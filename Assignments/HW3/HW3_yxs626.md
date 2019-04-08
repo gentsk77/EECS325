@@ -94,7 +94,16 @@ In conclusion, we have network address `223.1.17.128/26` for Subnet 1, `223.1.17
 
 ###8. Consider sending a 2100-byte datagram into a link that has an MTU of 700 bytes. Suppose the original datagram is stamped with the identification number 422. How many fragments are generated? What are the values in the various fields in the IP datagram(s) generated related to fragmentation?
 
+Since $MTU = 700$ byte, we may conclude that the maximum length of the data field is $700 - 20 = 680$ byte since we have 20 bytes for the IP header. Therefore, a total of $\lceil \frac{2100 - 20}{680} \rceil = 4$ fragments are generated. 
 
+| length | 16-bit identifier | flgs | fragment offset |
+| -----: | ----------------: | ---: | --------------: |
+|    700 |               422 |    1 |               0 |
+|    700 |               422 |    1 |              85 |
+|    700 |               422 |    1 |             170 |
+|     60 |               422 |    0 |             255 |
+
+To double check our final result, from the 4 datagrams above, we have a total of $700 \times 3 + 60 = 2160$-byte of data where $680 \times 3 + 40 = 2080$ bytes are the actual data, which confirms with the original requirement.  
 
 ###9. Consider the network setup below. Suppose that the ISP instead assigns the router the address 24.34.112.236 and that the network address of the home network is 192.168.1/24.
 
