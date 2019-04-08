@@ -37,13 +37,17 @@ These smaller datagrams are only reassembled into a single larger datagram at th
 
 ###5. Consider the network below:
 
+![p5 image](/Images/p5.png)
+
 ####a. Show the forwarding table in router A, such that all traffic destined to host H3 is forwarded through interface 3.
 
+| Destination Address | Link Interface |
+| ------------------- | :------------: |
+| H3                  |       3        |
 
+####b. Can you write down a forwarding table in router A, such that all traffic from H1 destined to host H3 is forwarded through interface 3, while all traffic from H2 destined to host H3 is forwarded through interface 4?
 
-####*b. Can you write down a forwarding table in router A, such that all traffic from H1 destined to host H3 is forwarded through interface 3, while all traffic from H2 destined to host H3 is forwarded through interface 4?
-
-
+No, it's not possible. Since a forwarding table is only determined by the destination address, in this case, it is impossible to defferentiate traffic from H1 to H3 and traffic from H2 to H3. 
 
 ###6. Consider a datagram network using 32-bit host addresses. Suppose a router has four links, numbered 0 through 3, and packets are to be forwarded to the link interfaces as follows:
 
