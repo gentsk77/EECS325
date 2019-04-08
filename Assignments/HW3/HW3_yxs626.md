@@ -107,14 +107,28 @@ To double check our final result, from the 4 datagrams above, we have a total of
 
 ###9. Consider the network setup below. Suppose that the ISP instead assigns the router the address 24.34.112.236 and that the network address of the home network is 192.168.1/24.
 
+![p9b image](/Images/p9b.png)
+
 ####a. Assign addresses to all interfaces in the home network
 
 
 
 ####b. Suppose each host has two ongoing TCP connections, all to port 80 at host 128.119.41.85. Provide the six corresponding entries in the NAT translation table.
 
-![p9b image](/Images/p9b.png)
+
 
 
 
 ###10. What is the difference between a forward table in the destination-based forwarding routers and OpenFlow’s flow table that we discussed in Section 4.4?
+
+- **destination-based forwarding table**
+  - forward based only on destination IP address 
+  - each entry contains only a set of destination IP address ranges and a set of corresponding link interface that represents where the datagram will be forwarded to 
+- **OpenFlow flow table**
+  - generalized forwarding 
+    - forward based on any set of header field values
+    - determined not only by the destination IP address, but also by the source IP address as well as IP prot, TCP source port, TCP destination port, etc. 
+  - each entry contains 
+    1. Rule: a set of header field values representing how the incoming packets should be matched
+    2. Action: a set of actions to be taken when a packet matches the rule of a flow table entry 
+    3. Stats: a set of counters that are updated as packets are matched to flow table entries
