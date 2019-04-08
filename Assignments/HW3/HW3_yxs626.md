@@ -55,14 +55,24 @@ No, it's not possible. Since a forwarding table is only determined by the destin
 
 ####a. Provide a forwarding table that has five entries, uses longest prefix matching, and forwards packets to the correct link interfaces.
 
-
+| Destination Address Range           | Link Interface |
+| ----------------------------------- | :------------: |
+| 11100000 00****** ******** ******** |       0        |
+| 11100000 01000000 ******** ******** |       1        |
+| 1110000* ******** ******** ******** |       2        |
+| 11100001 1******* ******** ******** |       3        |
+| otherwise                           |       3        |
 
 ####b. Describe how your forwarding table determines the appropriate link interface for datagrams with destination addresses:
 
 ![p6b image](/Images/p6b.png)
 
+1. The longest prefix of `11001000 10010001 01010001 01010101` matches none of the first four prefix entries from the forwarding table above, therefore should be matched to the `otherwise` entry and forwarded to link interface `3`, which confirms with the destination provided by the original forwarding table. 
+2. The longest prefix of `11100001 01000000 11000011 00111100` matches the `1110000` prefix entry from the forwarding table above, therefore should be forwarded to link interface 2, which confirms with the destination provided by the original forwarding table. 
+3. The longest prefix of `11100001 10000000 00010001 01110111` matches the `11100001 1` prefix entry from the forwarding table above, therefore should be forwarded to link interface 3, which confirms with the destination provided by the original forwarding table. 
 
 ###7. Consider a router that interconnects three subnets: Subnet 1, Subnet 2, and Subnet 3. Suppose all of the interfaces in each of these three subnets are required to have the prefix 223.1.17/24. Also suppose that Subnet 1 is required to support at least 60 interfaces, Subnet 2 is required to support at least 90 interfaces, and Subnet 3 is to support at least 12 interfaces. Provide three network addresses (of the form a.b.c.d/x) that satisfy these constraints.
+
 
 
 
