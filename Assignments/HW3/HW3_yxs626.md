@@ -12,11 +12,11 @@ Due: Thursday, April 11, 2019
   - switching rate is limited by memory bandwidth (2 bus crossings per datagram)
 - **switching via a bus**
   - switch datagram from input port memory to output port memory via a shared bus
-  - all output ports will receive the datagram, but nly the correct one will keep it
-  - switching speed is limited by bus bandwidth
+  - all output ports will receive the datagram, but only the correct one will keep it
+  - switching rate is limited by bus bandwidth
 - **switching via interconnection network (crossbar)**
   - switch datagrams via 2N buses that connect N input ports to N output ports
-  - each verticle bus intersects with each horizontal bus at an intersection that is controlled by the fabric controller
+  - each verticle bus intersects with each horizontal bus at an intersection controlled by the fabric controller
   - fragment datagram into cells of fixed length and switch these cells through the fabric 
   - datagrams to be forwarded will not be blocked by datagrams being forwarded to the other ports 
   - overcome bus bandwidth limitations 
@@ -24,7 +24,7 @@ Due: Thursday, April 11, 2019
 
 ###2. What is HOL blocking? Does it occur in input ports or output ports?
 
-HOL (Head of the Line) blocking: queued datagram at front of the queue prevents the following ones in the queue from moving forward. 
+HOL (Head of the Line) blocking describes the situation when queued datagram at front of the queue prevents the following datagrams in the queue from moving forward. 
 HOL occurs in input ports. 
 
 ###3. What fields in the IP header can be used to ensure that a packet is forwarded through no more than N routers?
@@ -47,7 +47,7 @@ These smaller datagrams are only reassembled into a single larger datagram at th
 
 ####b. Can you write down a forwarding table in router A, such that all traffic from H1 destined to host H3 is forwarded through interface 3, while all traffic from H2 destined to host H3 is forwarded through interface 4?
 
-No, it's not possible. Since a forwarding table is only determined by the destination address, in this case, it is impossible to defferentiate traffic from H1 to H3 and traffic from H2 to H3. 
+No, it's not possible. Since the link interface in such forwarding table is only determined by the destination address, it's impossible to defferentiate traffic from H1 to H3 with traffic from H2 to H3. 
 
 ###6. Consider a datagram network using 32-bit host addresses. Suppose a router has four links, numbered 0 through 3, and packets are to be forwarded to the link interfaces as follows:
 
@@ -94,7 +94,7 @@ In conclusion, we have network address `223.1.17.128/26` for Subnet 1, `223.1.17
 
 ###8. Consider sending a 2100-byte datagram into a link that has an MTU of 700 bytes. Suppose the original datagram is stamped with the identification number 422. How many fragments are generated? What are the values in the various fields in the IP datagram(s) generated related to fragmentation?
 
-Since $MTU = 700$ byte, we may conclude that the maximum length of the data field is $700 - 20 = 680$ byte since we have 20 bytes for the IP header. Therefore, a total of $\lceil \frac{2100 - 20}{680} \rceil = 4$ fragments are generated. 
+Given $MTU = 700$ byte, we may conclude that the maximum length of the data field is $700 - 20 = 680$ byte since we have 20 bytes for the IP header. Therefore, a total of $\lceil \frac{2100 - 20}{680} \rceil = 4$ fragments are generated. 
 
 | length | 16-bit identifier | flgs | fragment offset |
 | -----: | ----------------: | ---: | --------------: |
@@ -103,7 +103,7 @@ Since $MTU = 700$ byte, we may conclude that the maximum length of the data fiel
 |    700 |               422 |    1 |             170 |
 |     60 |               422 |    0 |             255 |
 
-To double check our final result, from the 4 datagrams above, we have a total of $700 \times 3 + 60 = 2160$-byte of data where $680 \times 3 + 40 = 2080$ bytes are the actual data, which confirms with the original requirement.  
+To double check our final result, from the 4 datagrams above, we have a total of $700 \times 3 + 60 = 2160$-byte of data where $680 \times 3 + 40 = 2080$ bytes are the actual data, which confirms with the original requirement $2100 - 20 = 2080$-byte.  
 
 ###9. Consider the network setup below. Suppose that the ISP instead assigns the router the address 24.34.112.236 and that the network address of the home network is 192.168.1/24.
 
@@ -111,7 +111,7 @@ To double check our final result, from the 4 datagrams above, we have a total of
 
 ####a. Assign addresses to all interfaces in the home network
 
-Router interface address: `192.168.1.4`
+Router address: `192.168.1.4`
 Home addresses: `192.168.1.1`, `192.168.1.2`, `192.168.1.3` 
 
 ####b. Suppose each host has two ongoing TCP connections, all to port 80 at host 128.119.41.85. Provide the six corresponding entries in the NAT translation table.
@@ -131,12 +131,12 @@ Home addresses: `192.168.1.1`, `192.168.1.2`, `192.168.1.3`
 
 - **destination-based forwarding table**
   - forward based only on destination IP address 
-  - each entry contains only a set of destination IP address ranges and a set of corresponding link interface that represents where the datagram will be forwarded to 
+  - each entry contains only a set of destination IP address ranges and a set of corresponding link interfaces that represent where the datagram will be forwarded to 
 - **OpenFlow flow table**
   - generalized forwarding 
     - forward based on any set of header field values
     - determined not only by the destination IP address, but also by the source IP address as well as IP prot, TCP source port, TCP destination port, etc. 
   - each entry contains 
-    1. Rule: a set of header field values representing how the incoming packets should be matched
-    2. Action: a set of actions to be taken when a packet matches the rule of a flow table entry 
-    3. Stats: a set of counters that are updated as packets are matched to flow table entries
+    1. Rule: a set of header field values representing how the incoming datagrams should be matched
+    2. Action: a set of actions to be taken when a datagram matches the rule of a flow table entry 
+    3. Stats: a set of counters that are updated as datagrams are matched to the flow table entries

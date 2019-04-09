@@ -1,0 +1,524 @@
+<!DOCTYPE html><html><head>
+      <title>HW3_yxs626</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\GenTsuki\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.13\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="assignment-3">Assignment 3</h1>
+
+<p>EECS325 Spring 2019<br>
+Yue Shu<br>
+Due: Thursday, April 11, 2019</p>
+<h3 class="mume-header" id="1-three-types-of-switching-fabric-are-discussed-in-section-42-list-and-briefly-describe-each-type-which-if-any-can-send-multiple-packets-across-the-fabric-in-parallel">1. Three types of switching fabric are discussed in Section 4.2. List and briefly describe each type. Which, if any, can send multiple packets across the fabric in parallel?</h3>
+
+<ul>
+<li><strong>switching via memory</strong>
+<ul>
+<li>traditional computers with switching under direct control of CPU</li>
+<li>datagrams are copied to system&apos;s memory</li>
+<li>switching rate is limited by memory bandwidth (2 bus crossings per datagram)</li>
+</ul>
+</li>
+<li><strong>switching via a bus</strong>
+<ul>
+<li>switch datagram from input port memory to output port memory via a shared bus</li>
+<li>all output ports will receive the datagram, but only the correct one will keep it</li>
+<li>switching rate is limited by bus bandwidth</li>
+</ul>
+</li>
+<li><strong>switching via interconnection network (crossbar)</strong>
+<ul>
+<li>switch datagrams via 2N buses that connect N input ports to N output ports</li>
+<li>each verticle bus intersects with each horizontal bus at an intersection controlled by the fabric controller</li>
+<li>fragment datagram into cells of fixed length and switch these cells through the fabric</li>
+<li>datagrams to be forwarded will not be blocked by datagrams being forwarded to the other ports</li>
+<li>overcome bus bandwidth limitations</li>
+</ul>
+</li>
+<li>only <strong>switching via interconnction network</strong> can send multiple datagrams across the fabric in parallel</li>
+</ul>
+<h3 class="mume-header" id="2-what-is-hol-blocking-does-it-occur-in-input-ports-or-output-ports">2. What is HOL blocking? Does it occur in input ports or output ports?</h3>
+
+<p>HOL (Head of the Line) blocking describes the situation when queued datagram at front of the queue prevents the following datagrams in the queue from moving forward.<br>
+HOL occurs in input ports.</p>
+<h3 class="mume-header" id="3-what-fields-in-the-ip-header-can-be-used-to-ensure-that-a-packet-is-forwarded-through-no-more-than-n-routers">3. What fields in the IP header can be used to ensure that a packet is forwarded through no more than N routers?</h3>
+
+<p>The <code>time to live</code> field. It keeps track of the maximum number of remaining hops and decrements the value at each router.</p>
+<h3 class="mume-header" id="4-when-a-large-datagram-is-fragmented-into-multiple-smaller-datagrams-where-are-these-smaller-datagrams-reassembled-into-a-single-larger-datagram">4. When a large datagram is fragmented into multiple smaller datagrams, where are these smaller datagrams reassembled into a single larger datagram?</h3>
+
+<p>These smaller datagrams are only reassembled into a single larger datagram at their <strong>final destination</strong>, before it is passed to and processed by the transport layer.</p>
+<h3 class="mume-header" id="5-consider-the-network-below">5. Consider the network below:</h3>
+
+<p><img src="Images\p5.png" alt="p5 image"></p>
+<h4 class="mume-header" id="a-show-the-forwarding-table-in-router-a-such-that-all-traffic-destined-to-host-h3-is-forwarded-through-interface-3">a. Show the forwarding table in router A, such that all traffic destined to host H3 is forwarded through interface 3.</h4>
+
+<table>
+<thead>
+<tr>
+<th>Destination Address</th>
+<th style="text-align:center">Link Interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H3</td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+<h4 class="mume-header" id="b-can-you-write-down-a-forwarding-table-in-router-a-such-that-all-traffic-from-h1-destined-to-host-h3-is-forwarded-through-interface-3-while-all-traffic-from-h2-destined-to-host-h3-is-forwarded-through-interface-4">b. Can you write down a forwarding table in router A, such that all traffic from H1 destined to host H3 is forwarded through interface 3, while all traffic from H2 destined to host H3 is forwarded through interface 4?</h4>
+
+<p>No, it&apos;s not possible. Since the link interface in such forwarding table is only determined by the destination address, it&apos;s impossible to defferentiate traffic from H1 to H3 with traffic from H2 to H3.</p>
+<h3 class="mume-header" id="6-consider-a-datagram-network-using-32-bit-host-addresses-suppose-a-router-has-four-links-numbered-0-through-3-and-packets-are-to-be-forwarded-to-the-link-interfaces-as-follows">6. Consider a datagram network using 32-bit host addresses. Suppose a router has four links, numbered 0 through 3, and packets are to be forwarded to the link interfaces as follows:</h3>
+
+<p><img src="Images\p6.png" alt="p6 image"></p>
+<h4 class="mume-header" id="a-provide-a-forwarding-table-that-has-five-entries-uses-longest-prefix-matching-and-forwards-packets-to-the-correct-link-interfaces">a. Provide a forwarding table that has five entries, uses longest prefix matching, and forwards packets to the correct link interfaces.</h4>
+
+<table>
+<thead>
+<tr>
+<th>Destination Address Range</th>
+<th style="text-align:center">Link Interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11100000 00****** ******** ********</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>11100000 01000000 ******** ********</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td>1110000* ******** ******** ********</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td>11100001 1******* ******** ********</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td>otherwise</td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+<h4 class="mume-header" id="b-describe-how-your-forwarding-table-determines-the-appropriate-link-interface-for-datagrams-with-destination-addresses">b. Describe how your forwarding table determines the appropriate link interface for datagrams with destination addresses:</h4>
+
+<p><img src="Images\p6b.png" alt="p6b image"></p>
+<ol>
+<li>The longest prefix of <code>11001000 10010001 01010001 01010101</code> matches none of the first four prefix entries from the forwarding table above, therefore should be matched to the <code>otherwise</code> entry and forwarded to link interface <code>3</code>, which confirms with the destination provided by the original forwarding table.</li>
+<li>The longest prefix of <code>11100001 01000000 11000011 00111100</code> matches the <code>1110000</code> prefix entry from the forwarding table above, therefore should be forwarded to link interface 2, which confirms with the destination provided by the original forwarding table.</li>
+<li>The longest prefix of <code>11100001 10000000 00010001 01110111</code> matches the <code>11100001 1</code> prefix entry from the forwarding table above, therefore should be forwarded to link interface 3, which confirms with the destination provided by the original forwarding table.</li>
+</ol>
+<h3 class="mume-header" id="7-consider-a-router-that-interconnects-three-subnets-subnet-1-subnet-2-and-subnet-3-suppose-all-of-the-interfaces-in-each-of-these-three-subnets-are-required-to-have-the-prefix-22311724-also-suppose-that-subnet-1-is-required-to-support-at-least-60-interfaces-subnet-2-is-required-to-support-at-least-90-interfaces-and-subnet-3-is-to-support-at-least-12-interfaces-provide-three-network-addresses-of-the-form-abcdx-that-satisfy-these-constraints">7. Consider a router that interconnects three subnets: Subnet 1, Subnet 2, and Subnet 3. Suppose all of the interfaces in each of these three subnets are required to have the prefix 223.1.17/24. Also suppose that Subnet 1 is required to support at least 60 interfaces, Subnet 2 is required to support at least 90 interfaces, and Subnet 3 is to support at least 12 interfaces. Provide three network addresses (of the form a.b.c.d/x) that satisfy these constraints.</h3>
+
+<p>According to the problem, it should be sufficient to provide 64 addresses for Subnet 1, 128 addresses for Subnet 2, and 16 addresses for Subnet 3. Since all of the interfaces in each of these three subnets are required to have the prefix <code>223.1.17/24</code>, the addresses should be ranging from <code>223.1.17.0</code> to <code>223.1.17.255</code>.</p>
+<p>To make our life easier, we shall start with the subnet that requires the most addresses, so as to have addresses with longest prefix accordingly for each subnet.</p>
+<ul>
+<li><strong>Subnet 2</strong>:
+<ul>
+<li>we need 128 addresses, least significant number of which ranging from 0 to 127</li>
+<li>the range is satisfied by <code>223.1.17.0</code> (<code>223.1.17.00000000</code>) to <code>223.1.17.127</code> (<code>223.1.17.01111111</code>)</li>
+<li>the address can be represented as <code>223.1.17.0/25</code></li>
+</ul>
+</li>
+<li><strong>Subenet 1</strong>:
+<ul>
+<li>we need 64 addresses, least significant number of which ranging from 0 to 63</li>
+<li>the range is satisfied by <code>223.1.17.128</code> (<code>223.1.17.10000000</code>) to <code>223.1.17.191</code> (<code>223.1.17.10111111</code>)</li>
+<li>the address can be represented as <code>223.1.17.128/26</code></li>
+</ul>
+</li>
+<li><strong>Subnet 3</strong>
+<ul>
+<li>we need 16 addresses, least significant number of which ranging from 0 to 15</li>
+<li>the range is satisfied by <code>223.1.17.192</code> (<code>223.1.17.11000000</code>) to <code>223.1.17.207</code> (<code>223.1.17.11001111</code>)</li>
+<li>the address can be represented as <code>223.1.17.192/28</code></li>
+</ul>
+</li>
+</ul>
+<p>In conclusion, we have network address <code>223.1.17.128/26</code> for Subnet 1, <code>223.1.17.0/25</code> for Subnet 2, and <code>223.1.17.192/28</code> for Subnet 3.</p>
+<h3 class="mume-header" id="8-consider-sending-a-2100-byte-datagram-into-a-link-that-has-an-mtu-of-700-bytes-suppose-the-original-datagram-is-stamped-with-the-identification-number-422-how-many-fragments-are-generated-what-are-the-values-in-the-various-fields-in-the-ip-datagrams-generated-related-to-fragmentation">8. Consider sending a 2100-byte datagram into a link that has an MTU of 700 bytes. Suppose the original datagram is stamped with the identification number 422. How many fragments are generated? What are the values in the various fields in the IP datagram(s) generated related to fragmentation?</h3>
+
+<p>Given <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mi>T</mi><mi>U</mi><mo>=</mo><mn>700</mn></mrow><annotation encoding="application/x-tex">MTU = 700</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span><span class="mord">0</span><span class="mord">0</span></span></span></span> byte, we may conclude that the maximum length of the data field is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>700</mn><mo>&#x2212;</mo><mn>20</mn><mo>=</mo><mn>680</mn></mrow><annotation encoding="application/x-tex">700 - 20 = 680</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">7</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span><span class="mord">8</span><span class="mord">0</span></span></span></span> byte since we have 20 bytes for the IP header. Therefore, a total of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&#x2308;</mo><mfrac><mrow><mn>2100</mn><mo>&#x2212;</mo><mn>20</mn></mrow><mn>680</mn></mfrac><mo>&#x2309;</mo><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\lceil \frac{2100 - 20}{680} \rceil = 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mopen">&#x2308;</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span><span class="mord mtight">8</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mord mtight">0</span><span class="mbin mtight">&#x2212;</span><span class="mord mtight">2</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">&#x2309;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> fragments are generated.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">length</th>
+<th style="text-align:right">16-bit identifier</th>
+<th style="text-align:right">flgs</th>
+<th style="text-align:right">fragment offset</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">700</td>
+<td style="text-align:right">422</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:right">700</td>
+<td style="text-align:right">422</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">85</td>
+</tr>
+<tr>
+<td style="text-align:right">700</td>
+<td style="text-align:right">422</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">170</td>
+</tr>
+<tr>
+<td style="text-align:right">60</td>
+<td style="text-align:right">422</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">255</td>
+</tr>
+</tbody>
+</table>
+<p>To double check our final result, from the 4 datagrams above, we have a total of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>700</mn><mo>&#xD7;</mo><mn>3</mn><mo>+</mo><mn>60</mn><mo>=</mo><mn>2160</mn></mrow><annotation encoding="application/x-tex">700 \times 3 + 60 = 2160</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">7</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mord">6</span><span class="mord">0</span></span></span></span>-byte of data where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>680</mn><mo>&#xD7;</mo><mn>3</mn><mo>+</mo><mn>40</mn><mo>=</mo><mn>2080</mn></mrow><annotation encoding="application/x-tex">680 \times 3 + 40 = 2080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">6</span><span class="mord">8</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span> bytes are the actual data, which confirms with the original requirement <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2100</mn><mo>&#x2212;</mo><mn>20</mn><mo>=</mo><mn>2080</mn></mrow><annotation encoding="application/x-tex">2100 - 20 = 2080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span>-byte.</p>
+<h3 class="mume-header" id="9-consider-the-network-setup-below-suppose-that-the-isp-instead-assigns-the-router-the-address-2434112236-and-that-the-network-address-of-the-home-network-is-192168124">9. Consider the network setup below. Suppose that the ISP instead assigns the router the address 24.34.112.236 and that the network address of the home network is 192.168.1/24.</h3>
+
+<p><img src="Images\p9b.png" alt="p9b image"></p>
+<h4 class="mume-header" id="a-assign-addresses-to-all-interfaces-in-the-home-network">a. Assign addresses to all interfaces in the home network</h4>
+
+<p>Router address: <code>192.168.1.4</code><br>
+Home addresses: <code>192.168.1.1</code>, <code>192.168.1.2</code>, <code>192.168.1.3</code></p>
+<h4 class="mume-header" id="b-suppose-each-host-has-two-ongoing-tcp-connections-all-to-port-80-at-host-1281194185-provide-the-six-corresponding-entries-in-the-nat-translation-table">b. Suppose each host has two ongoing TCP connections, all to port 80 at host 128.119.41.85. Provide the six corresponding entries in the NAT translation table.</h4>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:right">WAN side addr</th>
+<th style="text-align:right">LAN side addr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">24.34.112.236, 5001</td>
+<td style="text-align:right">192.168.1.1, 3345</td>
+</tr>
+<tr>
+<td style="text-align:right">24.34.112.236, 5002</td>
+<td style="text-align:right">192.168.1.1, 3346</td>
+</tr>
+<tr>
+<td style="text-align:right">24.34.112.236, 5003</td>
+<td style="text-align:right">192.168.1.2, 3345</td>
+</tr>
+<tr>
+<td style="text-align:right">24.34.112.236, 5004</td>
+<td style="text-align:right">192.168.1.2, 3346</td>
+</tr>
+<tr>
+<td style="text-align:right">24.34.112.236, 5005</td>
+<td style="text-align:right">192.168.1.3, 3345</td>
+</tr>
+<tr>
+<td style="text-align:right">24.34.112.236, 5006</td>
+<td style="text-align:right">192.168.1.3, 3346</td>
+</tr>
+</tbody>
+</table>
+<h3 class="mume-header" id="10-what-is-the-difference-between-a-forward-table-in-the-destination-based-forwarding-routers-and-openflows-flow-table-that-we-discussed-in-section-44">10. What is the difference between a forward table in the destination-based forwarding routers and OpenFlow&#x2019;s flow table that we discussed in Section 4.4?</h3>
+
+<ul>
+<li><strong>destination-based forwarding table</strong>
+<ul>
+<li>forward based only on destination IP address</li>
+<li>each entry contains only a set of destination IP address ranges and a set of corresponding link interfaces that represent where the datagram will be forwarded to</li>
+</ul>
+</li>
+<li><strong>OpenFlow flow table</strong>
+<ul>
+<li>generalized forwarding
+<ul>
+<li>forward based on any set of header field values</li>
+<li>determined not only by the destination IP address, but also by the source IP address as well as IP prot, TCP source port, TCP destination port, etc.</li>
+</ul>
+</li>
+<li>each entry contains
+<ol>
+<li>Rule: a set of header field values representing how the incoming datagrams should be matched</li>
+<li>Action: a set of actions to be taken when a datagram matches the rule of a flow table entry</li>
+<li>Stats: a set of counters that are updated as datagrams are matched to the flow table entries</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
