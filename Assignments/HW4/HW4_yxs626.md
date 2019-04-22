@@ -6,18 +6,47 @@ Due: Tuesday, April 23, 2019
 
 ### 1. Compare and contrast link-state and distance-vector routing algorithms.
 
-
+- **link-state**
+  - global information: 
+    - all routers have complete topology, link cost info
+    - all nodes have the same information
+    - accomplished via link state broadcast
+  - uses Dijkstra algorithm to calculate the shortest path
+  - computes least cost paths from one node to all other nodes 
+  - iterative: after k iterations, know least cost path to k destinations
+  - needs more CPU utilization and more memory space than distance-vector
+  - with n nodes, E links, O(nE) messages sent in O($n^2$) algorithm, can have oscillations
+  - if router malfunctions, node can advertise incorrect link cost
+  - each node computes only its own table
+- **distance-vector**
+  - decentralized information: 
+    - routers know about physically-connected neighbours, link cost
+    - each node share different node tables 
+  - uses Bellman-Ford equation to calcuulate the cost lowest-cost path from source to destination
+  - exchange between neighbours only, convergence time may vary
+  - can have count-to-infinity problem
+  - if router malfunctions, node can advertise incorrect path cost
+  - each node's table is also used by the others, so errors can be propogated through the entire network
 
 ### 2. Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show the algorithm by computing a table similar to Slide 15 in Chapter 5.
 
 ![p2 image](/Images/p2.png)
-
-
+  
+| Step |      N' | D(v), p(v) | D(y), p(y) | D(w), p(w) | D(z), p(z) | D(u), p(u) | D(t), p(t) |
+| ---: | ------: | ---------: | ---------: | ---------: | ---------: | ---------: | ---------: |
+|    0 |       x |       3, x |       6, x |       6, x |       8, x |   $\infty$ |   $\infty$ |
+|    1 |      xv |            |       6, x |       6, x |       8, x |       6, v |       7, v |
+|    2 |     xvy |            |            |       6, x |       8, x |       6, v |       7, v |
+|    3 |    xvyw |            |            |            |       8, x |       6, v |       7, v |
+|    4 |   xvywu |            |            |            |       8, x |            |       7, v |
+|    5 |  xvywut |            |            |            |       8, x |            |            |
+|    6 | xvywutz |            |            |            |            |            |            |
 
 
 ### 3. Consider the network shown below, and assume that each node initially knows the costs to each of its neighbors. Consider the distance-vector algorithm and show the distance table entries at node z. (Show the distance table entries in each step)
 
 ![p3 image](/Images/p3.png)
+
 
 
 
