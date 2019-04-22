@@ -69,7 +69,7 @@ Due: Tuesday, April 23, 2019
 
 | Table of Node z |    z |    x |    v |    y |    u |
 | --------------: | ---: | ---: | ---: | ---: | ---: |
-|               z |    0 |    2 |    5 |    5 |    6 |      
+|               z |    0 |    2 |    5 |    5 |    6 |
 |               x |    2 |    0 |    3 |    3 |    4 |
 |               v |    5 |    3 |    0 |    3 |    1 |
 
@@ -87,6 +87,44 @@ $\uparrow$ ends
 
 ![p5 image](/Images/p5.png)
 
+According to the distance-vector algorithm, upon each iteration, we have:
+$$
+D_x(y) = min\{c(x,y) + D_y(y), c(x,z) + D_z(y)\} \\ D_x(z) = min\{c(x,z) + D_z(z), c(x,y) + D_y(z) \}
+$$
+
+Then according to this equation, suppose before the first iteration the algorithm has already stabilized, and we only focus on the table of node x, then our first iteration would be:
+
+| Table of Node x |    x |    y |    z |
+| --------------: | ---: | ---: | ---: |
+|               x |    0 |    6 |    5 |
+|               y |    4 |    0 |    1 |
+|               z |    5 |    1 |    0 |
+
+If we continue to follow the same algorithm below, we have our second iteration as:
+
+| Table of Node x |    x |    y |    z |
+| --------------: | ---: | ---: | ---: |
+|               x |    0 |    6 |    7 |
+|               y |    6 |    0 |    1 |
+|               z |    5 |    1 |    0 |
+
+And our third iteration:
+
+| Table of Node x |    x |    y |    z |
+| --------------: | ---: | ---: | ---: |
+|               x |    0 |    8 |    7 |
+|               y |    6 |    0 |    1 |
+|               z |    7 |    1 |    0 |
+
+So for each iteration, we have either $D_x(y)$ or $D_x(z)$ increase by 2 since last iteration due to the algorithm we have above. 
+
+Therefore, upon the 43th iteration we have:
+
+| Table of Node x |    x |    y |    z |
+| --------------: | ---: | ---: | ---: |
+|               x |    0 |   48 |   47 |
+|               y |   46 |    0 |    1 |
+|               z |   47 |    1 |    0 |
 
 
 ### 6. Consider the network shown below. Suppose AS3 and AS2 are running OSPF for their intra-AS routing protocol. Suppose AS1 and AS4 are running RIP for their intra-AS routing protocol. Suppose eBGP and iBGP are used for the inter-AS routing protocol. Initially suppose there is no physical link between AS2 and AS4.
@@ -95,15 +133,19 @@ $\uparrow$ ends
 
 **a. Router 3c learns about prefix x from which routing protocol: OSPF, RIP, eBGP, or iBGP?**
 
+From eBGP. 
 
 **b. Router 3a learns about prefix x from which routing protocol?**
 
+From iBGP. 
 
 **c. Router 1c learns about x from which routing protocol?**
 
+From eBGP. 
 
 **d. Router 1d learns about x from which routing protocol?**
 
+From iBGP. 
 
 ### 7. In the figure below, X, Y and Z are access ISPs and A, B and C are backbone provider networks. Suppose an ISP only wants to route traffic to/from its customer networks (does not want to carry transit traffic between other ISPs). Another BGP policy X wants to enforce is that X does not want to route from B to C via X.
 
