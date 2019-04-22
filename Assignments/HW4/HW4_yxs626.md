@@ -49,6 +49,31 @@ Due: Tuesday, April 23, 2019
 
 
 
+| Table of Node z |        z |        x |        v |        y |        u |
+| --------------: | -------: | -------: | -------: | -------: | -------: |
+|               z |        0 |        2 |        6 | $\infty$ | $\infty$ |
+|               x | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+|               v | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+
+| Table of Node z |    z |    x |    v |        y |        u |
+| --------------: | ---: | ---: | ---: | -------: | -------: |
+|               z |    0 |    2 |    5 |        5 |        7 |
+|               x |    2 |    0 |    3 |        3 | $\infty$ |
+|               v |    6 |    3 |    0 | $\infty$ |        1 |
+
+| Table of Node z |    z |    x |    v |    y |    u |
+| --------------: | ---: | ---: | ---: | ---: | ---: |
+|               z |    0 |    2 |    5 |    5 |    6 |
+|               x |    2 |    0 |    3 |    3 |    4 |
+|               v |    5 |    3 |    0 |    3 |    1 |
+
+| Table of Node z |    z |    x |    v |    y |    u |
+| --------------: | ---: | ---: | ---: | ---: | ---: |
+|               z |    0 |    2 |    5 |    5 |    6 |      
+|               x |    2 |    0 |    3 |    3 |    4 |
+|               v |    5 |    3 |    0 |    3 |    1 |
+
+$\uparrow$ ends 
 
 ### 4. Suppose we have the forwarding tables shown in the following table for nodes A and F, in a network where all links have cost 1. Give a diagram of the smallest network consistent with these tables.
 
@@ -56,6 +81,7 @@ Due: Tuesday, April 23, 2019
 
 ![p4 image F](/Images/p4F.png)
 
+![p4 image](/Images/p4.png)
 
 ### 5. Consider the network below. When the link cost c(x, y) increases from 4 to 60. Explain why it takes 44 iterations for the algorithm to stabilize. (Hint: show the distance table entries in each iteration)
 
