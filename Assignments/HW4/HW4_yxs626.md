@@ -73,7 +73,7 @@ Due: Tuesday, April 23, 2019
 |               x |    2 |    0 |    3 |    3 |    4 |
 |               v |    5 |    3 |    0 |    3 |    1 |
 
-$\uparrow$ ends 
+$\uparrow$ ends at the fourth chart, which is the same as the third chart 
 
 ### 4. Suppose we have the forwarding tables shown in the following table for nodes A and F, in a network where all links have cost 1. Give a diagram of the smallest network consistent with these tables.
 
@@ -116,16 +116,7 @@ And our third iteration:
 |               y |    6 |    0 |    1 |
 |               z |    7 |    1 |    0 |
 
-So for each iteration, we have either $D_x(y)$ or $D_x(z)$ increase by 2 since last iteration due to the algorithm we have above. 
-
-Therefore, upon the 43th iteration we have:
-
-| Table of Node x |    x |    y |    z |
-| --------------: | ---: | ---: | ---: |
-|               x |    0 |   48 |   47 |
-|               y |   46 |    0 |    1 |
-|               z |   47 |    1 |    0 |
-
+So for every other iteration, we have $D_x(y)$ or $D_x(z)$ increase by 2 due to the algorithm we have above. We also know that the updating only stop when the distance vector between `x` and `z` reaches 50. This is because the BF equation only cares about the distance cost, instead of the path, which in this case is misled by the preferable "lower" yet unrealistic cost of `xy` and `xz` given the original unupdated `xy` distance. Therefore, the algorithm demands $50 - 7 = 43$ increments in order to reach stablization. Combining the first link change iteration, we have $43 + 1 = 44$ iterations in total. 
 
 ### 6. Consider the network shown below. Suppose AS3 and AS2 are running OSPF for their intra-AS routing protocol. Suppose AS1 and AS4 are running RIP for their intra-AS routing protocol. Suppose eBGP and iBGP are used for the inter-AS routing protocol. Initially suppose there is no physical link between AS2 and AS4.
 
@@ -133,19 +124,19 @@ Therefore, upon the 43th iteration we have:
 
 **a. Router 3c learns about prefix x from which routing protocol: OSPF, RIP, eBGP, or iBGP?**
 
-From eBGP. 
+Reachability information from neighbouring AS `AS4`, thus through eBGP. 
 
 **b. Router 3a learns about prefix x from which routing protocol?**
 
-From iBGP. 
+Reachability information through AS-internal router `3b`, thus through iBGP. 
 
 **c. Router 1c learns about x from which routing protocol?**
 
-From eBGP. 
+Reachability information from neighbouring AS `AS3`, thus through eBGP.  
 
 **d. Router 1d learns about x from which routing protocol?**
 
-From iBGP. 
+Reachability information through AS-internal router `1a` or `1b`, thus through iBGP. 
 
 ### 7. In the figure below, X, Y and Z are access ISPs and A, B and C are backbone provider networks. Suppose an ISP only wants to route traffic to/from its customer networks (does not want to carry transit traffic between other ISPs). Another BGP policy X wants to enforce is that X does not want to route from B to C via X.
 
@@ -155,3 +146,8 @@ From iBGP.
 
 ![p7 image Y](/Images/p7Y.png)
 
+For node `W`:
+![p7 image W](/Images/p7w.jpg)
+
+For node `X`:
+![p7 image X](/Images/p7x.jpg)
