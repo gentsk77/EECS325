@@ -247,6 +247,29 @@ char *readresponse(int sd) {
     return (msg);
 }
 
+int readn(int sd, char *buf, int n) {
+
+  int     toberead;
+  char *  ptr;
+  toberead = n;
+  ptr = buf;
+  
+  while (toberead > 0) {
+    int byteread;
+
+    byteread = read(sd, ptr, toberead);
+    if (byteread <= 0) {
+      if (byteread == -1)
+	perror("read");
+      return(0);
+    }
+    
+    toberead -= byteread;
+    ptr += byteread;
+  }
+  return(1);
+}
+
 /* Forward response message back to user */
 void forwardresponse(int sd, char *msg) {
 

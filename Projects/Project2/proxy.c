@@ -20,7 +20,7 @@ extern int startserver();
 main(int argc, char *argv[]) {
 
 	int servsock; /* server socket descriptor */
-	fd_set livesdset, servsdset; /* set of live client sockets and set of live http server sockets */
+	fd_set livesdset, servsdset, tempset; /* set of live client sockets and set of live http server sockets */
 	/* TODO: define largest file descriptor number used for select */
 	int liveskmax;
 
@@ -44,7 +44,9 @@ main(int argc, char *argv[]) {
 	/* TODO: initialize all the fd_sets and largest fd numbers */
 	FD_ZERO(&livesdset);
 	FD_ZERO(&servsdset);
-	
+	FD_SET(servsock, &livesdset);
+	FD_SET(servsock, &servsdset);
+	liveskmax = servsock;
 
 	while (1) {
 
@@ -52,33 +54,48 @@ main(int argc, char *argv[]) {
 
 		/* TODO: combine livesdset and servsdset, 
      	 * use the combined fd_set for select */
+		int fd;
+		fd_set combfdset;
+		FD_ZERO(&combfdset);
 
-		if (/* TODO: select from the combined fd_set */) {
+		for (fd = 0; fd < FD_SETSIZE; fd++) {
+			if (FD_ISSET(fd, &livesdset) || FD_ISSET(fd, &servsdset))
+				FD_SET(fd, &combfdset);
+		}
+
+		tempset = combfdset;
+
+		/* TODO: select from the combined fd_set */
+		if (select(liveskmax + 1, &tempset, NULL, NULL, NULL) == -1) {
 			fprintf(stderr, "Can't select.\n");
 			continue;
 		}
 
-		for (/* TODO: iterate over file descriptors */) {
+		for (frsock = 3; frsock <= liveskmax; frsock++) {
 			if (frsock == servsock)
 				continue;
 
-			if (/* TODO: input from existing client? */) {
+			/* TODO: input from existing client? */
+			if (FD_ISSET(frsock, &livesdset)) {
 				/* forward the request */
 				int newsd = sendrequest(frsock);
 				if (!newsd) {
 					printf("admin: disconnect from client\n");
 
 					/*TODO: clear frsock from fd_set(s) */
-
+					FD_CLR(frsock, &livesdset);
+					close(frsock);
 				}
 				else {
 					insertpair(table, newsd, frsock);
 
 					/* TODO: insert newsd into fd_set(s) */
+					FD_SET(newsd, &combfdset);
 
 				}
 			}
-			if (/* TODO: input from the http server? */) {
+			/* TODO: input from the http server? */
+			if (FD_ISSET(frsock, &servsdset)) {
 				char *msg;
 				struct pair *entry = NULL;
 				struct pair *delentry;
@@ -91,8 +108,7 @@ main(int argc, char *argv[]) {
 
 				/* forward response to client */
 				entry = searchpair(table, frsock);
-				if (!entry)
-				{
+				if (!entry) {
 					fprintf(stderr, "error: could not find matching clent sd\n");
 					exit(1);
 				}
@@ -102,12 +118,15 @@ main(int argc, char *argv[]) {
 
 				/* TODO: clear the client and server sockets used for 
 		 		 * this http connection from the fd_set(s) */
-
+				FD_CLR(entry->clientsd, &livesdset);
+				FD_CLR(entry->serversd, &servsdset);
+				close(entry->clientsd);
+				close(entry->serversd);
 			}
 		}
 
 		/* input from new client*/
-		if (FD_ISSET(servsock, &currset)) {
+		if (FD_ISSET(servsock, &tempset)) {
 			struct sockaddr_in caddr;
 			socklen_t clen = sizeof(caddr);
 			int csd = accept(servsock, (struct sockaddr *)&caddr, &clen);
@@ -115,7 +134,9 @@ main(int argc, char *argv[]) {
 			if (csd != -1) {
 
 				/* TODO: put csd into fd_set(s) */
-
+				FD_SET(csd, &livesdset);
+				if (csd > liveskmax)
+					liveskmax = csd;
 			}
 			else {
 				perror("accept");
