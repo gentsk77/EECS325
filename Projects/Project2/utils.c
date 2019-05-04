@@ -165,9 +165,9 @@ int connecttoserver(char *servhost, ushort servport) {
     else {
         clientport = ntohs(sin.sin_port);
     }
-
     /* succesful. return socket descriptor */
     printf("admin: connected to server on '%s' at '%hu' thru '%hu'\n", servhost, servport, clientport);
+    printf("here");
     return (sd);
 }
 /*----------------------------------------------------------------*/
@@ -201,10 +201,15 @@ int sendrequest(int sd) {
     /* extract servhost and servport from http request */
     url = strtok(msgcp, " ");
     url = strtok(NULL, " ");
+
+    char wutever[100];
+    char page[100];
+    sscanf(url, "http://%511[^/]%s", wutever, page);
     servhost = strtok(url, "//");
     servhost = strtok(NULL, "/");
     servport = strtok(servhost, ":");
     servport = strtok(NULL, ":");
+
     if (!servport)
         servport = "80";
 
@@ -212,7 +217,10 @@ int sendrequest(int sd) {
         /* TODO: establish new connection to http server on behalf of the user 
          * use connecttoserver() and write() */
         newsd = connecttoserver(servhost, atoi(servport));
-        write(newsd, url, sizeof(url));
+
+        write(newsd, "GET ", strlen("GET "));
+        write(newsd, page, sizeof(page));
+        write(newsd, " HTTP/1.0\r\n\r\n", strlen(" HTTP/1.0\r\n\r\n"));
 
         free(msgcp);
         free(msg);

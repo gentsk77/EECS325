@@ -90,7 +90,7 @@ main(int argc, char *argv[]) {
 					insertpair(table, newsd, frsock);
 
 					/* TODO: insert newsd into fd_set(s) */
-					FD_SET(newsd, &combfdset);
+					FD_SET(newsd, &servsdset);
 
 				}
 			}
@@ -100,7 +100,7 @@ main(int argc, char *argv[]) {
 				struct pair *entry = NULL;
 				struct pair *delentry;
 				msg = readresponse(frsock);
-
+				printf("im here2");
 				if (!msg) {
 					fprintf(stderr, "error: server died\n");
 					exit(1);
