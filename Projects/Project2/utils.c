@@ -1,3 +1,10 @@
+/*--------------------------------------------------------------------
+  EECS 325, Spring 2019
+  Yue Shu, yxs626
+  Project 2
+  functions for proxy
+--------------------------------------------------------------------*/
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
@@ -203,26 +210,39 @@ int sendrequest(int sd) {
 
     if (servhost && servport) {
         /* TODO: establish new connection to http server on behalf of the user 
-       * use connecttoserver() and write() */
+         * use connecttoserver() and write() */
+        newsd = connecttoserver(servhost, atoi(servport));
+        write(newsd, url, sizeof(url));
 
         free(msgcp);
         free(msg);
-        /*TODO: return newly created socket file descriptor */;
+        /*TODO: return newly created socket file descriptor */
+        return newsd;
     }
     return (0);
 }
 
 char *readresponse(int sd) {
     char *msg;
+    long  len;
+    
+    /* get the message length */
+    if (!readn(sd, (char *) &len, sizeof(len))) {
+        return(NULL);
+    }
+    len = ntohl(len);
 
     msg = (char *)malloc(RESPMSGLEN);
-    if (!msg)
-    {
+    if (!msg) {
         fprintf(stderr, "error : unable to malloc\n");
         return (NULL);
     }
     /* TODO: read response message back and store in msg 
      * use read(), could create other local variables if necessary */
+    if (!readn(sd, msg, len)) {
+      free(msg);
+      return(NULL);
+    }
 
     return (msg);
 }

@@ -18,14 +18,13 @@ extern void forwardresponse(int sd, char *msg);
 extern int startserver();
 
 main(int argc, char *argv[]) {
+
 	int servsock; /* server socket descriptor */
-
 	fd_set livesdset, servsdset; /* set of live client sockets and set of live http server sockets */
-
 	/* TODO: define largest file descriptor number used for select */
+	int liveskmax;
 
 	struct pair *table = malloc(sizeof(struct pair)); /* table to keep client<->server pairs */
-
 	char *msg;
 
 	/* check usage */
@@ -43,6 +42,9 @@ main(int argc, char *argv[]) {
 	table->next = NULL;
 
 	/* TODO: initialize all the fd_sets and largest fd numbers */
+	FD_ZERO(&livesdset);
+	FD_ZERO(&servsdset);
+	
 
 	while (1) {
 
