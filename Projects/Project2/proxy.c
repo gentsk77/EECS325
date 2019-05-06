@@ -44,9 +44,11 @@ main(int argc, char *argv[]) {
 	/* TODO: initialize all the fd_sets and largest fd numbers */
 	FD_ZERO(&livesdset);
 	FD_ZERO(&servsdset);
+	FD_ZERO(&tempset);
 	FD_SET(servsock, &livesdset);
-	FD_SET(servsock, &servsdset);
 	liveskmax = servsock;
+	
+	fd_set combfdset;
 
 	while (1) {
 
@@ -55,7 +57,6 @@ main(int argc, char *argv[]) {
 		/* TODO: combine livesdset and servsdset, 
      	 * use the combined fd_set for select */
 		int fd;
-		fd_set combfdset;
 		FD_ZERO(&combfdset);
 
 		for (fd = 0; fd < FD_SETSIZE; fd++) {
@@ -91,6 +92,8 @@ main(int argc, char *argv[]) {
 
 					/* TODO: insert newsd into fd_set(s) */
 					FD_SET(newsd, &servsdset);
+					if (newsd > liveskmax)
+						liveskmax = newsd;
 
 				}
 			}

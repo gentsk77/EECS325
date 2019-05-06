@@ -16,7 +16,9 @@
 #include <netdb.h>
 #include <time.h>
 #include <errno.h>
+#include <stdlib.h>
 #include "utils.h"
+
 
 #define MAXNAMELEN 256
 #define MAXMSGLEN 8000
@@ -117,7 +119,8 @@ int startserver() {
     }
 
     /* ready to accept requests */
-    printf("admin: started server on '%s' at '%hu'\n", servhost, servport);
+    printf("admin: started server on '%s' at '%hu' \n", servhost, servport);
+    printf("here");
     return (sd);
 }
 
@@ -200,16 +203,12 @@ int sendrequest(int sd) {
 
     /* extract servhost and servport from http request */
     url = strtok(msgcp, " ");
+    printf(msgcp);
     url = strtok(NULL, " ");
-
-    char wutever[100];
-    char page[100];
-    sscanf(url, "http://%511[^/]%s", wutever, page);
     servhost = strtok(url, "//");
     servhost = strtok(NULL, "/");
     servport = strtok(servhost, ":");
     servport = strtok(NULL, ":");
-
     if (!servport)
         servport = "80";
 
@@ -218,9 +217,7 @@ int sendrequest(int sd) {
          * use connecttoserver() and write() */
         newsd = connecttoserver(servhost, atoi(servport));
 
-        write(newsd, "GET ", strlen("GET "));
-        write(newsd, page, sizeof(page));
-        write(newsd, " HTTP/1.0\r\n\r\n", strlen(" HTTP/1.0\r\n\r\n"));
+        write(newsd, msg, MAXMSGLEN);
 
         free(msgcp);
         free(msg);
@@ -232,13 +229,8 @@ int sendrequest(int sd) {
 
 char *readresponse(int sd) {
     char *msg;
-    long  len;
-    
-    /* get the message length */
-    if (!readn(sd, (char *) &len, sizeof(len))) {
-        return(NULL);
-    }
-    len = ntohl(len);
+    char *ptr;
+    int len;
 
     msg = (char *)malloc(RESPMSGLEN);
     if (!msg) {
@@ -247,39 +239,15 @@ char *readresponse(int sd) {
     }
     /* TODO: read response message back and store in msg 
      * use read(), could create other local variables if necessary */
-    if (!readn(sd, msg, len)) {
-      free(msg);
-      return(NULL);
+    len = read(sd, msg, RESPMSGLEN);
+    if (!len) {
+        free(msg);
+        return len;
     }
-
     return (msg);
-}
-
-int readn(int sd, char *buf, int n) {
-
-  int     toberead;
-  char *  ptr;
-  toberead = n;
-  ptr = buf;
-  
-  while (toberead > 0) {
-    int byteread;
-
-    byteread = read(sd, ptr, toberead);
-    if (byteread <= 0) {
-      if (byteread == -1)
-	perror("read");
-      return(0);
-    }
-    
-    toberead -= byteread;
-    ptr += byteread;
-  }
-  return(1);
 }
 
 /* Forward response message back to user */
 void forwardresponse(int sd, char *msg) {
-
     write(sd, msg, RESPMSGLEN);
 }
