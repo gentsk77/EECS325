@@ -120,7 +120,6 @@ int startserver() {
 
     /* ready to accept requests */
     printf("admin: started server on '%s' at '%hu' \n", servhost, servport);
-    printf("here");
     return (sd);
 }
 
@@ -170,7 +169,6 @@ int connecttoserver(char *servhost, ushort servport) {
     }
     /* succesful. return socket descriptor */
     printf("admin: connected to server on '%s' at '%hu' thru '%hu'\n", servhost, servport, clientport);
-    printf("here");
     return (sd);
 }
 /*----------------------------------------------------------------*/
@@ -203,7 +201,6 @@ int sendrequest(int sd) {
 
     /* extract servhost and servport from http request */
     url = strtok(msgcp, " ");
-    printf(msgcp);
     url = strtok(NULL, " ");
     servhost = strtok(url, "//");
     servhost = strtok(NULL, "/");
@@ -229,22 +226,39 @@ int sendrequest(int sd) {
 
 char *readresponse(int sd) {
     char *msg;
-    char *ptr;
+    char *ptr, *msgcp;
     int len;
 
+    /* used to read the whole response msg */
+    ptr = (char *)malloc(RESPMSGLEN);
+    /* used to buffer response msg to be returned */
+    msgcp = (char *)malloc(RESPMSGLEN);
     msg = (char *)malloc(RESPMSGLEN);
-    if (!msg) {
+
+    memset(msgcp, 0, RESPMSGLEN);
+
+    if (!msg || !ptr || !msgcp) {
         fprintf(stderr, "error : unable to malloc\n");
         return (NULL);
     }
-    /* TODO: read response message back and store in msg 
-     * use read(), could create other local variables if necessary */
-    len = read(sd, msg, RESPMSGLEN);
+
+    /* read response message back and store in msg */
+    len = read(sd, ptr, RESPMSGLEN);
     if (!len) {
-        free(msg);
+        free(ptr);
         return len;
     }
-    return (msg);
+    while(len) {
+        strcat(msg, ptr);
+        len = read(sd, ptr, RESPMSGLEN);
+    }
+
+    /* this is to make sure that we also release the memory allocated for msg */
+    memcpy(msgcp, msg, RESPMSGLEN);
+
+    free(msg);
+    free(ptr);
+    return (msgcp);
 }
 
 /* Forward response message back to user */
