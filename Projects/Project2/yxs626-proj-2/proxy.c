@@ -103,7 +103,6 @@ main(int argc, char *argv[]) {
 				struct pair *entry = NULL;
 				struct pair *delentry;
 				msg = readresponse(frsock);
-				printf("im here2");
 				if (!msg) {
 					fprintf(stderr, "error: server died\n");
 					exit(1);
@@ -129,7 +128,7 @@ main(int argc, char *argv[]) {
 		}
 
 		/* input from new client*/
-		if (FD_ISSET(servsock, &tempset)) {
+		if (FD_ISSET(servsock, &combfdset)) {
 			struct sockaddr_in caddr;
 			socklen_t clen = sizeof(caddr);
 			int csd = accept(servsock, (struct sockaddr *)&caddr, &clen);

@@ -227,7 +227,7 @@ int sendrequest(int sd) {
 char *readresponse(int sd) {
     char *msg;
     char *ptr, *msgcp;
-    int len;
+    long len;
 
     /* used to read the whole response msg */
     ptr = (char *)malloc(RESPMSGLEN);
@@ -235,33 +235,60 @@ char *readresponse(int sd) {
     msgcp = (char *)malloc(RESPMSGLEN);
     msg = (char *)malloc(RESPMSGLEN);
 
-    memset(msgcp, 0, RESPMSGLEN);
-
+ 
     if (!msg || !ptr || !msgcp) {
         fprintf(stderr, "error : unable to malloc\n");
         return (NULL);
     }
 
-    /* read response message back and store in msg */
-    len = read(sd, ptr, RESPMSGLEN);
-    if (!len) {
-        free(ptr);
-        return len;
-    }
-    while(len) {
-        strcat(msg, ptr);
-        len = read(sd, ptr, RESPMSGLEN);
-    }
+    int     toberead;
+    toberead = RESPMSGLEN-1;
+    ptr = msg;
+    
+    while (toberead > 0) {
+        int byteread;
 
-    /* this is to make sure that we also release the memory allocated for msg */
-    memcpy(msgcp, msg, RESPMSGLEN);
-
-    free(msg);
-    free(ptr);
-    return (msgcp);
+        byteread = read(sd, ptr, toberead);
+        if (byteread < 0) {
+            //if (byteread == -1)
+                perror("read");
+            return(0);
+        }
+        if (byteread == 0)
+            break;
+        
+        toberead -= byteread;
+        ptr += byteread;
+    }
+    
+    return (msg);
 }
 
 /* Forward response message back to user */
 void forwardresponse(int sd, char *msg) {
     write(sd, msg, RESPMSGLEN);
+}
+
+int readn(int sd, char *buf, int n) {
+
+  int     toberead;
+  char *  ptr;
+  toberead = n;
+  ptr = buf;
+  
+  while (toberead > 0) {
+    int byteread;
+
+    byteread = read(sd, ptr, toberead);
+    if (byteread <= 0) {
+      if (byteread == -1)
+	perror("read");
+      return(0);
+    }
+    
+    toberead -= byteread;
+    ptr += byteread;
+  }
+
+  return(1);
 }
